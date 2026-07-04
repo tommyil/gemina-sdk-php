@@ -137,17 +137,15 @@ class RetrievalApi
      * Retrieval Aggregate
      *
      * @param  \Gemina\Sdk\Model\RetrievalAggregateInDTO $retrieval_aggregate_in_dto retrieval_aggregate_in_dto (required)
-     * @param  string|null $x_api_key x_api_key (optional)
-     * @param  string|null $authorization authorization (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrievalAggregate'] to see the possible values for this operation
      *
      * @throws \Gemina\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Gemina\Sdk\Model\RetrievalAggregateOutDTO|\Gemina\Sdk\Model\HTTPValidationError
      */
-    public function retrievalAggregate($retrieval_aggregate_in_dto, $x_api_key = null, $authorization = null, string $contentType = self::contentTypes['retrievalAggregate'][0])
+    public function retrievalAggregate($retrieval_aggregate_in_dto, string $contentType = self::contentTypes['retrievalAggregate'][0])
     {
-        list($response) = $this->retrievalAggregateWithHttpInfo($retrieval_aggregate_in_dto, $x_api_key, $authorization, $contentType);
+        list($response) = $this->retrievalAggregateWithHttpInfo($retrieval_aggregate_in_dto, $contentType);
         return $response;
     }
 
@@ -157,17 +155,15 @@ class RetrievalApi
      * Retrieval Aggregate
      *
      * @param  \Gemina\Sdk\Model\RetrievalAggregateInDTO $retrieval_aggregate_in_dto (required)
-     * @param  string|null $x_api_key (optional)
-     * @param  string|null $authorization (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrievalAggregate'] to see the possible values for this operation
      *
      * @throws \Gemina\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Gemina\Sdk\Model\RetrievalAggregateOutDTO|\Gemina\Sdk\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function retrievalAggregateWithHttpInfo($retrieval_aggregate_in_dto, $x_api_key = null, $authorization = null, string $contentType = self::contentTypes['retrievalAggregate'][0])
+    public function retrievalAggregateWithHttpInfo($retrieval_aggregate_in_dto, string $contentType = self::contentTypes['retrievalAggregate'][0])
     {
-        $request = $this->retrievalAggregateRequest($retrieval_aggregate_in_dto, $x_api_key, $authorization, $contentType);
+        $request = $this->retrievalAggregateRequest($retrieval_aggregate_in_dto, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -258,16 +254,14 @@ class RetrievalApi
      * Retrieval Aggregate
      *
      * @param  \Gemina\Sdk\Model\RetrievalAggregateInDTO $retrieval_aggregate_in_dto (required)
-     * @param  string|null $x_api_key (optional)
-     * @param  string|null $authorization (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrievalAggregate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function retrievalAggregateAsync($retrieval_aggregate_in_dto, $x_api_key = null, $authorization = null, string $contentType = self::contentTypes['retrievalAggregate'][0])
+    public function retrievalAggregateAsync($retrieval_aggregate_in_dto, string $contentType = self::contentTypes['retrievalAggregate'][0])
     {
-        return $this->retrievalAggregateAsyncWithHttpInfo($retrieval_aggregate_in_dto, $x_api_key, $authorization, $contentType)
+        return $this->retrievalAggregateAsyncWithHttpInfo($retrieval_aggregate_in_dto, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -281,17 +275,15 @@ class RetrievalApi
      * Retrieval Aggregate
      *
      * @param  \Gemina\Sdk\Model\RetrievalAggregateInDTO $retrieval_aggregate_in_dto (required)
-     * @param  string|null $x_api_key (optional)
-     * @param  string|null $authorization (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrievalAggregate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function retrievalAggregateAsyncWithHttpInfo($retrieval_aggregate_in_dto, $x_api_key = null, $authorization = null, string $contentType = self::contentTypes['retrievalAggregate'][0])
+    public function retrievalAggregateAsyncWithHttpInfo($retrieval_aggregate_in_dto, string $contentType = self::contentTypes['retrievalAggregate'][0])
     {
         $returnType = '\Gemina\Sdk\Model\RetrievalAggregateOutDTO';
-        $request = $this->retrievalAggregateRequest($retrieval_aggregate_in_dto, $x_api_key, $authorization, $contentType);
+        $request = $this->retrievalAggregateRequest($retrieval_aggregate_in_dto, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -333,14 +325,12 @@ class RetrievalApi
      * Create request for operation 'retrievalAggregate'
      *
      * @param  \Gemina\Sdk\Model\RetrievalAggregateInDTO $retrieval_aggregate_in_dto (required)
-     * @param  string|null $x_api_key (optional)
-     * @param  string|null $authorization (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrievalAggregate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function retrievalAggregateRequest($retrieval_aggregate_in_dto, $x_api_key = null, $authorization = null, string $contentType = self::contentTypes['retrievalAggregate'][0])
+    public function retrievalAggregateRequest($retrieval_aggregate_in_dto, string $contentType = self::contentTypes['retrievalAggregate'][0])
     {
 
         // verify the required parameter 'retrieval_aggregate_in_dto' is set
@@ -351,8 +341,6 @@ class RetrievalApi
         }
 
 
-
-
         $resourcePath = '/api/v1/retrieval/aggregate';
         $formParams = [];
         $queryParams = [];
@@ -361,14 +349,6 @@ class RetrievalApi
         $multipart = false;
 
 
-        // header params
-        if ($x_api_key !== null) {
-            $headerParams['X-API-Key'] = ObjectSerializer::toHeaderValue($x_api_key);
-        }
-        // header params
-        if ($authorization !== null) {
-            $headerParams['authorization'] = ObjectSerializer::toHeaderValue($authorization);
-        }
 
 
 
@@ -410,6 +390,15 @@ class RetrievalApi
             }
         }
 
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-Key');
+        if ($apiKey !== null) {
+            $headers['X-API-Key'] = $apiKey;
+        }
+        // this endpoint requires OAuth (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
@@ -438,17 +427,15 @@ class RetrievalApi
      * Retrieval Query
      *
      * @param  \Gemina\Sdk\Model\RetrievalQueryInDTO $retrieval_query_in_dto retrieval_query_in_dto (required)
-     * @param  string|null $x_api_key x_api_key (optional)
-     * @param  string|null $authorization authorization (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrievalQuery'] to see the possible values for this operation
      *
      * @throws \Gemina\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Gemina\Sdk\Model\RetrievalQueryOutDTO|\Gemina\Sdk\Model\HTTPValidationError
      */
-    public function retrievalQuery($retrieval_query_in_dto, $x_api_key = null, $authorization = null, string $contentType = self::contentTypes['retrievalQuery'][0])
+    public function retrievalQuery($retrieval_query_in_dto, string $contentType = self::contentTypes['retrievalQuery'][0])
     {
-        list($response) = $this->retrievalQueryWithHttpInfo($retrieval_query_in_dto, $x_api_key, $authorization, $contentType);
+        list($response) = $this->retrievalQueryWithHttpInfo($retrieval_query_in_dto, $contentType);
         return $response;
     }
 
@@ -458,17 +445,15 @@ class RetrievalApi
      * Retrieval Query
      *
      * @param  \Gemina\Sdk\Model\RetrievalQueryInDTO $retrieval_query_in_dto (required)
-     * @param  string|null $x_api_key (optional)
-     * @param  string|null $authorization (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrievalQuery'] to see the possible values for this operation
      *
      * @throws \Gemina\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Gemina\Sdk\Model\RetrievalQueryOutDTO|\Gemina\Sdk\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function retrievalQueryWithHttpInfo($retrieval_query_in_dto, $x_api_key = null, $authorization = null, string $contentType = self::contentTypes['retrievalQuery'][0])
+    public function retrievalQueryWithHttpInfo($retrieval_query_in_dto, string $contentType = self::contentTypes['retrievalQuery'][0])
     {
-        $request = $this->retrievalQueryRequest($retrieval_query_in_dto, $x_api_key, $authorization, $contentType);
+        $request = $this->retrievalQueryRequest($retrieval_query_in_dto, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -559,16 +544,14 @@ class RetrievalApi
      * Retrieval Query
      *
      * @param  \Gemina\Sdk\Model\RetrievalQueryInDTO $retrieval_query_in_dto (required)
-     * @param  string|null $x_api_key (optional)
-     * @param  string|null $authorization (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrievalQuery'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function retrievalQueryAsync($retrieval_query_in_dto, $x_api_key = null, $authorization = null, string $contentType = self::contentTypes['retrievalQuery'][0])
+    public function retrievalQueryAsync($retrieval_query_in_dto, string $contentType = self::contentTypes['retrievalQuery'][0])
     {
-        return $this->retrievalQueryAsyncWithHttpInfo($retrieval_query_in_dto, $x_api_key, $authorization, $contentType)
+        return $this->retrievalQueryAsyncWithHttpInfo($retrieval_query_in_dto, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -582,17 +565,15 @@ class RetrievalApi
      * Retrieval Query
      *
      * @param  \Gemina\Sdk\Model\RetrievalQueryInDTO $retrieval_query_in_dto (required)
-     * @param  string|null $x_api_key (optional)
-     * @param  string|null $authorization (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrievalQuery'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function retrievalQueryAsyncWithHttpInfo($retrieval_query_in_dto, $x_api_key = null, $authorization = null, string $contentType = self::contentTypes['retrievalQuery'][0])
+    public function retrievalQueryAsyncWithHttpInfo($retrieval_query_in_dto, string $contentType = self::contentTypes['retrievalQuery'][0])
     {
         $returnType = '\Gemina\Sdk\Model\RetrievalQueryOutDTO';
-        $request = $this->retrievalQueryRequest($retrieval_query_in_dto, $x_api_key, $authorization, $contentType);
+        $request = $this->retrievalQueryRequest($retrieval_query_in_dto, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -634,14 +615,12 @@ class RetrievalApi
      * Create request for operation 'retrievalQuery'
      *
      * @param  \Gemina\Sdk\Model\RetrievalQueryInDTO $retrieval_query_in_dto (required)
-     * @param  string|null $x_api_key (optional)
-     * @param  string|null $authorization (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrievalQuery'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function retrievalQueryRequest($retrieval_query_in_dto, $x_api_key = null, $authorization = null, string $contentType = self::contentTypes['retrievalQuery'][0])
+    public function retrievalQueryRequest($retrieval_query_in_dto, string $contentType = self::contentTypes['retrievalQuery'][0])
     {
 
         // verify the required parameter 'retrieval_query_in_dto' is set
@@ -652,8 +631,6 @@ class RetrievalApi
         }
 
 
-
-
         $resourcePath = '/api/v1/retrieval/query';
         $formParams = [];
         $queryParams = [];
@@ -662,14 +639,6 @@ class RetrievalApi
         $multipart = false;
 
 
-        // header params
-        if ($x_api_key !== null) {
-            $headerParams['X-API-Key'] = ObjectSerializer::toHeaderValue($x_api_key);
-        }
-        // header params
-        if ($authorization !== null) {
-            $headerParams['authorization'] = ObjectSerializer::toHeaderValue($authorization);
-        }
 
 
 
@@ -711,6 +680,15 @@ class RetrievalApi
             }
         }
 
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-Key');
+        if ($apiKey !== null) {
+            $headers['X-API-Key'] = $apiKey;
+        }
+        // this endpoint requires OAuth (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {

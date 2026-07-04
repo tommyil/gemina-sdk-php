@@ -131,17 +131,15 @@ class ChatApi
      * Chat Query
      *
      * @param  \Gemina\Sdk\Model\ChatQueryInDTO $chat_query_in_dto chat_query_in_dto (required)
-     * @param  string|null $x_api_key x_api_key (optional)
-     * @param  string|null $authorization authorization (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['chatQuery'] to see the possible values for this operation
      *
      * @throws \Gemina\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Gemina\Sdk\Model\ChatQueryOutDTO|\Gemina\Sdk\Model\HTTPValidationError
      */
-    public function chatQuery($chat_query_in_dto, $x_api_key = null, $authorization = null, string $contentType = self::contentTypes['chatQuery'][0])
+    public function chatQuery($chat_query_in_dto, string $contentType = self::contentTypes['chatQuery'][0])
     {
-        list($response) = $this->chatQueryWithHttpInfo($chat_query_in_dto, $x_api_key, $authorization, $contentType);
+        list($response) = $this->chatQueryWithHttpInfo($chat_query_in_dto, $contentType);
         return $response;
     }
 
@@ -151,17 +149,15 @@ class ChatApi
      * Chat Query
      *
      * @param  \Gemina\Sdk\Model\ChatQueryInDTO $chat_query_in_dto (required)
-     * @param  string|null $x_api_key (optional)
-     * @param  string|null $authorization (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['chatQuery'] to see the possible values for this operation
      *
      * @throws \Gemina\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Gemina\Sdk\Model\ChatQueryOutDTO|\Gemina\Sdk\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function chatQueryWithHttpInfo($chat_query_in_dto, $x_api_key = null, $authorization = null, string $contentType = self::contentTypes['chatQuery'][0])
+    public function chatQueryWithHttpInfo($chat_query_in_dto, string $contentType = self::contentTypes['chatQuery'][0])
     {
-        $request = $this->chatQueryRequest($chat_query_in_dto, $x_api_key, $authorization, $contentType);
+        $request = $this->chatQueryRequest($chat_query_in_dto, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -252,16 +248,14 @@ class ChatApi
      * Chat Query
      *
      * @param  \Gemina\Sdk\Model\ChatQueryInDTO $chat_query_in_dto (required)
-     * @param  string|null $x_api_key (optional)
-     * @param  string|null $authorization (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['chatQuery'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function chatQueryAsync($chat_query_in_dto, $x_api_key = null, $authorization = null, string $contentType = self::contentTypes['chatQuery'][0])
+    public function chatQueryAsync($chat_query_in_dto, string $contentType = self::contentTypes['chatQuery'][0])
     {
-        return $this->chatQueryAsyncWithHttpInfo($chat_query_in_dto, $x_api_key, $authorization, $contentType)
+        return $this->chatQueryAsyncWithHttpInfo($chat_query_in_dto, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -275,17 +269,15 @@ class ChatApi
      * Chat Query
      *
      * @param  \Gemina\Sdk\Model\ChatQueryInDTO $chat_query_in_dto (required)
-     * @param  string|null $x_api_key (optional)
-     * @param  string|null $authorization (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['chatQuery'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function chatQueryAsyncWithHttpInfo($chat_query_in_dto, $x_api_key = null, $authorization = null, string $contentType = self::contentTypes['chatQuery'][0])
+    public function chatQueryAsyncWithHttpInfo($chat_query_in_dto, string $contentType = self::contentTypes['chatQuery'][0])
     {
         $returnType = '\Gemina\Sdk\Model\ChatQueryOutDTO';
-        $request = $this->chatQueryRequest($chat_query_in_dto, $x_api_key, $authorization, $contentType);
+        $request = $this->chatQueryRequest($chat_query_in_dto, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -327,14 +319,12 @@ class ChatApi
      * Create request for operation 'chatQuery'
      *
      * @param  \Gemina\Sdk\Model\ChatQueryInDTO $chat_query_in_dto (required)
-     * @param  string|null $x_api_key (optional)
-     * @param  string|null $authorization (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['chatQuery'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function chatQueryRequest($chat_query_in_dto, $x_api_key = null, $authorization = null, string $contentType = self::contentTypes['chatQuery'][0])
+    public function chatQueryRequest($chat_query_in_dto, string $contentType = self::contentTypes['chatQuery'][0])
     {
 
         // verify the required parameter 'chat_query_in_dto' is set
@@ -345,8 +335,6 @@ class ChatApi
         }
 
 
-
-
         $resourcePath = '/api/v1/chat/query';
         $formParams = [];
         $queryParams = [];
@@ -355,14 +343,6 @@ class ChatApi
         $multipart = false;
 
 
-        // header params
-        if ($x_api_key !== null) {
-            $headerParams['X-API-Key'] = ObjectSerializer::toHeaderValue($x_api_key);
-        }
-        // header params
-        if ($authorization !== null) {
-            $headerParams['authorization'] = ObjectSerializer::toHeaderValue($authorization);
-        }
 
 
 
@@ -404,6 +384,15 @@ class ChatApi
             }
         }
 
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-Key');
+        if ($apiKey !== null) {
+            $headers['X-API-Key'] = $apiKey;
+        }
+        // this endpoint requires OAuth (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
