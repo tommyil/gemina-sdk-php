@@ -123,6 +123,36 @@ foreach ($agg->getRows() as $row) {
 
 Check how many of your documents are indexed with `$client->retrieval()->retrievalStatus()->getIndexedDocuments()`.
 
+**Advanced filters & match highlights.** Beyond the promoted `filters`, filter on *any* structured field a document has with `structuredFilters` (`op` is one of `eq` / `neq` / `gt` / `lt` / `contains` / `exists`, max 8), and read back the line-item snippet that made a document match via `getMatchedChunks()`:
+
+```php
+use Gemina\Sdk\Model\RetrievalQueryInDTO;
+use Gemina\Sdk\Model\StructuredFilterDTO;
+
+$out = $client->retrieval()->retrievalQuery(new RetrievalQueryInDTO([
+    'mode' => 'hybrid',
+    'text' => '27-inch monitors',
+    'structured_filters' => [
+        new StructuredFilterDTO(['path' => 'position', 'op' => 'contains', 'value' => 'engineer']),
+    ],
+]));
+
+foreach ($out->getItems() as $item) {
+    foreach ($item->getMatchedChunks() ?? [] as $chunk) {
+        printf("%s matched on: %s\n", $item->getDocumentId(), $chunk->getText());
+    }
+}
+```
+
+Discover which fields you can filter on with `$client->retrieval()->retrievalFields()` — it returns the structured field names per document type (names only, never values), so you can build a field picker from real data:
+
+```php
+foreach ($client->retrieval()->retrievalFields()->getFields() as $field) {
+    // e.g. documentType "invoice", field "vendor_name", count 42
+    printf("%s.%s (%d)\n", $field->getDocumentType(), $field->getField(), $field->getCount());
+}
+```
+
 ## Chat with your documents
 
 Ask questions in natural language; answers come back with citations:
@@ -140,6 +170,19 @@ print_r($chat->getCitations());
 ```
 
 Chat requires a plan with Document Intelligence enabled — see [pricing](https://gemina.co). Without it, the API returns `402`/`403`.
+
+**Multi-turn conversations (memory).** For a back-and-forth where follow-ups keep context, use a **conversation** — it threads the server-issued `sessionId` for you:
+
+```php
+$chat = $client->conversation();
+$chat->send('How much did I spend on hosting in June, and with which vendor?');
+$follow = $chat->send('And which month was cheapest?'); // remembers hosting / June
+printf("%s · session: %s\n", $follow->getAnswer(), $chat->getSessionId());
+
+$chat->delete(); // end it server-side (or $chat->reset() to just forget it locally)
+```
+
+A conversation expires after 24h of inactivity; the next `send()` then throws the API's `404 CHAT_SESSION_NOT_FOUND` (an `ApiException`) — call `$chat->reset()` and resend to continue in a fresh one. One-shot `chatQuery()` with a `session_id` is still available if you'd rather hold the id yourself; every response returns `getSessionId()`.
 
 ## Session tokens (browser embedding)
 

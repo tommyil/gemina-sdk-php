@@ -166,6 +166,24 @@ class GeminaClient
     }
 
     // ------------------------------------------------------------------
+    // Stateful chat convenience
+    // ------------------------------------------------------------------
+
+    /**
+     * Start a stateful chat conversation that threads the conversation
+     * sessionId across turns for you, so follow-up questions keep context. The
+     * full one-shot surface stays available on chat().
+     *
+     * @param array{endUserId?: string} $options End-user id forwarded with each
+     *        turn (API key path only; on the session-token path the token's
+     *        signed scope wins server-side).
+     */
+    public function conversation(array $options = []): GeminaChatConversation
+    {
+        return new GeminaChatConversation($this->chat(), $options['endUserId'] ?? null);
+    }
+
+    // ------------------------------------------------------------------
     // processDocument — the headline one-call flow
     // ------------------------------------------------------------------
 
