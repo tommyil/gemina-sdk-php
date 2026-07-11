@@ -1,6 +1,6 @@
 <?php
 /**
- * ChatQueryInDTO
+ * StructuredFilterDTO
  *
  * PHP version 8.1
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Gemina\Sdk\ObjectSerializer;
 
 /**
- * ChatQueryInDTO Class Doc Comment
+ * StructuredFilterDTO Class Doc Comment
  *
  * @category Class
+ * @description One self-query condition over the &#x60;&#x60;structured&#x60;&#x60; JSONB (design §5, D6).  Deliberately narrow: TOP-LEVEL snake_case keys only, a closed op set, values compiled to bind parameters — the model never writes SQL.
  * @package  Gemina\Sdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
+class StructuredFilterDTO implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'ChatQueryInDTO';
+    protected static $openAPIModelName = 'StructuredFilterDTO';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +58,9 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'end_user_id' => 'string',
-        'message' => 'string',
-        'session_id' => 'string'
+        'op' => 'string',
+        'path' => 'string',
+        'value' => '\Gemina\Sdk\Model\Value'
     ];
 
     /**
@@ -70,9 +71,9 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'end_user_id' => null,
-        'message' => null,
-        'session_id' => 'uuid'
+        'op' => null,
+        'path' => null,
+        'value' => null
     ];
 
     /**
@@ -81,9 +82,9 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'end_user_id' => true,
-        'message' => false,
-        'session_id' => true
+        'op' => false,
+        'path' => false,
+        'value' => true
     ];
 
     /**
@@ -172,9 +173,9 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'end_user_id' => 'endUserId',
-        'message' => 'message',
-        'session_id' => 'sessionId'
+        'op' => 'op',
+        'path' => 'path',
+        'value' => 'value'
     ];
 
     /**
@@ -183,9 +184,9 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'end_user_id' => 'setEndUserId',
-        'message' => 'setMessage',
-        'session_id' => 'setSessionId'
+        'op' => 'setOp',
+        'path' => 'setPath',
+        'value' => 'setValue'
     ];
 
     /**
@@ -194,9 +195,9 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'end_user_id' => 'getEndUserId',
-        'message' => 'getMessage',
-        'session_id' => 'getSessionId'
+        'op' => 'getOp',
+        'path' => 'getPath',
+        'value' => 'getValue'
     ];
 
     /**
@@ -240,6 +241,29 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const OP_EQ = 'eq';
+    public const OP_NEQ = 'neq';
+    public const OP_GT = 'gt';
+    public const OP_LT = 'lt';
+    public const OP_CONTAINS = 'contains';
+    public const OP_EXISTS = 'exists';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getOpAllowableValues()
+    {
+        return [
+            self::OP_EQ,
+            self::OP_NEQ,
+            self::OP_GT,
+            self::OP_LT,
+            self::OP_CONTAINS,
+            self::OP_EXISTS,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -256,9 +280,9 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('end_user_id', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
-        $this->setIfExists('session_id', $data ?? [], null);
+        $this->setIfExists('op', $data ?? [], null);
+        $this->setIfExists('path', $data ?? [], null);
+        $this->setIfExists('value', $data ?? [], null);
     }
 
     /**
@@ -288,19 +312,23 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['end_user_id']) && (mb_strlen($this->container['end_user_id']) > 100)) {
-            $invalidProperties[] = "invalid value for 'end_user_id', the character length must be smaller than or equal to 100.";
+        if ($this->container['op'] === null) {
+            $invalidProperties[] = "'op' can't be null";
+        }
+        $allowedValues = $this->getOpAllowableValues();
+        if (!is_null($this->container['op']) && !in_array($this->container['op'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'op', must be one of '%s'",
+                $this->container['op'],
+                implode("', '", $allowedValues)
+            );
         }
 
-        if ($this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
+        if ($this->container['path'] === null) {
+            $invalidProperties[] = "'path' can't be null";
         }
-        if ((mb_strlen($this->container['message']) > 2000)) {
-            $invalidProperties[] = "invalid value for 'message', the character length must be smaller than or equal to 2000.";
-        }
-
-        if ((mb_strlen($this->container['message']) < 1)) {
-            $invalidProperties[] = "invalid value for 'message', the character length must be bigger than or equal to 1.";
+        if (!preg_match("/^[A-Za-z0-9_]{1,64}$/", $this->container['path'])) {
+            $invalidProperties[] = "invalid value for 'path', must be conform to the pattern /^[A-Za-z0-9_]{1,64}$/.";
         }
 
         return $invalidProperties;
@@ -319,107 +347,104 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets end_user_id
-     *
-     * @return string|null
-     */
-    public function getEndUserId()
-    {
-        return $this->container['end_user_id'];
-    }
-
-    /**
-     * Sets end_user_id
-     *
-     * @param string|null $end_user_id Server-to-server (API key) path only: trusted within-tenant filter. On the token path the token's signed scope always wins.
-     *
-     * @return self
-     */
-    public function setEndUserId($end_user_id)
-    {
-        if (is_null($end_user_id)) {
-            array_push($this->openAPINullablesSetToNull, 'end_user_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('end_user_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        if (!is_null($end_user_id) && (mb_strlen($end_user_id) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $end_user_id when calling ChatQueryInDTO., must be smaller than or equal to 100.');
-        }
-
-        $this->container['end_user_id'] = $end_user_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets message
+     * Gets op
      *
      * @return string
      */
-    public function getMessage()
+    public function getOp()
     {
-        return $this->container['message'];
+        return $this->container['op'];
     }
 
     /**
-     * Sets message
+     * Sets op
      *
-     * @param string $message message
+     * @param string $op op
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setOp($op)
     {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($op)) {
+            throw new \InvalidArgumentException('non-nullable op cannot be null');
         }
-        if ((mb_strlen($message) > 2000)) {
-            throw new \InvalidArgumentException('invalid length for $message when calling ChatQueryInDTO., must be smaller than or equal to 2000.');
+        $allowedValues = $this->getOpAllowableValues();
+        if (!in_array($op, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'op', must be one of '%s'",
+                    $op,
+                    implode("', '", $allowedValues)
+                )
+            );
         }
-        if ((mb_strlen($message) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $message when calling ChatQueryInDTO., must be bigger than or equal to 1.');
-        }
-
-        $this->container['message'] = $message;
+        $this->container['op'] = $op;
 
         return $this;
     }
 
     /**
-     * Gets session_id
+     * Gets path
      *
-     * @return string|null
+     * @return string
      */
-    public function getSessionId()
+    public function getPath()
     {
-        return $this->container['session_id'];
+        return $this->container['path'];
     }
 
     /**
-     * Sets session_id
+     * Sets path
      *
-     * @param string|null $session_id Continue an existing conversation. Omit to start a new one; the response returns the sessionId to send on follow-up turns.
+     * @param string $path path
      *
      * @return self
      */
-    public function setSessionId($session_id)
+    public function setPath($path)
     {
-        if (is_null($session_id)) {
-            array_push($this->openAPINullablesSetToNull, 'session_id');
+        if (is_null($path)) {
+            throw new \InvalidArgumentException('non-nullable path cannot be null');
+        }
+
+        if ((!preg_match("/^[A-Za-z0-9_]{1,64}$/", ObjectSerializer::toString($path)))) {
+            throw new \InvalidArgumentException("invalid value for \$path when calling StructuredFilterDTO., must conform to the pattern /^[A-Za-z0-9_]{1,64}$/.");
+        }
+
+        $this->container['path'] = $path;
+
+        return $this;
+    }
+
+    /**
+     * Gets value
+     *
+     * @return \Gemina\Sdk\Model\Value|null
+     */
+    public function getValue()
+    {
+        return $this->container['value'];
+    }
+
+    /**
+     * Sets value
+     *
+     * @param \Gemina\Sdk\Model\Value|null $value value
+     *
+     * @return self
+     */
+    public function setValue($value)
+    {
+        if (is_null($value)) {
+            array_push($this->openAPINullablesSetToNull, 'value');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('session_id', $nullablesSetToNull);
+            $index = array_search('value', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['session_id'] = $session_id;
+        $this->container['value'] = $value;
 
         return $this;
     }

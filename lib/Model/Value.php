@@ -1,6 +1,6 @@
 <?php
 /**
- * ChatQueryInDTO
+ * Value
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Gemina\Sdk\ObjectSerializer;
 
 /**
- * ChatQueryInDTO Class Doc Comment
+ * Value Class Doc Comment
  *
  * @category Class
  * @package  Gemina\Sdk
@@ -40,7 +40,7 @@ use \Gemina\Sdk\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
+class Value implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'ChatQueryInDTO';
+    protected static $openAPIModelName = 'Value';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,7 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'end_user_id' => 'string',
-        'message' => 'string',
-        'session_id' => 'string'
+        
     ];
 
     /**
@@ -70,9 +68,7 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'end_user_id' => null,
-        'message' => null,
-        'session_id' => 'uuid'
+        
     ];
 
     /**
@@ -81,9 +77,7 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'end_user_id' => true,
-        'message' => false,
-        'session_id' => true
+        
     ];
 
     /**
@@ -172,9 +166,7 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'end_user_id' => 'endUserId',
-        'message' => 'message',
-        'session_id' => 'sessionId'
+        
     ];
 
     /**
@@ -183,9 +175,7 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'end_user_id' => 'setEndUserId',
-        'message' => 'setMessage',
-        'session_id' => 'setSessionId'
+        
     ];
 
     /**
@@ -194,9 +184,7 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'end_user_id' => 'getEndUserId',
-        'message' => 'getMessage',
-        'session_id' => 'getSessionId'
+        
     ];
 
     /**
@@ -256,9 +244,6 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('end_user_id', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
-        $this->setIfExists('session_id', $data ?? [], null);
     }
 
     /**
@@ -288,21 +273,6 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['end_user_id']) && (mb_strlen($this->container['end_user_id']) > 100)) {
-            $invalidProperties[] = "invalid value for 'end_user_id', the character length must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
-        }
-        if ((mb_strlen($this->container['message']) > 2000)) {
-            $invalidProperties[] = "invalid value for 'message', the character length must be smaller than or equal to 2000.";
-        }
-
-        if ((mb_strlen($this->container['message']) < 1)) {
-            $invalidProperties[] = "invalid value for 'message', the character length must be bigger than or equal to 1.";
-        }
-
         return $invalidProperties;
     }
 
@@ -317,112 +287,6 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets end_user_id
-     *
-     * @return string|null
-     */
-    public function getEndUserId()
-    {
-        return $this->container['end_user_id'];
-    }
-
-    /**
-     * Sets end_user_id
-     *
-     * @param string|null $end_user_id Server-to-server (API key) path only: trusted within-tenant filter. On the token path the token's signed scope always wins.
-     *
-     * @return self
-     */
-    public function setEndUserId($end_user_id)
-    {
-        if (is_null($end_user_id)) {
-            array_push($this->openAPINullablesSetToNull, 'end_user_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('end_user_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        if (!is_null($end_user_id) && (mb_strlen($end_user_id) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $end_user_id when calling ChatQueryInDTO., must be smaller than or equal to 100.');
-        }
-
-        $this->container['end_user_id'] = $end_user_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets message
-     *
-     * @return string
-     */
-    public function getMessage()
-    {
-        return $this->container['message'];
-    }
-
-    /**
-     * Sets message
-     *
-     * @param string $message message
-     *
-     * @return self
-     */
-    public function setMessage($message)
-    {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
-        }
-        if ((mb_strlen($message) > 2000)) {
-            throw new \InvalidArgumentException('invalid length for $message when calling ChatQueryInDTO., must be smaller than or equal to 2000.');
-        }
-        if ((mb_strlen($message) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $message when calling ChatQueryInDTO., must be bigger than or equal to 1.');
-        }
-
-        $this->container['message'] = $message;
-
-        return $this;
-    }
-
-    /**
-     * Gets session_id
-     *
-     * @return string|null
-     */
-    public function getSessionId()
-    {
-        return $this->container['session_id'];
-    }
-
-    /**
-     * Sets session_id
-     *
-     * @param string|null $session_id Continue an existing conversation. Omit to start a new one; the response returns the sessionId to send on follow-up turns.
-     *
-     * @return self
-     */
-    public function setSessionId($session_id)
-    {
-        if (is_null($session_id)) {
-            array_push($this->openAPINullablesSetToNull, 'session_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('session_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['session_id'] = $session_id;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *

@@ -1,6 +1,6 @@
 <?php
 /**
- * ChatQueryInDTO
+ * RetrievalFieldsOutDTO
  *
  * PHP version 8.1
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Gemina\Sdk\ObjectSerializer;
 
 /**
- * ChatQueryInDTO Class Doc Comment
+ * RetrievalFieldsOutDTO Class Doc Comment
  *
  * @category Class
+ * @description Observed structured field NAMES per document type (self-query catalog).  Names only — never values. Same envelope (servedAt) as the sibling retrieval endpoints.
  * @package  Gemina\Sdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
+class RetrievalFieldsOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'ChatQueryInDTO';
+    protected static $openAPIModelName = 'RetrievalFieldsOutDTO';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +58,11 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'end_user_id' => 'string',
-        'message' => 'string',
-        'session_id' => 'string'
+        'created_at' => '\DateTime',
+        'created_at_timestamp' => 'float',
+        'fields' => '\Gemina\Sdk\Model\RetrievalFieldItemDTO[]',
+        'served_at' => '\DateTime',
+        'served_at_timestamp' => 'float'
     ];
 
     /**
@@ -70,9 +73,11 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'end_user_id' => null,
-        'message' => null,
-        'session_id' => 'uuid'
+        'created_at' => 'date-time',
+        'created_at_timestamp' => null,
+        'fields' => null,
+        'served_at' => 'date-time',
+        'served_at_timestamp' => null
     ];
 
     /**
@@ -81,9 +86,11 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'end_user_id' => true,
-        'message' => false,
-        'session_id' => true
+        'created_at' => true,
+        'created_at_timestamp' => true,
+        'fields' => false,
+        'served_at' => false,
+        'served_at_timestamp' => false
     ];
 
     /**
@@ -172,9 +179,11 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'end_user_id' => 'endUserId',
-        'message' => 'message',
-        'session_id' => 'sessionId'
+        'created_at' => 'createdAt',
+        'created_at_timestamp' => 'createdAtTimestamp',
+        'fields' => 'fields',
+        'served_at' => 'servedAt',
+        'served_at_timestamp' => 'servedAtTimestamp'
     ];
 
     /**
@@ -183,9 +192,11 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'end_user_id' => 'setEndUserId',
-        'message' => 'setMessage',
-        'session_id' => 'setSessionId'
+        'created_at' => 'setCreatedAt',
+        'created_at_timestamp' => 'setCreatedAtTimestamp',
+        'fields' => 'setFields',
+        'served_at' => 'setServedAt',
+        'served_at_timestamp' => 'setServedAtTimestamp'
     ];
 
     /**
@@ -194,9 +205,11 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'end_user_id' => 'getEndUserId',
-        'message' => 'getMessage',
-        'session_id' => 'getSessionId'
+        'created_at' => 'getCreatedAt',
+        'created_at_timestamp' => 'getCreatedAtTimestamp',
+        'fields' => 'getFields',
+        'served_at' => 'getServedAt',
+        'served_at_timestamp' => 'getServedAtTimestamp'
     ];
 
     /**
@@ -256,9 +269,11 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('end_user_id', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
-        $this->setIfExists('session_id', $data ?? [], null);
+        $this->setIfExists('created_at', $data ?? [], null);
+        $this->setIfExists('created_at_timestamp', $data ?? [], null);
+        $this->setIfExists('fields', $data ?? [], null);
+        $this->setIfExists('served_at', $data ?? [], null);
+        $this->setIfExists('served_at_timestamp', $data ?? [], null);
     }
 
     /**
@@ -288,21 +303,6 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['end_user_id']) && (mb_strlen($this->container['end_user_id']) > 100)) {
-            $invalidProperties[] = "invalid value for 'end_user_id', the character length must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
-        }
-        if ((mb_strlen($this->container['message']) > 2000)) {
-            $invalidProperties[] = "invalid value for 'message', the character length must be smaller than or equal to 2000.";
-        }
-
-        if ((mb_strlen($this->container['message']) < 1)) {
-            $invalidProperties[] = "invalid value for 'message', the character length must be bigger than or equal to 1.";
-        }
-
         return $invalidProperties;
     }
 
@@ -319,107 +319,150 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets end_user_id
+     * Gets created_at
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getEndUserId()
+    public function getCreatedAt()
     {
-        return $this->container['end_user_id'];
+        return $this->container['created_at'];
     }
 
     /**
-     * Sets end_user_id
+     * Sets created_at
      *
-     * @param string|null $end_user_id Server-to-server (API key) path only: trusted within-tenant filter. On the token path the token's signed scope always wins.
+     * @param \DateTime|null $created_at created_at
      *
      * @return self
      */
-    public function setEndUserId($end_user_id)
+    public function setCreatedAt($created_at)
     {
-        if (is_null($end_user_id)) {
-            array_push($this->openAPINullablesSetToNull, 'end_user_id');
+        if (is_null($created_at)) {
+            array_push($this->openAPINullablesSetToNull, 'created_at');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('end_user_id', $nullablesSetToNull);
+            $index = array_search('created_at', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        if (!is_null($end_user_id) && (mb_strlen($end_user_id) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $end_user_id when calling ChatQueryInDTO., must be smaller than or equal to 100.');
-        }
-
-        $this->container['end_user_id'] = $end_user_id;
+        $this->container['created_at'] = $created_at;
 
         return $this;
     }
 
     /**
-     * Gets message
+     * Gets created_at_timestamp
      *
-     * @return string
+     * @return float|null
      */
-    public function getMessage()
+    public function getCreatedAtTimestamp()
     {
-        return $this->container['message'];
+        return $this->container['created_at_timestamp'];
     }
 
     /**
-     * Sets message
+     * Sets created_at_timestamp
      *
-     * @param string $message message
+     * @param float|null $created_at_timestamp created_at_timestamp
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setCreatedAtTimestamp($created_at_timestamp)
     {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
-        }
-        if ((mb_strlen($message) > 2000)) {
-            throw new \InvalidArgumentException('invalid length for $message when calling ChatQueryInDTO., must be smaller than or equal to 2000.');
-        }
-        if ((mb_strlen($message) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $message when calling ChatQueryInDTO., must be bigger than or equal to 1.');
-        }
-
-        $this->container['message'] = $message;
-
-        return $this;
-    }
-
-    /**
-     * Gets session_id
-     *
-     * @return string|null
-     */
-    public function getSessionId()
-    {
-        return $this->container['session_id'];
-    }
-
-    /**
-     * Sets session_id
-     *
-     * @param string|null $session_id Continue an existing conversation. Omit to start a new one; the response returns the sessionId to send on follow-up turns.
-     *
-     * @return self
-     */
-    public function setSessionId($session_id)
-    {
-        if (is_null($session_id)) {
-            array_push($this->openAPINullablesSetToNull, 'session_id');
+        if (is_null($created_at_timestamp)) {
+            array_push($this->openAPINullablesSetToNull, 'created_at_timestamp');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('session_id', $nullablesSetToNull);
+            $index = array_search('created_at_timestamp', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['session_id'] = $session_id;
+        $this->container['created_at_timestamp'] = $created_at_timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Gets fields
+     *
+     * @return \Gemina\Sdk\Model\RetrievalFieldItemDTO[]|null
+     */
+    public function getFields()
+    {
+        return $this->container['fields'];
+    }
+
+    /**
+     * Sets fields
+     *
+     * @param \Gemina\Sdk\Model\RetrievalFieldItemDTO[]|null $fields fields
+     *
+     * @return self
+     */
+    public function setFields($fields)
+    {
+        if (is_null($fields)) {
+            throw new \InvalidArgumentException('non-nullable fields cannot be null');
+        }
+        $this->container['fields'] = $fields;
+
+        return $this;
+    }
+
+    /**
+     * Gets served_at
+     *
+     * @return \DateTime|null
+     */
+    public function getServedAt()
+    {
+        return $this->container['served_at'];
+    }
+
+    /**
+     * Sets served_at
+     *
+     * @param \DateTime|null $served_at served_at
+     *
+     * @return self
+     */
+    public function setServedAt($served_at)
+    {
+        if (is_null($served_at)) {
+            throw new \InvalidArgumentException('non-nullable served_at cannot be null');
+        }
+        $this->container['served_at'] = $served_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets served_at_timestamp
+     *
+     * @return float|null
+     */
+    public function getServedAtTimestamp()
+    {
+        return $this->container['served_at_timestamp'];
+    }
+
+    /**
+     * Sets served_at_timestamp
+     *
+     * @param float|null $served_at_timestamp served_at_timestamp
+     *
+     * @return self
+     */
+    public function setServedAtTimestamp($served_at_timestamp)
+    {
+        if (is_null($served_at_timestamp)) {
+            throw new \InvalidArgumentException('non-nullable served_at_timestamp cannot be null');
+        }
+        $this->container['served_at_timestamp'] = $served_at_timestamp;
 
         return $this;
     }

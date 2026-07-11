@@ -63,6 +63,7 @@ class RetrievalQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializa
         'skip' => 'int',
         'sort_field' => 'string',
         'sort_method' => 'string',
+        'structured_filters' => '\Gemina\Sdk\Model\StructuredFilterDTO[]',
         'text' => 'string',
         'top_k' => 'int'
     ];
@@ -81,6 +82,7 @@ class RetrievalQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializa
         'skip' => null,
         'sort_field' => null,
         'sort_method' => null,
+        'structured_filters' => null,
         'text' => null,
         'top_k' => null
     ];
@@ -97,6 +99,7 @@ class RetrievalQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializa
         'skip' => false,
         'sort_field' => true,
         'sort_method' => false,
+        'structured_filters' => false,
         'text' => true,
         'top_k' => false
     ];
@@ -193,6 +196,7 @@ class RetrievalQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializa
         'skip' => 'skip',
         'sort_field' => 'sortField',
         'sort_method' => 'sortMethod',
+        'structured_filters' => 'structuredFilters',
         'text' => 'text',
         'top_k' => 'topK'
     ];
@@ -209,6 +213,7 @@ class RetrievalQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializa
         'skip' => 'setSkip',
         'sort_field' => 'setSortField',
         'sort_method' => 'setSortMethod',
+        'structured_filters' => 'setStructuredFilters',
         'text' => 'setText',
         'top_k' => 'setTopK'
     ];
@@ -225,6 +230,7 @@ class RetrievalQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializa
         'skip' => 'getSkip',
         'sort_field' => 'getSortField',
         'sort_method' => 'getSortMethod',
+        'structured_filters' => 'getStructuredFilters',
         'text' => 'getText',
         'top_k' => 'getTopK'
     ];
@@ -345,6 +351,7 @@ class RetrievalQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('skip', $data ?? [], 0);
         $this->setIfExists('sort_field', $data ?? [], null);
         $this->setIfExists('sort_method', $data ?? [], 'desc');
+        $this->setIfExists('structured_filters', $data ?? [], null);
         $this->setIfExists('text', $data ?? [], null);
         $this->setIfExists('top_k', $data ?? [], 10);
     }
@@ -413,6 +420,10 @@ class RetrievalQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializa
                 $this->container['sort_method'],
                 implode("', '", $allowedValues)
             );
+        }
+
+        if (!is_null($this->container['structured_filters']) && (count($this->container['structured_filters']) > 8)) {
+            $invalidProperties[] = "invalid value for 'structured_filters', number of items must be less than or equal to 8.";
         }
 
         if (!is_null($this->container['text']) && (mb_strlen($this->container['text']) > 2000)) {
@@ -657,6 +668,37 @@ class RetrievalQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializa
             );
         }
         $this->container['sort_method'] = $sort_method;
+
+        return $this;
+    }
+
+    /**
+     * Gets structured_filters
+     *
+     * @return \Gemina\Sdk\Model\StructuredFilterDTO[]|null
+     */
+    public function getStructuredFilters()
+    {
+        return $this->container['structured_filters'];
+    }
+
+    /**
+     * Sets structured_filters
+     *
+     * @param \Gemina\Sdk\Model\StructuredFilterDTO[]|null $structured_filters Self-query conditions over any structured field (whitelisted ops)
+     *
+     * @return self
+     */
+    public function setStructuredFilters($structured_filters)
+    {
+        if (is_null($structured_filters)) {
+            throw new \InvalidArgumentException('non-nullable structured_filters cannot be null');
+        }
+
+        if ((count($structured_filters) > 8)) {
+            throw new \InvalidArgumentException('invalid value for $structured_filters when calling RetrievalQueryInDTO., number of items must be less than or equal to 8.');
+        }
+        $this->container['structured_filters'] = $structured_filters;
 
         return $this;
     }

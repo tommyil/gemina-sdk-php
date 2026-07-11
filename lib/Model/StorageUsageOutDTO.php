@@ -1,6 +1,6 @@
 <?php
 /**
- * ChatQueryOutDTO
+ * StorageUsageOutDTO
  *
  * PHP version 8.1
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Gemina\Sdk\ObjectSerializer;
 
 /**
- * ChatQueryOutDTO Class Doc Comment
+ * StorageUsageOutDTO Class Doc Comment
  *
  * @category Class
+ * @description Tenant storage usage (FileTag-excluded). &#x60;&#x60;billingMode&#x60;&#x60; is credits | money | none; &#x60;&#x60;unit&#x60;&#x60; is credits | usd. &#x60;&#x60;ratePerGbMonth&#x60;&#x60; and &#x60;&#x60;projectedCharge&#x60;&#x60; are 0 when storage is not billed (&#x60;&#x60;none&#x60;&#x60;).
  * @package  Gemina\Sdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ChatQueryOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
+class StorageUsageOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class ChatQueryOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'ChatQueryOutDTO';
+    protected static $openAPIModelName = 'StorageUsageOutDTO';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,15 +58,18 @@ class ChatQueryOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'answer' => 'string',
-        'citations' => 'string[]',
-        'confident' => 'bool',
+        'billable_gb' => 'string',
+        'billing_mode' => 'string',
         'created_at' => '\DateTime',
         'created_at_timestamp' => 'float',
-        'intent' => 'string',
+        'included_gb' => 'string',
+        'projected_charge' => 'string',
+        'rate_per_gb_month' => 'string',
         'served_at' => '\DateTime',
         'served_at_timestamp' => 'float',
-        'session_id' => 'string'
+        'stored_bytes' => 'int',
+        'stored_gb' => 'string',
+        'unit' => 'string'
     ];
 
     /**
@@ -76,15 +80,18 @@ class ChatQueryOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'answer' => null,
-        'citations' => null,
-        'confident' => null,
+        'billable_gb' => null,
+        'billing_mode' => null,
         'created_at' => 'date-time',
         'created_at_timestamp' => null,
-        'intent' => null,
+        'included_gb' => null,
+        'projected_charge' => null,
+        'rate_per_gb_month' => null,
         'served_at' => 'date-time',
         'served_at_timestamp' => null,
-        'session_id' => 'uuid'
+        'stored_bytes' => null,
+        'stored_gb' => null,
+        'unit' => null
     ];
 
     /**
@@ -93,15 +100,18 @@ class ChatQueryOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'answer' => false,
-        'citations' => false,
-        'confident' => false,
+        'billable_gb' => false,
+        'billing_mode' => false,
         'created_at' => true,
         'created_at_timestamp' => true,
-        'intent' => true,
+        'included_gb' => false,
+        'projected_charge' => false,
+        'rate_per_gb_month' => false,
         'served_at' => false,
         'served_at_timestamp' => false,
-        'session_id' => false
+        'stored_bytes' => false,
+        'stored_gb' => false,
+        'unit' => false
     ];
 
     /**
@@ -190,15 +200,18 @@ class ChatQueryOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'answer' => 'answer',
-        'citations' => 'citations',
-        'confident' => 'confident',
+        'billable_gb' => 'billableGb',
+        'billing_mode' => 'billingMode',
         'created_at' => 'createdAt',
         'created_at_timestamp' => 'createdAtTimestamp',
-        'intent' => 'intent',
+        'included_gb' => 'includedGb',
+        'projected_charge' => 'projectedCharge',
+        'rate_per_gb_month' => 'ratePerGbMonth',
         'served_at' => 'servedAt',
         'served_at_timestamp' => 'servedAtTimestamp',
-        'session_id' => 'sessionId'
+        'stored_bytes' => 'storedBytes',
+        'stored_gb' => 'storedGb',
+        'unit' => 'unit'
     ];
 
     /**
@@ -207,15 +220,18 @@ class ChatQueryOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'answer' => 'setAnswer',
-        'citations' => 'setCitations',
-        'confident' => 'setConfident',
+        'billable_gb' => 'setBillableGb',
+        'billing_mode' => 'setBillingMode',
         'created_at' => 'setCreatedAt',
         'created_at_timestamp' => 'setCreatedAtTimestamp',
-        'intent' => 'setIntent',
+        'included_gb' => 'setIncludedGb',
+        'projected_charge' => 'setProjectedCharge',
+        'rate_per_gb_month' => 'setRatePerGbMonth',
         'served_at' => 'setServedAt',
         'served_at_timestamp' => 'setServedAtTimestamp',
-        'session_id' => 'setSessionId'
+        'stored_bytes' => 'setStoredBytes',
+        'stored_gb' => 'setStoredGb',
+        'unit' => 'setUnit'
     ];
 
     /**
@@ -224,15 +240,18 @@ class ChatQueryOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'answer' => 'getAnswer',
-        'citations' => 'getCitations',
-        'confident' => 'getConfident',
+        'billable_gb' => 'getBillableGb',
+        'billing_mode' => 'getBillingMode',
         'created_at' => 'getCreatedAt',
         'created_at_timestamp' => 'getCreatedAtTimestamp',
-        'intent' => 'getIntent',
+        'included_gb' => 'getIncludedGb',
+        'projected_charge' => 'getProjectedCharge',
+        'rate_per_gb_month' => 'getRatePerGbMonth',
         'served_at' => 'getServedAt',
         'served_at_timestamp' => 'getServedAtTimestamp',
-        'session_id' => 'getSessionId'
+        'stored_bytes' => 'getStoredBytes',
+        'stored_gb' => 'getStoredGb',
+        'unit' => 'getUnit'
     ];
 
     /**
@@ -292,15 +311,18 @@ class ChatQueryOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('answer', $data ?? [], null);
-        $this->setIfExists('citations', $data ?? [], null);
-        $this->setIfExists('confident', $data ?? [], false);
+        $this->setIfExists('billable_gb', $data ?? [], null);
+        $this->setIfExists('billing_mode', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('created_at_timestamp', $data ?? [], null);
-        $this->setIfExists('intent', $data ?? [], null);
+        $this->setIfExists('included_gb', $data ?? [], null);
+        $this->setIfExists('projected_charge', $data ?? [], null);
+        $this->setIfExists('rate_per_gb_month', $data ?? [], null);
         $this->setIfExists('served_at', $data ?? [], null);
         $this->setIfExists('served_at_timestamp', $data ?? [], null);
-        $this->setIfExists('session_id', $data ?? [], null);
+        $this->setIfExists('stored_bytes', $data ?? [], null);
+        $this->setIfExists('stored_gb', $data ?? [], null);
+        $this->setIfExists('unit', $data ?? [], null);
     }
 
     /**
@@ -330,11 +352,29 @@ class ChatQueryOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['answer'] === null) {
-            $invalidProperties[] = "'answer' can't be null";
+        if ($this->container['billable_gb'] === null) {
+            $invalidProperties[] = "'billable_gb' can't be null";
         }
-        if ($this->container['session_id'] === null) {
-            $invalidProperties[] = "'session_id' can't be null";
+        if ($this->container['billing_mode'] === null) {
+            $invalidProperties[] = "'billing_mode' can't be null";
+        }
+        if ($this->container['included_gb'] === null) {
+            $invalidProperties[] = "'included_gb' can't be null";
+        }
+        if ($this->container['projected_charge'] === null) {
+            $invalidProperties[] = "'projected_charge' can't be null";
+        }
+        if ($this->container['rate_per_gb_month'] === null) {
+            $invalidProperties[] = "'rate_per_gb_month' can't be null";
+        }
+        if ($this->container['stored_bytes'] === null) {
+            $invalidProperties[] = "'stored_bytes' can't be null";
+        }
+        if ($this->container['stored_gb'] === null) {
+            $invalidProperties[] = "'stored_gb' can't be null";
+        }
+        if ($this->container['unit'] === null) {
+            $invalidProperties[] = "'unit' can't be null";
         }
         return $invalidProperties;
     }
@@ -352,82 +392,55 @@ class ChatQueryOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets answer
+     * Gets billable_gb
      *
      * @return string
      */
-    public function getAnswer()
+    public function getBillableGb()
     {
-        return $this->container['answer'];
+        return $this->container['billable_gb'];
     }
 
     /**
-     * Sets answer
+     * Sets billable_gb
      *
-     * @param string $answer answer
+     * @param string $billable_gb billable_gb
      *
      * @return self
      */
-    public function setAnswer($answer)
+    public function setBillableGb($billable_gb)
     {
-        if (is_null($answer)) {
-            throw new \InvalidArgumentException('non-nullable answer cannot be null');
+        if (is_null($billable_gb)) {
+            throw new \InvalidArgumentException('non-nullable billable_gb cannot be null');
         }
-        $this->container['answer'] = $answer;
+        $this->container['billable_gb'] = $billable_gb;
 
         return $this;
     }
 
     /**
-     * Gets citations
+     * Gets billing_mode
      *
-     * @return string[]|null
+     * @return string
      */
-    public function getCitations()
+    public function getBillingMode()
     {
-        return $this->container['citations'];
+        return $this->container['billing_mode'];
     }
 
     /**
-     * Sets citations
+     * Sets billing_mode
      *
-     * @param string[]|null $citations documentId values the answer relies on
+     * @param string $billing_mode billing_mode
      *
      * @return self
      */
-    public function setCitations($citations)
+    public function setBillingMode($billing_mode)
     {
-        if (is_null($citations)) {
-            throw new \InvalidArgumentException('non-nullable citations cannot be null');
+        if (is_null($billing_mode)) {
+            throw new \InvalidArgumentException('non-nullable billing_mode cannot be null');
         }
-        $this->container['citations'] = $citations;
-
-        return $this;
-    }
-
-    /**
-     * Gets confident
-     *
-     * @return bool|null
-     */
-    public function getConfident()
-    {
-        return $this->container['confident'];
-    }
-
-    /**
-     * Sets confident
-     *
-     * @param bool|null $confident False when the data could not support a reliable answer
-     *
-     * @return self
-     */
-    public function setConfident($confident)
-    {
-        if (is_null($confident)) {
-            throw new \InvalidArgumentException('non-nullable confident cannot be null');
-        }
-        $this->container['confident'] = $confident;
+        $this->container['billing_mode'] = $billing_mode;
 
         return $this;
     }
@@ -501,35 +514,82 @@ class ChatQueryOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets intent
+     * Gets included_gb
      *
-     * @return string|null
+     * @return string
      */
-    public function getIntent()
+    public function getIncludedGb()
     {
-        return $this->container['intent'];
+        return $this->container['included_gb'];
     }
 
     /**
-     * Sets intent
+     * Sets included_gb
      *
-     * @param string|null $intent structured | semantic | hybrid | aggregation
+     * @param string $included_gb included_gb
      *
      * @return self
      */
-    public function setIntent($intent)
+    public function setIncludedGb($included_gb)
     {
-        if (is_null($intent)) {
-            array_push($this->openAPINullablesSetToNull, 'intent');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('intent', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($included_gb)) {
+            throw new \InvalidArgumentException('non-nullable included_gb cannot be null');
         }
-        $this->container['intent'] = $intent;
+        $this->container['included_gb'] = $included_gb;
+
+        return $this;
+    }
+
+    /**
+     * Gets projected_charge
+     *
+     * @return string
+     */
+    public function getProjectedCharge()
+    {
+        return $this->container['projected_charge'];
+    }
+
+    /**
+     * Sets projected_charge
+     *
+     * @param string $projected_charge projected_charge
+     *
+     * @return self
+     */
+    public function setProjectedCharge($projected_charge)
+    {
+        if (is_null($projected_charge)) {
+            throw new \InvalidArgumentException('non-nullable projected_charge cannot be null');
+        }
+        $this->container['projected_charge'] = $projected_charge;
+
+        return $this;
+    }
+
+    /**
+     * Gets rate_per_gb_month
+     *
+     * @return string
+     */
+    public function getRatePerGbMonth()
+    {
+        return $this->container['rate_per_gb_month'];
+    }
+
+    /**
+     * Sets rate_per_gb_month
+     *
+     * @param string $rate_per_gb_month rate_per_gb_month
+     *
+     * @return self
+     */
+    public function setRatePerGbMonth($rate_per_gb_month)
+    {
+        if (is_null($rate_per_gb_month)) {
+            throw new \InvalidArgumentException('non-nullable rate_per_gb_month cannot be null');
+        }
+        $this->container['rate_per_gb_month'] = $rate_per_gb_month;
 
         return $this;
     }
@@ -589,28 +649,82 @@ class ChatQueryOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets session_id
+     * Gets stored_bytes
      *
-     * @return string
+     * @return int
      */
-    public function getSessionId()
+    public function getStoredBytes()
     {
-        return $this->container['session_id'];
+        return $this->container['stored_bytes'];
     }
 
     /**
-     * Sets session_id
+     * Sets stored_bytes
      *
-     * @param string $session_id Conversation id — send back to continue this chat
+     * @param int $stored_bytes stored_bytes
      *
      * @return self
      */
-    public function setSessionId($session_id)
+    public function setStoredBytes($stored_bytes)
     {
-        if (is_null($session_id)) {
-            throw new \InvalidArgumentException('non-nullable session_id cannot be null');
+        if (is_null($stored_bytes)) {
+            throw new \InvalidArgumentException('non-nullable stored_bytes cannot be null');
         }
-        $this->container['session_id'] = $session_id;
+        $this->container['stored_bytes'] = $stored_bytes;
+
+        return $this;
+    }
+
+    /**
+     * Gets stored_gb
+     *
+     * @return string
+     */
+    public function getStoredGb()
+    {
+        return $this->container['stored_gb'];
+    }
+
+    /**
+     * Sets stored_gb
+     *
+     * @param string $stored_gb stored_gb
+     *
+     * @return self
+     */
+    public function setStoredGb($stored_gb)
+    {
+        if (is_null($stored_gb)) {
+            throw new \InvalidArgumentException('non-nullable stored_gb cannot be null');
+        }
+        $this->container['stored_gb'] = $stored_gb;
+
+        return $this;
+    }
+
+    /**
+     * Gets unit
+     *
+     * @return string
+     */
+    public function getUnit()
+    {
+        return $this->container['unit'];
+    }
+
+    /**
+     * Sets unit
+     *
+     * @param string $unit unit
+     *
+     * @return self
+     */
+    public function setUnit($unit)
+    {
+        if (is_null($unit)) {
+            throw new \InvalidArgumentException('non-nullable unit cannot be null');
+        }
+        $this->container['unit'] = $unit;
 
         return $this;
     }

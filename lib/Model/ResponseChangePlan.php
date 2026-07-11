@@ -63,13 +63,17 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
         'paddle_transaction_id' => 'string',
         'subscription_id' => 'string',
         'cancel_scheduled_at' => '\DateTime',
+        'chat_credit_cost' => 'string',
+        'chat_included_per_cycle' => 'int',
         'credits_remaining' => 'string',
         'credits_snapshot' => 'int',
         'current_period_end' => '\DateTime',
         'current_period_start' => '\DateTime',
         'data_residency_enabled' => 'bool',
+        'document_intelligence_enabled' => 'bool',
         'enhanced_privacy_enabled' => 'bool',
         'id' => 'string',
+        'index_credit_cost' => 'string',
         'ip_allowlist_enabled' => 'bool',
         'max_data_retention_period' => '\Gemina\Sdk\Model\DataRetentionPeriodModel',
         'max_templates' => 'int',
@@ -78,7 +82,10 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
         'plan_id' => 'string',
         'plan_name' => 'string',
         'price_snapshot_cents' => 'int',
+        'retrieval_rate_limit_per_second' => 'int',
         'status' => '\Gemina\Sdk\Model\SubscriptionStatus',
+        'storage_credit_cost_per_gb_month' => 'string',
+        'storage_included_gb' => 'string',
         'support_level' => '\Gemina\Sdk\Model\SupportLevel',
         'user_email' => 'string',
         'user_id' => 'string',
@@ -99,13 +106,17 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
         'paddle_transaction_id' => null,
         'subscription_id' => 'uuid',
         'cancel_scheduled_at' => 'date-time',
+        'chat_credit_cost' => null,
+        'chat_included_per_cycle' => null,
         'credits_remaining' => null,
         'credits_snapshot' => null,
         'current_period_end' => 'date-time',
         'current_period_start' => 'date-time',
         'data_residency_enabled' => null,
+        'document_intelligence_enabled' => null,
         'enhanced_privacy_enabled' => null,
         'id' => 'uuid',
+        'index_credit_cost' => null,
         'ip_allowlist_enabled' => null,
         'max_data_retention_period' => null,
         'max_templates' => null,
@@ -114,7 +125,10 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
         'plan_id' => 'uuid',
         'plan_name' => null,
         'price_snapshot_cents' => null,
+        'retrieval_rate_limit_per_second' => null,
         'status' => null,
+        'storage_credit_cost_per_gb_month' => null,
+        'storage_included_gb' => null,
         'support_level' => null,
         'user_email' => null,
         'user_id' => 'uuid',
@@ -133,13 +147,17 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
         'paddle_transaction_id' => false,
         'subscription_id' => false,
         'cancel_scheduled_at' => false,
+        'chat_credit_cost' => false,
+        'chat_included_per_cycle' => false,
         'credits_remaining' => false,
         'credits_snapshot' => false,
         'current_period_end' => false,
         'current_period_start' => false,
         'data_residency_enabled' => false,
+        'document_intelligence_enabled' => false,
         'enhanced_privacy_enabled' => false,
         'id' => false,
+        'index_credit_cost' => false,
         'ip_allowlist_enabled' => false,
         'max_data_retention_period' => false,
         'max_templates' => false,
@@ -148,7 +166,10 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
         'plan_id' => false,
         'plan_name' => false,
         'price_snapshot_cents' => false,
+        'retrieval_rate_limit_per_second' => false,
         'status' => false,
+        'storage_credit_cost_per_gb_month' => false,
+        'storage_included_gb' => false,
         'support_level' => false,
         'user_email' => false,
         'user_id' => false,
@@ -247,13 +268,17 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
         'paddle_transaction_id' => 'paddleTransactionId',
         'subscription_id' => 'subscriptionId',
         'cancel_scheduled_at' => 'cancelScheduledAt',
+        'chat_credit_cost' => 'chatCreditCost',
+        'chat_included_per_cycle' => 'chatIncludedPerCycle',
         'credits_remaining' => 'creditsRemaining',
         'credits_snapshot' => 'creditsSnapshot',
         'current_period_end' => 'currentPeriodEnd',
         'current_period_start' => 'currentPeriodStart',
         'data_residency_enabled' => 'dataResidencyEnabled',
+        'document_intelligence_enabled' => 'documentIntelligenceEnabled',
         'enhanced_privacy_enabled' => 'enhancedPrivacyEnabled',
         'id' => 'id',
+        'index_credit_cost' => 'indexCreditCost',
         'ip_allowlist_enabled' => 'ipAllowlistEnabled',
         'max_data_retention_period' => 'maxDataRetentionPeriod',
         'max_templates' => 'maxTemplates',
@@ -262,7 +287,10 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
         'plan_id' => 'planId',
         'plan_name' => 'planName',
         'price_snapshot_cents' => 'priceSnapshotCents',
+        'retrieval_rate_limit_per_second' => 'retrievalRateLimitPerSecond',
         'status' => 'status',
+        'storage_credit_cost_per_gb_month' => 'storageCreditCostPerGbMonth',
+        'storage_included_gb' => 'storageIncludedGb',
         'support_level' => 'supportLevel',
         'user_email' => 'userEmail',
         'user_id' => 'userId',
@@ -281,13 +309,17 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
         'paddle_transaction_id' => 'setPaddleTransactionId',
         'subscription_id' => 'setSubscriptionId',
         'cancel_scheduled_at' => 'setCancelScheduledAt',
+        'chat_credit_cost' => 'setChatCreditCost',
+        'chat_included_per_cycle' => 'setChatIncludedPerCycle',
         'credits_remaining' => 'setCreditsRemaining',
         'credits_snapshot' => 'setCreditsSnapshot',
         'current_period_end' => 'setCurrentPeriodEnd',
         'current_period_start' => 'setCurrentPeriodStart',
         'data_residency_enabled' => 'setDataResidencyEnabled',
+        'document_intelligence_enabled' => 'setDocumentIntelligenceEnabled',
         'enhanced_privacy_enabled' => 'setEnhancedPrivacyEnabled',
         'id' => 'setId',
+        'index_credit_cost' => 'setIndexCreditCost',
         'ip_allowlist_enabled' => 'setIpAllowlistEnabled',
         'max_data_retention_period' => 'setMaxDataRetentionPeriod',
         'max_templates' => 'setMaxTemplates',
@@ -296,7 +328,10 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
         'plan_id' => 'setPlanId',
         'plan_name' => 'setPlanName',
         'price_snapshot_cents' => 'setPriceSnapshotCents',
+        'retrieval_rate_limit_per_second' => 'setRetrievalRateLimitPerSecond',
         'status' => 'setStatus',
+        'storage_credit_cost_per_gb_month' => 'setStorageCreditCostPerGbMonth',
+        'storage_included_gb' => 'setStorageIncludedGb',
         'support_level' => 'setSupportLevel',
         'user_email' => 'setUserEmail',
         'user_id' => 'setUserId',
@@ -315,13 +350,17 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
         'paddle_transaction_id' => 'getPaddleTransactionId',
         'subscription_id' => 'getSubscriptionId',
         'cancel_scheduled_at' => 'getCancelScheduledAt',
+        'chat_credit_cost' => 'getChatCreditCost',
+        'chat_included_per_cycle' => 'getChatIncludedPerCycle',
         'credits_remaining' => 'getCreditsRemaining',
         'credits_snapshot' => 'getCreditsSnapshot',
         'current_period_end' => 'getCurrentPeriodEnd',
         'current_period_start' => 'getCurrentPeriodStart',
         'data_residency_enabled' => 'getDataResidencyEnabled',
+        'document_intelligence_enabled' => 'getDocumentIntelligenceEnabled',
         'enhanced_privacy_enabled' => 'getEnhancedPrivacyEnabled',
         'id' => 'getId',
+        'index_credit_cost' => 'getIndexCreditCost',
         'ip_allowlist_enabled' => 'getIpAllowlistEnabled',
         'max_data_retention_period' => 'getMaxDataRetentionPeriod',
         'max_templates' => 'getMaxTemplates',
@@ -330,7 +369,10 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
         'plan_id' => 'getPlanId',
         'plan_name' => 'getPlanName',
         'price_snapshot_cents' => 'getPriceSnapshotCents',
+        'retrieval_rate_limit_per_second' => 'getRetrievalRateLimitPerSecond',
         'status' => 'getStatus',
+        'storage_credit_cost_per_gb_month' => 'getStorageCreditCostPerGbMonth',
+        'storage_included_gb' => 'getStorageIncludedGb',
         'support_level' => 'getSupportLevel',
         'user_email' => 'getUserEmail',
         'user_id' => 'getUserId',
@@ -400,13 +442,17 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('paddle_transaction_id', $data ?? [], null);
         $this->setIfExists('subscription_id', $data ?? [], null);
         $this->setIfExists('cancel_scheduled_at', $data ?? [], null);
+        $this->setIfExists('chat_credit_cost', $data ?? [], '0');
+        $this->setIfExists('chat_included_per_cycle', $data ?? [], 0);
         $this->setIfExists('credits_remaining', $data ?? [], null);
         $this->setIfExists('credits_snapshot', $data ?? [], null);
         $this->setIfExists('current_period_end', $data ?? [], null);
         $this->setIfExists('current_period_start', $data ?? [], null);
         $this->setIfExists('data_residency_enabled', $data ?? [], null);
+        $this->setIfExists('document_intelligence_enabled', $data ?? [], false);
         $this->setIfExists('enhanced_privacy_enabled', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('index_credit_cost', $data ?? [], '0');
         $this->setIfExists('ip_allowlist_enabled', $data ?? [], null);
         $this->setIfExists('max_data_retention_period', $data ?? [], null);
         $this->setIfExists('max_templates', $data ?? [], null);
@@ -415,7 +461,10 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('plan_id', $data ?? [], null);
         $this->setIfExists('plan_name', $data ?? [], null);
         $this->setIfExists('price_snapshot_cents', $data ?? [], null);
+        $this->setIfExists('retrieval_rate_limit_per_second', $data ?? [], 20);
         $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('storage_credit_cost_per_gb_month', $data ?? [], '0');
+        $this->setIfExists('storage_included_gb', $data ?? [], '0');
         $this->setIfExists('support_level', $data ?? [], null);
         $this->setIfExists('user_email', $data ?? [], null);
         $this->setIfExists('user_id', $data ?? [], null);
@@ -675,6 +724,60 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
     }
 
     /**
+     * Gets chat_credit_cost
+     *
+     * @return string|null
+     */
+    public function getChatCreditCost()
+    {
+        return $this->container['chat_credit_cost'];
+    }
+
+    /**
+     * Sets chat_credit_cost
+     *
+     * @param string|null $chat_credit_cost chat_credit_cost
+     *
+     * @return self
+     */
+    public function setChatCreditCost($chat_credit_cost)
+    {
+        if (is_null($chat_credit_cost)) {
+            throw new \InvalidArgumentException('non-nullable chat_credit_cost cannot be null');
+        }
+        $this->container['chat_credit_cost'] = $chat_credit_cost;
+
+        return $this;
+    }
+
+    /**
+     * Gets chat_included_per_cycle
+     *
+     * @return int|null
+     */
+    public function getChatIncludedPerCycle()
+    {
+        return $this->container['chat_included_per_cycle'];
+    }
+
+    /**
+     * Sets chat_included_per_cycle
+     *
+     * @param int|null $chat_included_per_cycle chat_included_per_cycle
+     *
+     * @return self
+     */
+    public function setChatIncludedPerCycle($chat_included_per_cycle)
+    {
+        if (is_null($chat_included_per_cycle)) {
+            throw new \InvalidArgumentException('non-nullable chat_included_per_cycle cannot be null');
+        }
+        $this->container['chat_included_per_cycle'] = $chat_included_per_cycle;
+
+        return $this;
+    }
+
+    /**
      * Gets credits_remaining
      *
      * @return string
@@ -810,6 +913,33 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
     }
 
     /**
+     * Gets document_intelligence_enabled
+     *
+     * @return bool|null
+     */
+    public function getDocumentIntelligenceEnabled()
+    {
+        return $this->container['document_intelligence_enabled'];
+    }
+
+    /**
+     * Sets document_intelligence_enabled
+     *
+     * @param bool|null $document_intelligence_enabled document_intelligence_enabled
+     *
+     * @return self
+     */
+    public function setDocumentIntelligenceEnabled($document_intelligence_enabled)
+    {
+        if (is_null($document_intelligence_enabled)) {
+            throw new \InvalidArgumentException('non-nullable document_intelligence_enabled cannot be null');
+        }
+        $this->container['document_intelligence_enabled'] = $document_intelligence_enabled;
+
+        return $this;
+    }
+
+    /**
      * Gets enhanced_privacy_enabled
      *
      * @return bool
@@ -859,6 +989,33 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets index_credit_cost
+     *
+     * @return string|null
+     */
+    public function getIndexCreditCost()
+    {
+        return $this->container['index_credit_cost'];
+    }
+
+    /**
+     * Sets index_credit_cost
+     *
+     * @param string|null $index_credit_cost index_credit_cost
+     *
+     * @return self
+     */
+    public function setIndexCreditCost($index_credit_cost)
+    {
+        if (is_null($index_credit_cost)) {
+            throw new \InvalidArgumentException('non-nullable index_credit_cost cannot be null');
+        }
+        $this->container['index_credit_cost'] = $index_credit_cost;
 
         return $this;
     }
@@ -1080,6 +1237,33 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
     }
 
     /**
+     * Gets retrieval_rate_limit_per_second
+     *
+     * @return int|null
+     */
+    public function getRetrievalRateLimitPerSecond()
+    {
+        return $this->container['retrieval_rate_limit_per_second'];
+    }
+
+    /**
+     * Sets retrieval_rate_limit_per_second
+     *
+     * @param int|null $retrieval_rate_limit_per_second retrieval_rate_limit_per_second
+     *
+     * @return self
+     */
+    public function setRetrievalRateLimitPerSecond($retrieval_rate_limit_per_second)
+    {
+        if (is_null($retrieval_rate_limit_per_second)) {
+            throw new \InvalidArgumentException('non-nullable retrieval_rate_limit_per_second cannot be null');
+        }
+        $this->container['retrieval_rate_limit_per_second'] = $retrieval_rate_limit_per_second;
+
+        return $this;
+    }
+
+    /**
      * Gets status
      *
      * @return \Gemina\Sdk\Model\SubscriptionStatus
@@ -1102,6 +1286,60 @@ class ResponseChangePlan implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets storage_credit_cost_per_gb_month
+     *
+     * @return string|null
+     */
+    public function getStorageCreditCostPerGbMonth()
+    {
+        return $this->container['storage_credit_cost_per_gb_month'];
+    }
+
+    /**
+     * Sets storage_credit_cost_per_gb_month
+     *
+     * @param string|null $storage_credit_cost_per_gb_month storage_credit_cost_per_gb_month
+     *
+     * @return self
+     */
+    public function setStorageCreditCostPerGbMonth($storage_credit_cost_per_gb_month)
+    {
+        if (is_null($storage_credit_cost_per_gb_month)) {
+            throw new \InvalidArgumentException('non-nullable storage_credit_cost_per_gb_month cannot be null');
+        }
+        $this->container['storage_credit_cost_per_gb_month'] = $storage_credit_cost_per_gb_month;
+
+        return $this;
+    }
+
+    /**
+     * Gets storage_included_gb
+     *
+     * @return string|null
+     */
+    public function getStorageIncludedGb()
+    {
+        return $this->container['storage_included_gb'];
+    }
+
+    /**
+     * Sets storage_included_gb
+     *
+     * @param string|null $storage_included_gb storage_included_gb
+     *
+     * @return self
+     */
+    public function setStorageIncludedGb($storage_included_gb)
+    {
+        if (is_null($storage_included_gb)) {
+            throw new \InvalidArgumentException('non-nullable storage_included_gb cannot be null');
+        }
+        $this->container['storage_included_gb'] = $storage_included_gb;
 
         return $this;
     }

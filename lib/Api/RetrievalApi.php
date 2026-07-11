@@ -77,6 +77,9 @@ class RetrievalApi
         'retrievalAggregate' => [
             'application/json',
         ],
+        'retrievalFields' => [
+            'application/json',
+        ],
         'retrievalQuery' => [
             'application/json',
         ],
@@ -422,6 +425,277 @@ class RetrievalApi
     }
 
     /**
+     * Operation retrievalFields
+     *
+     * Retrieval Fields
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrievalFields'] to see the possible values for this operation
+     *
+     * @throws \Gemina\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Gemina\Sdk\Model\RetrievalFieldsOutDTO|\Gemina\Sdk\Model\HTTPValidationError
+     */
+    public function retrievalFields(string $contentType = self::contentTypes['retrievalFields'][0])
+    {
+        list($response) = $this->retrievalFieldsWithHttpInfo($contentType);
+        return $response;
+    }
+
+    /**
+     * Operation retrievalFieldsWithHttpInfo
+     *
+     * Retrieval Fields
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrievalFields'] to see the possible values for this operation
+     *
+     * @throws \Gemina\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Gemina\Sdk\Model\RetrievalFieldsOutDTO|\Gemina\Sdk\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function retrievalFieldsWithHttpInfo(string $contentType = self::contentTypes['retrievalFields'][0])
+    {
+        $request = $this->retrievalFieldsRequest($contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Gemina\Sdk\Model\RetrievalFieldsOutDTO',
+                        $request,
+                        $response,
+                    );
+                case 422:
+                    return $this->handleResponseWithDataType(
+                        '\Gemina\Sdk\Model\HTTPValidationError',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Gemina\Sdk\Model\RetrievalFieldsOutDTO',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Gemina\Sdk\Model\RetrievalFieldsOutDTO',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Gemina\Sdk\Model\HTTPValidationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation retrievalFieldsAsync
+     *
+     * Retrieval Fields
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrievalFields'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function retrievalFieldsAsync(string $contentType = self::contentTypes['retrievalFields'][0])
+    {
+        return $this->retrievalFieldsAsyncWithHttpInfo($contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation retrievalFieldsAsyncWithHttpInfo
+     *
+     * Retrieval Fields
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrievalFields'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function retrievalFieldsAsyncWithHttpInfo(string $contentType = self::contentTypes['retrievalFields'][0])
+    {
+        $returnType = '\Gemina\Sdk\Model\RetrievalFieldsOutDTO';
+        $request = $this->retrievalFieldsRequest($contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'retrievalFields'
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrievalFields'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function retrievalFieldsRequest(string $contentType = self::contentTypes['retrievalFields'][0])
+    {
+
+
+        $resourcePath = '/api/v1/retrieval/fields';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-Key');
+        if ($apiKey !== null) {
+            $headers['X-API-Key'] = $apiKey;
+        }
+        // this endpoint requires OAuth (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation retrievalQuery
      *
      * Retrieval Query
@@ -720,7 +994,7 @@ class RetrievalApi
      *
      * @throws \Gemina\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Gemina\Sdk\Model\RetrievalStatusOutDTO
+     * @return \Gemina\Sdk\Model\RetrievalStatusOutDTO|\Gemina\Sdk\Model\HTTPValidationError
      */
     public function retrievalStatus(string $contentType = self::contentTypes['retrievalStatus'][0])
     {
@@ -737,7 +1011,7 @@ class RetrievalApi
      *
      * @throws \Gemina\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Gemina\Sdk\Model\RetrievalStatusOutDTO, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Gemina\Sdk\Model\RetrievalStatusOutDTO|\Gemina\Sdk\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
      */
     public function retrievalStatusWithHttpInfo(string $contentType = self::contentTypes['retrievalStatus'][0])
     {
@@ -773,6 +1047,12 @@ class RetrievalApi
                         $request,
                         $response,
                     );
+                case 422:
+                    return $this->handleResponseWithDataType(
+                        '\Gemina\Sdk\Model\HTTPValidationError',
+                        $request,
+                        $response,
+                    );
             }
 
             
@@ -801,6 +1081,14 @@ class RetrievalApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Gemina\Sdk\Model\RetrievalStatusOutDTO',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Gemina\Sdk\Model\HTTPValidationError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -941,6 +1229,10 @@ class RetrievalApi
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-Key');
         if ($apiKey !== null) {
             $headers['X-API-Key'] = $apiKey;
+        }
+        // this endpoint requires OAuth (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
         $defaultHeaders = [];

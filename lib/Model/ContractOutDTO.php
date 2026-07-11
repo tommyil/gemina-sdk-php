@@ -58,17 +58,24 @@ class ContractOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $openAPITypes = [
         'billing_cycle_day' => 'int',
+        'chat_included_per_cycle' => 'int',
+        'chat_price_cents' => 'string',
         'checkout_url' => 'string',
         'created_at' => '\DateTime',
         'created_at_timestamp' => 'float',
+        'document_intelligence_enabled' => 'bool',
         'id' => 'string',
+        'index_price_cents' => 'string',
         'max_monthly_extractions' => 'int',
         'monthly_filetag_credits' => 'int',
         'paddle_subscription_id' => 'string',
         'rate_card_template_id' => 'string',
         'rate_cards' => '\Gemina\Sdk\Model\RateCardOutDTO[]',
         'requires_manual_approval' => 'bool',
+        'retrieval_rate_limit_per_second' => 'int',
         'status' => '\Gemina\Sdk\Model\ContractStatus',
+        'storage_included_gb' => 'string',
+        'storage_price_per_gb_month_cents' => 'string',
         'user_email' => 'string',
         'user_id' => 'string',
         'volume_discount_tiers' => '\Gemina\Sdk\Model\VolumeDiscountTierOutDTO[]'
@@ -83,17 +90,24 @@ class ContractOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $openAPIFormats = [
         'billing_cycle_day' => null,
+        'chat_included_per_cycle' => null,
+        'chat_price_cents' => null,
         'checkout_url' => null,
         'created_at' => 'date-time',
         'created_at_timestamp' => null,
+        'document_intelligence_enabled' => null,
         'id' => 'uuid',
+        'index_price_cents' => null,
         'max_monthly_extractions' => null,
         'monthly_filetag_credits' => null,
         'paddle_subscription_id' => null,
         'rate_card_template_id' => 'uuid',
         'rate_cards' => null,
         'requires_manual_approval' => null,
+        'retrieval_rate_limit_per_second' => null,
         'status' => null,
+        'storage_included_gb' => null,
+        'storage_price_per_gb_month_cents' => null,
         'user_email' => null,
         'user_id' => 'uuid',
         'volume_discount_tiers' => null
@@ -106,17 +120,24 @@ class ContractOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static array $openAPINullables = [
         'billing_cycle_day' => false,
+        'chat_included_per_cycle' => false,
+        'chat_price_cents' => false,
         'checkout_url' => true,
         'created_at' => true,
         'created_at_timestamp' => true,
+        'document_intelligence_enabled' => false,
         'id' => false,
+        'index_price_cents' => false,
         'max_monthly_extractions' => true,
         'monthly_filetag_credits' => false,
         'paddle_subscription_id' => true,
         'rate_card_template_id' => true,
         'rate_cards' => false,
         'requires_manual_approval' => false,
+        'retrieval_rate_limit_per_second' => false,
         'status' => false,
+        'storage_included_gb' => false,
+        'storage_price_per_gb_month_cents' => false,
         'user_email' => true,
         'user_id' => false,
         'volume_discount_tiers' => false
@@ -209,17 +230,24 @@ class ContractOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'billing_cycle_day' => 'billingCycleDay',
+        'chat_included_per_cycle' => 'chatIncludedPerCycle',
+        'chat_price_cents' => 'chatPriceCents',
         'checkout_url' => 'checkoutUrl',
         'created_at' => 'createdAt',
         'created_at_timestamp' => 'createdAtTimestamp',
+        'document_intelligence_enabled' => 'documentIntelligenceEnabled',
         'id' => 'id',
+        'index_price_cents' => 'indexPriceCents',
         'max_monthly_extractions' => 'maxMonthlyExtractions',
         'monthly_filetag_credits' => 'monthlyFiletagCredits',
         'paddle_subscription_id' => 'paddleSubscriptionId',
         'rate_card_template_id' => 'rateCardTemplateId',
         'rate_cards' => 'rateCards',
         'requires_manual_approval' => 'requiresManualApproval',
+        'retrieval_rate_limit_per_second' => 'retrievalRateLimitPerSecond',
         'status' => 'status',
+        'storage_included_gb' => 'storageIncludedGb',
+        'storage_price_per_gb_month_cents' => 'storagePricePerGbMonthCents',
         'user_email' => 'userEmail',
         'user_id' => 'userId',
         'volume_discount_tiers' => 'volumeDiscountTiers'
@@ -232,17 +260,24 @@ class ContractOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'billing_cycle_day' => 'setBillingCycleDay',
+        'chat_included_per_cycle' => 'setChatIncludedPerCycle',
+        'chat_price_cents' => 'setChatPriceCents',
         'checkout_url' => 'setCheckoutUrl',
         'created_at' => 'setCreatedAt',
         'created_at_timestamp' => 'setCreatedAtTimestamp',
+        'document_intelligence_enabled' => 'setDocumentIntelligenceEnabled',
         'id' => 'setId',
+        'index_price_cents' => 'setIndexPriceCents',
         'max_monthly_extractions' => 'setMaxMonthlyExtractions',
         'monthly_filetag_credits' => 'setMonthlyFiletagCredits',
         'paddle_subscription_id' => 'setPaddleSubscriptionId',
         'rate_card_template_id' => 'setRateCardTemplateId',
         'rate_cards' => 'setRateCards',
         'requires_manual_approval' => 'setRequiresManualApproval',
+        'retrieval_rate_limit_per_second' => 'setRetrievalRateLimitPerSecond',
         'status' => 'setStatus',
+        'storage_included_gb' => 'setStorageIncludedGb',
+        'storage_price_per_gb_month_cents' => 'setStoragePricePerGbMonthCents',
         'user_email' => 'setUserEmail',
         'user_id' => 'setUserId',
         'volume_discount_tiers' => 'setVolumeDiscountTiers'
@@ -255,17 +290,24 @@ class ContractOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'billing_cycle_day' => 'getBillingCycleDay',
+        'chat_included_per_cycle' => 'getChatIncludedPerCycle',
+        'chat_price_cents' => 'getChatPriceCents',
         'checkout_url' => 'getCheckoutUrl',
         'created_at' => 'getCreatedAt',
         'created_at_timestamp' => 'getCreatedAtTimestamp',
+        'document_intelligence_enabled' => 'getDocumentIntelligenceEnabled',
         'id' => 'getId',
+        'index_price_cents' => 'getIndexPriceCents',
         'max_monthly_extractions' => 'getMaxMonthlyExtractions',
         'monthly_filetag_credits' => 'getMonthlyFiletagCredits',
         'paddle_subscription_id' => 'getPaddleSubscriptionId',
         'rate_card_template_id' => 'getRateCardTemplateId',
         'rate_cards' => 'getRateCards',
         'requires_manual_approval' => 'getRequiresManualApproval',
+        'retrieval_rate_limit_per_second' => 'getRetrievalRateLimitPerSecond',
         'status' => 'getStatus',
+        'storage_included_gb' => 'getStorageIncludedGb',
+        'storage_price_per_gb_month_cents' => 'getStoragePricePerGbMonthCents',
         'user_email' => 'getUserEmail',
         'user_id' => 'getUserId',
         'volume_discount_tiers' => 'getVolumeDiscountTiers'
@@ -329,17 +371,24 @@ class ContractOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('billing_cycle_day', $data ?? [], null);
+        $this->setIfExists('chat_included_per_cycle', $data ?? [], 0);
+        $this->setIfExists('chat_price_cents', $data ?? [], '0');
         $this->setIfExists('checkout_url', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('created_at_timestamp', $data ?? [], null);
+        $this->setIfExists('document_intelligence_enabled', $data ?? [], false);
         $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('index_price_cents', $data ?? [], '0');
         $this->setIfExists('max_monthly_extractions', $data ?? [], null);
         $this->setIfExists('monthly_filetag_credits', $data ?? [], 0);
         $this->setIfExists('paddle_subscription_id', $data ?? [], null);
         $this->setIfExists('rate_card_template_id', $data ?? [], null);
         $this->setIfExists('rate_cards', $data ?? [], null);
         $this->setIfExists('requires_manual_approval', $data ?? [], null);
+        $this->setIfExists('retrieval_rate_limit_per_second', $data ?? [], 20);
         $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('storage_included_gb', $data ?? [], '0');
+        $this->setIfExists('storage_price_per_gb_month_cents', $data ?? [], '0');
         $this->setIfExists('user_email', $data ?? [], null);
         $this->setIfExists('user_id', $data ?? [], null);
         $this->setIfExists('volume_discount_tiers', $data ?? [], null);
@@ -429,6 +478,60 @@ class ContractOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable billing_cycle_day cannot be null');
         }
         $this->container['billing_cycle_day'] = $billing_cycle_day;
+
+        return $this;
+    }
+
+    /**
+     * Gets chat_included_per_cycle
+     *
+     * @return int|null
+     */
+    public function getChatIncludedPerCycle()
+    {
+        return $this->container['chat_included_per_cycle'];
+    }
+
+    /**
+     * Sets chat_included_per_cycle
+     *
+     * @param int|null $chat_included_per_cycle chat_included_per_cycle
+     *
+     * @return self
+     */
+    public function setChatIncludedPerCycle($chat_included_per_cycle)
+    {
+        if (is_null($chat_included_per_cycle)) {
+            throw new \InvalidArgumentException('non-nullable chat_included_per_cycle cannot be null');
+        }
+        $this->container['chat_included_per_cycle'] = $chat_included_per_cycle;
+
+        return $this;
+    }
+
+    /**
+     * Gets chat_price_cents
+     *
+     * @return string|null
+     */
+    public function getChatPriceCents()
+    {
+        return $this->container['chat_price_cents'];
+    }
+
+    /**
+     * Sets chat_price_cents
+     *
+     * @param string|null $chat_price_cents chat_price_cents
+     *
+     * @return self
+     */
+    public function setChatPriceCents($chat_price_cents)
+    {
+        if (is_null($chat_price_cents)) {
+            throw new \InvalidArgumentException('non-nullable chat_price_cents cannot be null');
+        }
+        $this->container['chat_price_cents'] = $chat_price_cents;
 
         return $this;
     }
@@ -536,6 +639,33 @@ class ContractOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets document_intelligence_enabled
+     *
+     * @return bool|null
+     */
+    public function getDocumentIntelligenceEnabled()
+    {
+        return $this->container['document_intelligence_enabled'];
+    }
+
+    /**
+     * Sets document_intelligence_enabled
+     *
+     * @param bool|null $document_intelligence_enabled document_intelligence_enabled
+     *
+     * @return self
+     */
+    public function setDocumentIntelligenceEnabled($document_intelligence_enabled)
+    {
+        if (is_null($document_intelligence_enabled)) {
+            throw new \InvalidArgumentException('non-nullable document_intelligence_enabled cannot be null');
+        }
+        $this->container['document_intelligence_enabled'] = $document_intelligence_enabled;
+
+        return $this;
+    }
+
+    /**
      * Gets id
      *
      * @return string
@@ -558,6 +688,33 @@ class ContractOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets index_price_cents
+     *
+     * @return string|null
+     */
+    public function getIndexPriceCents()
+    {
+        return $this->container['index_price_cents'];
+    }
+
+    /**
+     * Sets index_price_cents
+     *
+     * @param string|null $index_price_cents index_price_cents
+     *
+     * @return self
+     */
+    public function setIndexPriceCents($index_price_cents)
+    {
+        if (is_null($index_price_cents)) {
+            throw new \InvalidArgumentException('non-nullable index_price_cents cannot be null');
+        }
+        $this->container['index_price_cents'] = $index_price_cents;
 
         return $this;
     }
@@ -751,6 +908,33 @@ class ContractOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets retrieval_rate_limit_per_second
+     *
+     * @return int|null
+     */
+    public function getRetrievalRateLimitPerSecond()
+    {
+        return $this->container['retrieval_rate_limit_per_second'];
+    }
+
+    /**
+     * Sets retrieval_rate_limit_per_second
+     *
+     * @param int|null $retrieval_rate_limit_per_second retrieval_rate_limit_per_second
+     *
+     * @return self
+     */
+    public function setRetrievalRateLimitPerSecond($retrieval_rate_limit_per_second)
+    {
+        if (is_null($retrieval_rate_limit_per_second)) {
+            throw new \InvalidArgumentException('non-nullable retrieval_rate_limit_per_second cannot be null');
+        }
+        $this->container['retrieval_rate_limit_per_second'] = $retrieval_rate_limit_per_second;
+
+        return $this;
+    }
+
+    /**
      * Gets status
      *
      * @return \Gemina\Sdk\Model\ContractStatus
@@ -773,6 +957,60 @@ class ContractOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets storage_included_gb
+     *
+     * @return string|null
+     */
+    public function getStorageIncludedGb()
+    {
+        return $this->container['storage_included_gb'];
+    }
+
+    /**
+     * Sets storage_included_gb
+     *
+     * @param string|null $storage_included_gb storage_included_gb
+     *
+     * @return self
+     */
+    public function setStorageIncludedGb($storage_included_gb)
+    {
+        if (is_null($storage_included_gb)) {
+            throw new \InvalidArgumentException('non-nullable storage_included_gb cannot be null');
+        }
+        $this->container['storage_included_gb'] = $storage_included_gb;
+
+        return $this;
+    }
+
+    /**
+     * Gets storage_price_per_gb_month_cents
+     *
+     * @return string|null
+     */
+    public function getStoragePricePerGbMonthCents()
+    {
+        return $this->container['storage_price_per_gb_month_cents'];
+    }
+
+    /**
+     * Sets storage_price_per_gb_month_cents
+     *
+     * @param string|null $storage_price_per_gb_month_cents storage_price_per_gb_month_cents
+     *
+     * @return self
+     */
+    public function setStoragePricePerGbMonthCents($storage_price_per_gb_month_cents)
+    {
+        if (is_null($storage_price_per_gb_month_cents)) {
+            throw new \InvalidArgumentException('non-nullable storage_price_per_gb_month_cents cannot be null');
+        }
+        $this->container['storage_price_per_gb_month_cents'] = $storage_price_per_gb_month_cents;
 
         return $this;
     }

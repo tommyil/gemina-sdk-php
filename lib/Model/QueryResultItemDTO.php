@@ -68,6 +68,7 @@ class QueryResultItemDTO implements ModelInterface, ArrayAccess, \JsonSerializab
         'expense_type' => 'string',
         'external_id' => 'string',
         'issue_date' => '\DateTime',
+        'matched_chunks' => '\Gemina\Sdk\Model\MatchedChunkDTO[]',
         'net_amount' => 'float',
         'payment_method' => 'string',
         'score' => 'float',
@@ -97,6 +98,7 @@ class QueryResultItemDTO implements ModelInterface, ArrayAccess, \JsonSerializab
         'expense_type' => null,
         'external_id' => null,
         'issue_date' => 'date',
+        'matched_chunks' => null,
         'net_amount' => null,
         'payment_method' => null,
         'score' => null,
@@ -124,6 +126,7 @@ class QueryResultItemDTO implements ModelInterface, ArrayAccess, \JsonSerializab
         'expense_type' => true,
         'external_id' => true,
         'issue_date' => true,
+        'matched_chunks' => false,
         'net_amount' => true,
         'payment_method' => true,
         'score' => true,
@@ -231,6 +234,7 @@ class QueryResultItemDTO implements ModelInterface, ArrayAccess, \JsonSerializab
         'expense_type' => 'expenseType',
         'external_id' => 'externalId',
         'issue_date' => 'issueDate',
+        'matched_chunks' => 'matchedChunks',
         'net_amount' => 'netAmount',
         'payment_method' => 'paymentMethod',
         'score' => 'score',
@@ -258,6 +262,7 @@ class QueryResultItemDTO implements ModelInterface, ArrayAccess, \JsonSerializab
         'expense_type' => 'setExpenseType',
         'external_id' => 'setExternalId',
         'issue_date' => 'setIssueDate',
+        'matched_chunks' => 'setMatchedChunks',
         'net_amount' => 'setNetAmount',
         'payment_method' => 'setPaymentMethod',
         'score' => 'setScore',
@@ -285,6 +290,7 @@ class QueryResultItemDTO implements ModelInterface, ArrayAccess, \JsonSerializab
         'expense_type' => 'getExpenseType',
         'external_id' => 'getExternalId',
         'issue_date' => 'getIssueDate',
+        'matched_chunks' => 'getMatchedChunks',
         'net_amount' => 'getNetAmount',
         'payment_method' => 'getPaymentMethod',
         'score' => 'getScore',
@@ -363,6 +369,7 @@ class QueryResultItemDTO implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('expense_type', $data ?? [], null);
         $this->setIfExists('external_id', $data ?? [], null);
         $this->setIfExists('issue_date', $data ?? [], null);
+        $this->setIfExists('matched_chunks', $data ?? [], null);
         $this->setIfExists('net_amount', $data ?? [], null);
         $this->setIfExists('payment_method', $data ?? [], null);
         $this->setIfExists('score', $data ?? [], null);
@@ -777,6 +784,33 @@ class QueryResultItemDTO implements ModelInterface, ArrayAccess, \JsonSerializab
             }
         }
         $this->container['issue_date'] = $issue_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets matched_chunks
+     *
+     * @return \Gemina\Sdk\Model\MatchedChunkDTO[]|null
+     */
+    public function getMatchedChunks()
+    {
+        return $this->container['matched_chunks'];
+    }
+
+    /**
+     * Sets matched_chunks
+     *
+     * @param \Gemina\Sdk\Model\MatchedChunkDTO[]|null $matched_chunks Line-item/section snippets that matched the query (chunk search)
+     *
+     * @return self
+     */
+    public function setMatchedChunks($matched_chunks)
+    {
+        if (is_null($matched_chunks)) {
+            throw new \InvalidArgumentException('non-nullable matched_chunks cannot be null');
+        }
+        $this->container['matched_chunks'] = $matched_chunks;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * ChatQueryInDTO
+ * RetrievalFieldItemDTO
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Gemina\Sdk\ObjectSerializer;
 
 /**
- * ChatQueryInDTO Class Doc Comment
+ * RetrievalFieldItemDTO Class Doc Comment
  *
  * @category Class
  * @package  Gemina\Sdk
@@ -40,7 +40,7 @@ use \Gemina\Sdk\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
+class RetrievalFieldItemDTO implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'ChatQueryInDTO';
+    protected static $openAPIModelName = 'RetrievalFieldItemDTO';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,9 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'end_user_id' => 'string',
-        'message' => 'string',
-        'session_id' => 'string'
+        'count' => 'int',
+        'document_type' => 'string',
+        'field' => 'string'
     ];
 
     /**
@@ -70,9 +70,9 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'end_user_id' => null,
-        'message' => null,
-        'session_id' => 'uuid'
+        'count' => null,
+        'document_type' => null,
+        'field' => null
     ];
 
     /**
@@ -81,9 +81,9 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'end_user_id' => true,
-        'message' => false,
-        'session_id' => true
+        'count' => false,
+        'document_type' => true,
+        'field' => false
     ];
 
     /**
@@ -172,9 +172,9 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'end_user_id' => 'endUserId',
-        'message' => 'message',
-        'session_id' => 'sessionId'
+        'count' => 'count',
+        'document_type' => 'documentType',
+        'field' => 'field'
     ];
 
     /**
@@ -183,9 +183,9 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'end_user_id' => 'setEndUserId',
-        'message' => 'setMessage',
-        'session_id' => 'setSessionId'
+        'count' => 'setCount',
+        'document_type' => 'setDocumentType',
+        'field' => 'setField'
     ];
 
     /**
@@ -194,9 +194,9 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'end_user_id' => 'getEndUserId',
-        'message' => 'getMessage',
-        'session_id' => 'getSessionId'
+        'count' => 'getCount',
+        'document_type' => 'getDocumentType',
+        'field' => 'getField'
     ];
 
     /**
@@ -256,9 +256,9 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('end_user_id', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
-        $this->setIfExists('session_id', $data ?? [], null);
+        $this->setIfExists('count', $data ?? [], 0);
+        $this->setIfExists('document_type', $data ?? [], null);
+        $this->setIfExists('field', $data ?? [], null);
     }
 
     /**
@@ -288,21 +288,9 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['end_user_id']) && (mb_strlen($this->container['end_user_id']) > 100)) {
-            $invalidProperties[] = "invalid value for 'end_user_id', the character length must be smaller than or equal to 100.";
+        if ($this->container['field'] === null) {
+            $invalidProperties[] = "'field' can't be null";
         }
-
-        if ($this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
-        }
-        if ((mb_strlen($this->container['message']) > 2000)) {
-            $invalidProperties[] = "invalid value for 'message', the character length must be smaller than or equal to 2000.";
-        }
-
-        if ((mb_strlen($this->container['message']) < 1)) {
-            $invalidProperties[] = "invalid value for 'message', the character length must be bigger than or equal to 1.";
-        }
-
         return $invalidProperties;
     }
 
@@ -319,107 +307,89 @@ class ChatQueryInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets end_user_id
+     * Gets count
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getEndUserId()
+    public function getCount()
     {
-        return $this->container['end_user_id'];
+        return $this->container['count'];
     }
 
     /**
-     * Sets end_user_id
+     * Sets count
      *
-     * @param string|null $end_user_id Server-to-server (API key) path only: trusted within-tenant filter. On the token path the token's signed scope always wins.
+     * @param int|null $count documents in which this field appears
      *
      * @return self
      */
-    public function setEndUserId($end_user_id)
+    public function setCount($count)
     {
-        if (is_null($end_user_id)) {
-            array_push($this->openAPINullablesSetToNull, 'end_user_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('end_user_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($count)) {
+            throw new \InvalidArgumentException('non-nullable count cannot be null');
         }
-        if (!is_null($end_user_id) && (mb_strlen($end_user_id) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $end_user_id when calling ChatQueryInDTO., must be smaller than or equal to 100.');
-        }
-
-        $this->container['end_user_id'] = $end_user_id;
+        $this->container['count'] = $count;
 
         return $this;
     }
 
     /**
-     * Gets message
+     * Gets document_type
+     *
+     * @return string|null
+     */
+    public function getDocumentType()
+    {
+        return $this->container['document_type'];
+    }
+
+    /**
+     * Sets document_type
+     *
+     * @param string|null $document_type document_type
+     *
+     * @return self
+     */
+    public function setDocumentType($document_type)
+    {
+        if (is_null($document_type)) {
+            array_push($this->openAPINullablesSetToNull, 'document_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('document_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['document_type'] = $document_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets field
      *
      * @return string
      */
-    public function getMessage()
+    public function getField()
     {
-        return $this->container['message'];
+        return $this->container['field'];
     }
 
     /**
-     * Sets message
+     * Sets field
      *
-     * @param string $message message
+     * @param string $field field
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setField($field)
     {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($field)) {
+            throw new \InvalidArgumentException('non-nullable field cannot be null');
         }
-        if ((mb_strlen($message) > 2000)) {
-            throw new \InvalidArgumentException('invalid length for $message when calling ChatQueryInDTO., must be smaller than or equal to 2000.');
-        }
-        if ((mb_strlen($message) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $message when calling ChatQueryInDTO., must be bigger than or equal to 1.');
-        }
-
-        $this->container['message'] = $message;
-
-        return $this;
-    }
-
-    /**
-     * Gets session_id
-     *
-     * @return string|null
-     */
-    public function getSessionId()
-    {
-        return $this->container['session_id'];
-    }
-
-    /**
-     * Sets session_id
-     *
-     * @param string|null $session_id Continue an existing conversation. Omit to start a new one; the response returns the sessionId to send on follow-up turns.
-     *
-     * @return self
-     */
-    public function setSessionId($session_id)
-    {
-        if (is_null($session_id)) {
-            array_push($this->openAPINullablesSetToNull, 'session_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('session_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['session_id'] = $session_id;
+        $this->container['field'] = $field;
 
         return $this;
     }

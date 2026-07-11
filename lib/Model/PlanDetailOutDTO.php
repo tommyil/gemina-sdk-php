@@ -58,6 +58,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $openAPITypes = [
         'bonus_percentage' => 'int',
+        'chat_credit_cost' => 'string',
         'chat_included_per_cycle' => 'int',
         'created_at' => '\DateTime',
         'created_at_timestamp' => 'float',
@@ -68,6 +69,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
         'document_intelligence_enabled' => 'bool',
         'enhanced_privacy_enabled' => 'bool',
         'id' => 'string',
+        'index_credit_cost' => 'string',
         'ip_allowlist_enabled' => 'bool',
         'is_active' => 'bool',
         'max_data_retention_period' => '\Gemina\Sdk\Model\DataRetentionPeriodModel',
@@ -80,6 +82,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
         'retrieval_rate_limit_per_second' => 'int',
         'slug' => 'string',
         'storage_credit_cost_per_gb_month' => 'string',
+        'storage_included_gb' => 'string',
         'support_level' => '\Gemina\Sdk\Model\SupportLevel',
         'webhooks_enabled' => 'bool'
     ];
@@ -93,6 +96,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $openAPIFormats = [
         'bonus_percentage' => null,
+        'chat_credit_cost' => null,
         'chat_included_per_cycle' => null,
         'created_at' => 'date-time',
         'created_at_timestamp' => null,
@@ -103,6 +107,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
         'document_intelligence_enabled' => null,
         'enhanced_privacy_enabled' => null,
         'id' => 'uuid',
+        'index_credit_cost' => null,
         'ip_allowlist_enabled' => null,
         'is_active' => null,
         'max_data_retention_period' => null,
@@ -115,6 +120,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
         'retrieval_rate_limit_per_second' => null,
         'slug' => null,
         'storage_credit_cost_per_gb_month' => null,
+        'storage_included_gb' => null,
         'support_level' => null,
         'webhooks_enabled' => null
     ];
@@ -126,6 +132,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static array $openAPINullables = [
         'bonus_percentage' => false,
+        'chat_credit_cost' => false,
         'chat_included_per_cycle' => false,
         'created_at' => true,
         'created_at_timestamp' => true,
@@ -136,6 +143,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
         'document_intelligence_enabled' => false,
         'enhanced_privacy_enabled' => false,
         'id' => false,
+        'index_credit_cost' => false,
         'ip_allowlist_enabled' => false,
         'is_active' => false,
         'max_data_retention_period' => false,
@@ -148,6 +156,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
         'retrieval_rate_limit_per_second' => false,
         'slug' => false,
         'storage_credit_cost_per_gb_month' => false,
+        'storage_included_gb' => false,
         'support_level' => false,
         'webhooks_enabled' => false
     ];
@@ -239,6 +248,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'bonus_percentage' => 'bonusPercentage',
+        'chat_credit_cost' => 'chatCreditCost',
         'chat_included_per_cycle' => 'chatIncludedPerCycle',
         'created_at' => 'createdAt',
         'created_at_timestamp' => 'createdAtTimestamp',
@@ -249,6 +259,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
         'document_intelligence_enabled' => 'documentIntelligenceEnabled',
         'enhanced_privacy_enabled' => 'enhancedPrivacyEnabled',
         'id' => 'id',
+        'index_credit_cost' => 'indexCreditCost',
         'ip_allowlist_enabled' => 'ipAllowlistEnabled',
         'is_active' => 'isActive',
         'max_data_retention_period' => 'maxDataRetentionPeriod',
@@ -261,6 +272,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
         'retrieval_rate_limit_per_second' => 'retrievalRateLimitPerSecond',
         'slug' => 'slug',
         'storage_credit_cost_per_gb_month' => 'storageCreditCostPerGbMonth',
+        'storage_included_gb' => 'storageIncludedGb',
         'support_level' => 'supportLevel',
         'webhooks_enabled' => 'webhooksEnabled'
     ];
@@ -272,6 +284,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'bonus_percentage' => 'setBonusPercentage',
+        'chat_credit_cost' => 'setChatCreditCost',
         'chat_included_per_cycle' => 'setChatIncludedPerCycle',
         'created_at' => 'setCreatedAt',
         'created_at_timestamp' => 'setCreatedAtTimestamp',
@@ -282,6 +295,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
         'document_intelligence_enabled' => 'setDocumentIntelligenceEnabled',
         'enhanced_privacy_enabled' => 'setEnhancedPrivacyEnabled',
         'id' => 'setId',
+        'index_credit_cost' => 'setIndexCreditCost',
         'ip_allowlist_enabled' => 'setIpAllowlistEnabled',
         'is_active' => 'setIsActive',
         'max_data_retention_period' => 'setMaxDataRetentionPeriod',
@@ -294,6 +308,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
         'retrieval_rate_limit_per_second' => 'setRetrievalRateLimitPerSecond',
         'slug' => 'setSlug',
         'storage_credit_cost_per_gb_month' => 'setStorageCreditCostPerGbMonth',
+        'storage_included_gb' => 'setStorageIncludedGb',
         'support_level' => 'setSupportLevel',
         'webhooks_enabled' => 'setWebhooksEnabled'
     ];
@@ -305,6 +320,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'bonus_percentage' => 'getBonusPercentage',
+        'chat_credit_cost' => 'getChatCreditCost',
         'chat_included_per_cycle' => 'getChatIncludedPerCycle',
         'created_at' => 'getCreatedAt',
         'created_at_timestamp' => 'getCreatedAtTimestamp',
@@ -315,6 +331,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
         'document_intelligence_enabled' => 'getDocumentIntelligenceEnabled',
         'enhanced_privacy_enabled' => 'getEnhancedPrivacyEnabled',
         'id' => 'getId',
+        'index_credit_cost' => 'getIndexCreditCost',
         'ip_allowlist_enabled' => 'getIpAllowlistEnabled',
         'is_active' => 'getIsActive',
         'max_data_retention_period' => 'getMaxDataRetentionPeriod',
@@ -327,6 +344,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
         'retrieval_rate_limit_per_second' => 'getRetrievalRateLimitPerSecond',
         'slug' => 'getSlug',
         'storage_credit_cost_per_gb_month' => 'getStorageCreditCostPerGbMonth',
+        'storage_included_gb' => 'getStorageIncludedGb',
         'support_level' => 'getSupportLevel',
         'webhooks_enabled' => 'getWebhooksEnabled'
     ];
@@ -389,6 +407,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('bonus_percentage', $data ?? [], null);
+        $this->setIfExists('chat_credit_cost', $data ?? [], '0');
         $this->setIfExists('chat_included_per_cycle', $data ?? [], 0);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('created_at_timestamp', $data ?? [], null);
@@ -399,6 +418,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('document_intelligence_enabled', $data ?? [], false);
         $this->setIfExists('enhanced_privacy_enabled', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('index_credit_cost', $data ?? [], '0');
         $this->setIfExists('ip_allowlist_enabled', $data ?? [], null);
         $this->setIfExists('is_active', $data ?? [], null);
         $this->setIfExists('max_data_retention_period', $data ?? [], null);
@@ -411,6 +431,7 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('retrieval_rate_limit_per_second', $data ?? [], 20);
         $this->setIfExists('slug', $data ?? [], null);
         $this->setIfExists('storage_credit_cost_per_gb_month', $data ?? [], '0');
+        $this->setIfExists('storage_included_gb', $data ?? [], '0');
         $this->setIfExists('support_level', $data ?? [], null);
         $this->setIfExists('webhooks_enabled', $data ?? [], null);
     }
@@ -525,6 +546,33 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable bonus_percentage cannot be null');
         }
         $this->container['bonus_percentage'] = $bonus_percentage;
+
+        return $this;
+    }
+
+    /**
+     * Gets chat_credit_cost
+     *
+     * @return string|null
+     */
+    public function getChatCreditCost()
+    {
+        return $this->container['chat_credit_cost'];
+    }
+
+    /**
+     * Sets chat_credit_cost
+     *
+     * @param string|null $chat_credit_cost chat_credit_cost
+     *
+     * @return self
+     */
+    public function setChatCreditCost($chat_credit_cost)
+    {
+        if (is_null($chat_credit_cost)) {
+            throw new \InvalidArgumentException('non-nullable chat_credit_cost cannot be null');
+        }
+        $this->container['chat_credit_cost'] = $chat_credit_cost;
 
         return $this;
     }
@@ -816,6 +864,33 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets index_credit_cost
+     *
+     * @return string|null
+     */
+    public function getIndexCreditCost()
+    {
+        return $this->container['index_credit_cost'];
+    }
+
+    /**
+     * Sets index_credit_cost
+     *
+     * @param string|null $index_credit_cost index_credit_cost
+     *
+     * @return self
+     */
+    public function setIndexCreditCost($index_credit_cost)
+    {
+        if (is_null($index_credit_cost)) {
+            throw new \InvalidArgumentException('non-nullable index_credit_cost cannot be null');
+        }
+        $this->container['index_credit_cost'] = $index_credit_cost;
 
         return $this;
     }
@@ -1154,6 +1229,33 @@ class PlanDetailOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable storage_credit_cost_per_gb_month cannot be null');
         }
         $this->container['storage_credit_cost_per_gb_month'] = $storage_credit_cost_per_gb_month;
+
+        return $this;
+    }
+
+    /**
+     * Gets storage_included_gb
+     *
+     * @return string|null
+     */
+    public function getStorageIncludedGb()
+    {
+        return $this->container['storage_included_gb'];
+    }
+
+    /**
+     * Sets storage_included_gb
+     *
+     * @param string|null $storage_included_gb storage_included_gb
+     *
+     * @return self
+     */
+    public function setStorageIncludedGb($storage_included_gb)
+    {
+        if (is_null($storage_included_gb)) {
+            throw new \InvalidArgumentException('non-nullable storage_included_gb cannot be null');
+        }
+        $this->container['storage_included_gb'] = $storage_included_gb;
 
         return $this;
     }
