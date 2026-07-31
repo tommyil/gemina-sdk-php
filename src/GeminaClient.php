@@ -201,7 +201,7 @@ class GeminaClient
      * @param string|\SplFileObject|UrlSource $source File path, open file, or
      *        a UrlSource pointing at a downloadable document.
      * @param string[] $extractionTypes Non-empty list of extraction types
-     *        (values of \Gemina\Sdk\Model\ExtractionTypeModel, e.g.
+     *        (values of \Gemina\Sdk\Model\UploadExtractionTypeEnum, e.g.
      *        'invoice_headers').
      * @param array{
      *     externalId?: string,

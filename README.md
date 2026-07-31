@@ -79,6 +79,33 @@ Extraction types:
 | `custom_template` | Fields defined by your own template (pass `templateId` in options) |
 | `filetag` | Document classification and file-naming metadata |
 
+## What did an extraction cost?
+
+Credits are charged *after* the result is delivered, so cost is a separate
+lookup rather than a field on the extraction response. Ask for one extraction,
+or up to 100 at a time:
+
+```php
+$single = $client->documents()->getExtractionCost($extractionId);
+echo $single->getData()->getState(), ' ', $single->getData()->getCreditsConsumed(), PHP_EOL;
+
+$bulk = $client->documents()->getExtractionCosts([$extractionId, $otherId]);
+foreach ($bulk->getData()->getCosts() as $cost) {
+    echo $cost->getExtractionId(), ' ', $cost->getState(), PHP_EOL;
+}
+```
+
+`state` tells you whether the number is final:
+
+- `settled` — the charge is on record; this is the authoritative number.
+- `pending` — billing has not run yet. Retry.
+- `not_charged` — billing finished without a charge. This never resolves, so
+  don't poll it.
+
+Enterprise accounts are billed in contract dollars: `creditsConsumed` is null
+and `costCents` carries the amount. The bulk call silently omits ids you don't
+own, so key the response by `extractionId` rather than assuming input order.
+
 ## Search & aggregate your documents
 
 Everything you process is indexed for retrieval. Query it in natural language plus structured filters:
