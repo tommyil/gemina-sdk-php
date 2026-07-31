@@ -77,7 +77,9 @@ Extraction types:
 | `document_details_hebrew` | Hebrew document header details |
 | `document_line_items_hebrew` | Hebrew document line items |
 | `custom_template` | Fields defined by your own template (pass `templateId` in options) |
-| `filetag` | Document classification and file-naming metadata |
+
+`filetag` is deliberately absent: the upload endpoints reject it, and FileTag
+has its own endpoints.
 
 ## What did an extraction cost?
 
