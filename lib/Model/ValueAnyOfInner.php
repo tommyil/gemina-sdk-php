@@ -1,6 +1,6 @@
 <?php
 /**
- * FreeTierConfigOutDTO
+ * ValueAnyOfInner
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Gemina\Sdk\ObjectSerializer;
 
 /**
- * FreeTierConfigOutDTO Class Doc Comment
+ * ValueAnyOfInner Class Doc Comment
  *
  * @category Class
  * @package  Gemina\Sdk
@@ -40,7 +40,7 @@ use \Gemina\Sdk\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class FreeTierConfigOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
+class ValueAnyOfInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class FreeTierConfigOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
      *
      * @var string
      */
-    protected static $openAPIModelName = 'FreeTierConfigOutDTO';
+    protected static $openAPIModelName = 'Value_anyOf_inner';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,11 +57,7 @@ class FreeTierConfigOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $openAPITypes = [
-        'description' => 'string',
-        'display_name' => 'string',
-        'features' => 'string[]',
-        'monthly_filetag_credits' => 'string',
-        'retention_days' => 'int'
+        
     ];
 
     /**
@@ -72,11 +68,7 @@ class FreeTierConfigOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'description' => null,
-        'display_name' => null,
-        'features' => null,
-        'monthly_filetag_credits' => null,
-        'retention_days' => null
+        
     ];
 
     /**
@@ -85,11 +77,7 @@ class FreeTierConfigOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'description' => true,
-        'display_name' => false,
-        'features' => false,
-        'monthly_filetag_credits' => false,
-        'retention_days' => false
+        
     ];
 
     /**
@@ -178,11 +166,7 @@ class FreeTierConfigOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'description' => 'description',
-        'display_name' => 'displayName',
-        'features' => 'features',
-        'monthly_filetag_credits' => 'monthlyFiletagCredits',
-        'retention_days' => 'retentionDays'
+        
     ];
 
     /**
@@ -191,11 +175,7 @@ class FreeTierConfigOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'description' => 'setDescription',
-        'display_name' => 'setDisplayName',
-        'features' => 'setFeatures',
-        'monthly_filetag_credits' => 'setMonthlyFiletagCredits',
-        'retention_days' => 'setRetentionDays'
+        
     ];
 
     /**
@@ -204,11 +184,7 @@ class FreeTierConfigOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'description' => 'getDescription',
-        'display_name' => 'getDisplayName',
-        'features' => 'getFeatures',
-        'monthly_filetag_credits' => 'getMonthlyFiletagCredits',
-        'retention_days' => 'getRetentionDays'
+        
     ];
 
     /**
@@ -268,11 +244,6 @@ class FreeTierConfigOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('display_name', $data ?? [], null);
-        $this->setIfExists('features', $data ?? [], null);
-        $this->setIfExists('monthly_filetag_credits', $data ?? [], null);
-        $this->setIfExists('retention_days', $data ?? [], null);
     }
 
     /**
@@ -302,15 +273,6 @@ class FreeTierConfigOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
-        if ($this->container['display_name'] === null) {
-            $invalidProperties[] = "'display_name' can't be null";
-        }
-        if ($this->container['monthly_filetag_credits'] === null) {
-            $invalidProperties[] = "'monthly_filetag_credits' can't be null";
-        }
-        if ($this->container['retention_days'] === null) {
-            $invalidProperties[] = "'retention_days' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -325,148 +287,6 @@ class FreeTierConfigOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description description
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-        if (is_null($description)) {
-            array_push($this->openAPINullablesSetToNull, 'description');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('description', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
-     * Gets display_name
-     *
-     * @return string
-     */
-    public function getDisplayName()
-    {
-        return $this->container['display_name'];
-    }
-
-    /**
-     * Sets display_name
-     *
-     * @param string $display_name display_name
-     *
-     * @return self
-     */
-    public function setDisplayName($display_name)
-    {
-        if (is_null($display_name)) {
-            throw new \InvalidArgumentException('non-nullable display_name cannot be null');
-        }
-        $this->container['display_name'] = $display_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets features
-     *
-     * @return string[]|null
-     */
-    public function getFeatures()
-    {
-        return $this->container['features'];
-    }
-
-    /**
-     * Sets features
-     *
-     * @param string[]|null $features features
-     *
-     * @return self
-     */
-    public function setFeatures($features)
-    {
-        if (is_null($features)) {
-            throw new \InvalidArgumentException('non-nullable features cannot be null');
-        }
-        $this->container['features'] = $features;
-
-        return $this;
-    }
-
-    /**
-     * Gets monthly_filetag_credits
-     *
-     * @return string
-     */
-    public function getMonthlyFiletagCredits()
-    {
-        return $this->container['monthly_filetag_credits'];
-    }
-
-    /**
-     * Sets monthly_filetag_credits
-     *
-     * @param string $monthly_filetag_credits monthly_filetag_credits
-     *
-     * @return self
-     */
-    public function setMonthlyFiletagCredits($monthly_filetag_credits)
-    {
-        if (is_null($monthly_filetag_credits)) {
-            throw new \InvalidArgumentException('non-nullable monthly_filetag_credits cannot be null');
-        }
-        $this->container['monthly_filetag_credits'] = $monthly_filetag_credits;
-
-        return $this;
-    }
-
-    /**
-     * Gets retention_days
-     *
-     * @return int
-     */
-    public function getRetentionDays()
-    {
-        return $this->container['retention_days'];
-    }
-
-    /**
-     * Sets retention_days
-     *
-     * @param int $retention_days retention_days
-     *
-     * @return self
-     */
-    public function setRetentionDays($retention_days)
-    {
-        if (is_null($retention_days)) {
-            throw new \InvalidArgumentException('non-nullable retention_days cannot be null');
-        }
-        $this->container['retention_days'] = $retention_days;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *
