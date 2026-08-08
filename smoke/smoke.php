@@ -37,6 +37,13 @@ try {
             ? $status->getServedAt()->format(DATE_ATOM)
             : 'n/a',
     );
+
+    $history = $client->chat()->listChatSessions(0, 2);
+    printf(
+        "chat history OK — count=%d sessions=%d\n",
+        $history->getCount(),
+        count($history->getSessions()),
+    );
     exit(0);
 } catch (\Throwable $e) {
     fwrite(STDERR, sprintf("Smoke test failed: %s: %s\n", get_class($e), $e->getMessage()));
