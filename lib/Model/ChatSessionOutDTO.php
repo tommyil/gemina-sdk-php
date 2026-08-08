@@ -1,6 +1,6 @@
 <?php
 /**
- * ExtractionMetaOutDTO
+ * ChatSessionOutDTO
  *
  * PHP version 8.1
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Gemina\Sdk\ObjectSerializer;
 
 /**
- * ExtractionMetaOutDTO Class Doc Comment
+ * ChatSessionOutDTO Class Doc Comment
  *
  * @category Class
+ * @description One row of chat history — a live conversation, an ended one, or a stub.  A purged session survives here as a STUB: ids and timestamps, never a title and never content (design D4/D10). The console&#39;s purge copy already promises \&quot;a record of the purge will be kept\&quot;, and document lists expose exactly this shape behind the same &#x60;&#x60;with_purged&#x60;&#x60; flag.
  * @package  Gemina\Sdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ExtractionMetaOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
+class ChatSessionOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class ExtractionMetaOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
      *
      * @var string
      */
-    protected static $openAPIModelName = 'ExtractionMetaOutDTO';
+    protected static $openAPIModelName = 'ChatSessionOutDTO';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,20 +58,16 @@ class ExtractionMetaOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $openAPITypes = [
-        'correction' => 'bool',
-        'evaluation' => 'bool',
-        'extraction_id' => 'string',
-        'extraction_type' => '\Gemina\Sdk\Model\ExtractionTypeModel',
-        'include_coordinates' => 'bool',
-        'latency_seconds' => 'float',
-        'model_type' => '\Gemina\Sdk\Model\ModelType',
-        'number_of_fields' => 'int',
-        'processor_class' => 'string',
+        'created_at' => '\DateTime',
+        'created_at_timestamp' => 'float',
+        'id' => 'string',
+        'last_activity_at' => '\DateTime',
         'purge_at' => '\DateTime',
-        'purge_reason' => '\Gemina\Sdk\Model\PurgeReasonModel',
+        'purge_reason' => 'string',
         'purged_at' => '\DateTime',
-        'thinking' => 'bool',
-        'validation_feedback' => '\Gemina\Sdk\Model\ValidationSchemaModel'
+        'resumable' => 'bool',
+        'title' => 'string',
+        'turn_count' => 'int'
     ];
 
     /**
@@ -81,20 +78,16 @@ class ExtractionMetaOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'correction' => null,
-        'evaluation' => null,
-        'extraction_id' => 'uuid',
-        'extraction_type' => null,
-        'include_coordinates' => null,
-        'latency_seconds' => null,
-        'model_type' => null,
-        'number_of_fields' => null,
-        'processor_class' => null,
+        'created_at' => 'date-time',
+        'created_at_timestamp' => null,
+        'id' => 'uuid',
+        'last_activity_at' => 'date-time',
         'purge_at' => 'date-time',
         'purge_reason' => null,
         'purged_at' => 'date-time',
-        'thinking' => null,
-        'validation_feedback' => null
+        'resumable' => null,
+        'title' => null,
+        'turn_count' => null
     ];
 
     /**
@@ -103,20 +96,16 @@ class ExtractionMetaOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'correction' => false,
-        'evaluation' => false,
-        'extraction_id' => true,
-        'extraction_type' => false,
-        'include_coordinates' => false,
-        'latency_seconds' => true,
-        'model_type' => false,
-        'number_of_fields' => true,
-        'processor_class' => false,
+        'created_at' => true,
+        'created_at_timestamp' => true,
+        'id' => false,
+        'last_activity_at' => true,
         'purge_at' => true,
         'purge_reason' => true,
         'purged_at' => true,
-        'thinking' => false,
-        'validation_feedback' => true
+        'resumable' => false,
+        'title' => true,
+        'turn_count' => false
     ];
 
     /**
@@ -205,20 +194,16 @@ class ExtractionMetaOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'correction' => 'correction',
-        'evaluation' => 'evaluation',
-        'extraction_id' => 'extractionId',
-        'extraction_type' => 'extractionType',
-        'include_coordinates' => 'includeCoordinates',
-        'latency_seconds' => 'latencySeconds',
-        'model_type' => 'modelType',
-        'number_of_fields' => 'numberOfFields',
-        'processor_class' => 'processorClass',
+        'created_at' => 'createdAt',
+        'created_at_timestamp' => 'createdAtTimestamp',
+        'id' => 'id',
+        'last_activity_at' => 'lastActivityAt',
         'purge_at' => 'purgeAt',
         'purge_reason' => 'purgeReason',
         'purged_at' => 'purgedAt',
-        'thinking' => 'thinking',
-        'validation_feedback' => 'validationFeedback'
+        'resumable' => 'resumable',
+        'title' => 'title',
+        'turn_count' => 'turnCount'
     ];
 
     /**
@@ -227,20 +212,16 @@ class ExtractionMetaOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'correction' => 'setCorrection',
-        'evaluation' => 'setEvaluation',
-        'extraction_id' => 'setExtractionId',
-        'extraction_type' => 'setExtractionType',
-        'include_coordinates' => 'setIncludeCoordinates',
-        'latency_seconds' => 'setLatencySeconds',
-        'model_type' => 'setModelType',
-        'number_of_fields' => 'setNumberOfFields',
-        'processor_class' => 'setProcessorClass',
+        'created_at' => 'setCreatedAt',
+        'created_at_timestamp' => 'setCreatedAtTimestamp',
+        'id' => 'setId',
+        'last_activity_at' => 'setLastActivityAt',
         'purge_at' => 'setPurgeAt',
         'purge_reason' => 'setPurgeReason',
         'purged_at' => 'setPurgedAt',
-        'thinking' => 'setThinking',
-        'validation_feedback' => 'setValidationFeedback'
+        'resumable' => 'setResumable',
+        'title' => 'setTitle',
+        'turn_count' => 'setTurnCount'
     ];
 
     /**
@@ -249,20 +230,16 @@ class ExtractionMetaOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'correction' => 'getCorrection',
-        'evaluation' => 'getEvaluation',
-        'extraction_id' => 'getExtractionId',
-        'extraction_type' => 'getExtractionType',
-        'include_coordinates' => 'getIncludeCoordinates',
-        'latency_seconds' => 'getLatencySeconds',
-        'model_type' => 'getModelType',
-        'number_of_fields' => 'getNumberOfFields',
-        'processor_class' => 'getProcessorClass',
+        'created_at' => 'getCreatedAt',
+        'created_at_timestamp' => 'getCreatedAtTimestamp',
+        'id' => 'getId',
+        'last_activity_at' => 'getLastActivityAt',
         'purge_at' => 'getPurgeAt',
         'purge_reason' => 'getPurgeReason',
         'purged_at' => 'getPurgedAt',
-        'thinking' => 'getThinking',
-        'validation_feedback' => 'getValidationFeedback'
+        'resumable' => 'getResumable',
+        'title' => 'getTitle',
+        'turn_count' => 'getTurnCount'
     ];
 
     /**
@@ -322,20 +299,16 @@ class ExtractionMetaOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('correction', $data ?? [], null);
-        $this->setIfExists('evaluation', $data ?? [], null);
-        $this->setIfExists('extraction_id', $data ?? [], null);
-        $this->setIfExists('extraction_type', $data ?? [], null);
-        $this->setIfExists('include_coordinates', $data ?? [], null);
-        $this->setIfExists('latency_seconds', $data ?? [], null);
-        $this->setIfExists('model_type', $data ?? [], null);
-        $this->setIfExists('number_of_fields', $data ?? [], null);
-        $this->setIfExists('processor_class', $data ?? [], null);
+        $this->setIfExists('created_at', $data ?? [], null);
+        $this->setIfExists('created_at_timestamp', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('last_activity_at', $data ?? [], null);
         $this->setIfExists('purge_at', $data ?? [], null);
         $this->setIfExists('purge_reason', $data ?? [], null);
         $this->setIfExists('purged_at', $data ?? [], null);
-        $this->setIfExists('thinking', $data ?? [], null);
-        $this->setIfExists('validation_feedback', $data ?? [], null);
+        $this->setIfExists('resumable', $data ?? [], false);
+        $this->setIfExists('title', $data ?? [], null);
+        $this->setIfExists('turn_count', $data ?? [], 0);
     }
 
     /**
@@ -365,35 +338,8 @@ class ExtractionMetaOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
-        if ($this->container['correction'] === null) {
-            $invalidProperties[] = "'correction' can't be null";
-        }
-        if ($this->container['evaluation'] === null) {
-            $invalidProperties[] = "'evaluation' can't be null";
-        }
-        if ($this->container['extraction_type'] === null) {
-            $invalidProperties[] = "'extraction_type' can't be null";
-        }
-        if ($this->container['include_coordinates'] === null) {
-            $invalidProperties[] = "'include_coordinates' can't be null";
-        }
-        if ($this->container['model_type'] === null) {
-            $invalidProperties[] = "'model_type' can't be null";
-        }
-        if ($this->container['processor_class'] === null) {
-            $invalidProperties[] = "'processor_class' can't be null";
-        }
-        if ($this->container['purge_at'] === null && !$this->isNullableSetToNull('purge_at')) {
-            $invalidProperties[] = "'purge_at' is required";
-        }
-        if ($this->container['purge_reason'] === null && !$this->isNullableSetToNull('purge_reason')) {
-            $invalidProperties[] = "'purge_reason' is required";
-        }
-        if ($this->container['purged_at'] === null && !$this->isNullableSetToNull('purged_at')) {
-            $invalidProperties[] = "'purged_at' is required";
-        }
-        if ($this->container['thinking'] === null) {
-            $invalidProperties[] = "'thinking' can't be null";
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
         }
         return $invalidProperties;
     }
@@ -411,265 +357,130 @@ class ExtractionMetaOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets correction
+     * Gets created_at
      *
-     * @return bool
+     * @return \DateTime|null
      */
-    public function getCorrection()
+    public function getCreatedAt()
     {
-        return $this->container['correction'];
+        return $this->container['created_at'];
     }
 
     /**
-     * Sets correction
+     * Sets created_at
      *
-     * @param bool $correction correction
+     * @param \DateTime|null $created_at created_at
      *
      * @return self
      */
-    public function setCorrection($correction)
+    public function setCreatedAt($created_at)
     {
-        if (is_null($correction)) {
-            throw new \InvalidArgumentException('non-nullable correction cannot be null');
-        }
-        $this->container['correction'] = $correction;
-
-        return $this;
-    }
-
-    /**
-     * Gets evaluation
-     *
-     * @return bool
-     */
-    public function getEvaluation()
-    {
-        return $this->container['evaluation'];
-    }
-
-    /**
-     * Sets evaluation
-     *
-     * @param bool $evaluation evaluation
-     *
-     * @return self
-     */
-    public function setEvaluation($evaluation)
-    {
-        if (is_null($evaluation)) {
-            throw new \InvalidArgumentException('non-nullable evaluation cannot be null');
-        }
-        $this->container['evaluation'] = $evaluation;
-
-        return $this;
-    }
-
-    /**
-     * Gets extraction_id
-     *
-     * @return string|null
-     */
-    public function getExtractionId()
-    {
-        return $this->container['extraction_id'];
-    }
-
-    /**
-     * Sets extraction_id
-     *
-     * @param string|null $extraction_id extraction_id
-     *
-     * @return self
-     */
-    public function setExtractionId($extraction_id)
-    {
-        if (is_null($extraction_id)) {
-            array_push($this->openAPINullablesSetToNull, 'extraction_id');
+        if (is_null($created_at)) {
+            array_push($this->openAPINullablesSetToNull, 'created_at');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('extraction_id', $nullablesSetToNull);
+            $index = array_search('created_at', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['extraction_id'] = $extraction_id;
+        $this->container['created_at'] = $created_at;
 
         return $this;
     }
 
     /**
-     * Gets extraction_type
-     *
-     * @return \Gemina\Sdk\Model\ExtractionTypeModel
-     */
-    public function getExtractionType()
-    {
-        return $this->container['extraction_type'];
-    }
-
-    /**
-     * Sets extraction_type
-     *
-     * @param \Gemina\Sdk\Model\ExtractionTypeModel $extraction_type extraction_type
-     *
-     * @return self
-     */
-    public function setExtractionType($extraction_type)
-    {
-        if (is_null($extraction_type)) {
-            throw new \InvalidArgumentException('non-nullable extraction_type cannot be null');
-        }
-        $this->container['extraction_type'] = $extraction_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets include_coordinates
-     *
-     * @return bool
-     */
-    public function getIncludeCoordinates()
-    {
-        return $this->container['include_coordinates'];
-    }
-
-    /**
-     * Sets include_coordinates
-     *
-     * @param bool $include_coordinates include_coordinates
-     *
-     * @return self
-     */
-    public function setIncludeCoordinates($include_coordinates)
-    {
-        if (is_null($include_coordinates)) {
-            throw new \InvalidArgumentException('non-nullable include_coordinates cannot be null');
-        }
-        $this->container['include_coordinates'] = $include_coordinates;
-
-        return $this;
-    }
-
-    /**
-     * Gets latency_seconds
+     * Gets created_at_timestamp
      *
      * @return float|null
      */
-    public function getLatencySeconds()
+    public function getCreatedAtTimestamp()
     {
-        return $this->container['latency_seconds'];
+        return $this->container['created_at_timestamp'];
     }
 
     /**
-     * Sets latency_seconds
+     * Sets created_at_timestamp
      *
-     * @param float|null $latency_seconds latency_seconds
+     * @param float|null $created_at_timestamp created_at_timestamp
      *
      * @return self
      */
-    public function setLatencySeconds($latency_seconds)
+    public function setCreatedAtTimestamp($created_at_timestamp)
     {
-        if (is_null($latency_seconds)) {
-            array_push($this->openAPINullablesSetToNull, 'latency_seconds');
+        if (is_null($created_at_timestamp)) {
+            array_push($this->openAPINullablesSetToNull, 'created_at_timestamp');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('latency_seconds', $nullablesSetToNull);
+            $index = array_search('created_at_timestamp', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['latency_seconds'] = $latency_seconds;
+        $this->container['created_at_timestamp'] = $created_at_timestamp;
 
         return $this;
     }
 
     /**
-     * Gets model_type
-     *
-     * @return \Gemina\Sdk\Model\ModelType
-     */
-    public function getModelType()
-    {
-        return $this->container['model_type'];
-    }
-
-    /**
-     * Sets model_type
-     *
-     * @param \Gemina\Sdk\Model\ModelType $model_type model_type
-     *
-     * @return self
-     */
-    public function setModelType($model_type)
-    {
-        if (is_null($model_type)) {
-            throw new \InvalidArgumentException('non-nullable model_type cannot be null');
-        }
-        $this->container['model_type'] = $model_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets number_of_fields
-     *
-     * @return int|null
-     */
-    public function getNumberOfFields()
-    {
-        return $this->container['number_of_fields'];
-    }
-
-    /**
-     * Sets number_of_fields
-     *
-     * @param int|null $number_of_fields number_of_fields
-     *
-     * @return self
-     */
-    public function setNumberOfFields($number_of_fields)
-    {
-        if (is_null($number_of_fields)) {
-            array_push($this->openAPINullablesSetToNull, 'number_of_fields');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('number_of_fields', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['number_of_fields'] = $number_of_fields;
-
-        return $this;
-    }
-
-    /**
-     * Gets processor_class
+     * Gets id
      *
      * @return string
      */
-    public function getProcessorClass()
+    public function getId()
     {
-        return $this->container['processor_class'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets processor_class
+     * Sets id
      *
-     * @param string $processor_class processor_class
+     * @param string $id id
      *
      * @return self
      */
-    public function setProcessorClass($processor_class)
+    public function setId($id)
     {
-        if (is_null($processor_class)) {
-            throw new \InvalidArgumentException('non-nullable processor_class cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
-        $this->container['processor_class'] = $processor_class;
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets last_activity_at
+     *
+     * @return \DateTime|null
+     */
+    public function getLastActivityAt()
+    {
+        return $this->container['last_activity_at'];
+    }
+
+    /**
+     * Sets last_activity_at
+     *
+     * @param \DateTime|null $last_activity_at last_activity_at
+     *
+     * @return self
+     */
+    public function setLastActivityAt($last_activity_at)
+    {
+        if (is_null($last_activity_at)) {
+            array_push($this->openAPINullablesSetToNull, 'last_activity_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('last_activity_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['last_activity_at'] = $last_activity_at;
 
         return $this;
     }
@@ -687,7 +498,7 @@ class ExtractionMetaOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets purge_at
      *
-     * @param \DateTime|null $purge_at purge_at
+     * @param \DateTime|null $purge_at When retention will delete this chat; null = kept always
      *
      * @return self
      */
@@ -711,7 +522,7 @@ class ExtractionMetaOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets purge_reason
      *
-     * @return \Gemina\Sdk\Model\PurgeReasonModel|null
+     * @return string|null
      */
     public function getPurgeReason()
     {
@@ -721,7 +532,7 @@ class ExtractionMetaOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets purge_reason
      *
-     * @param \Gemina\Sdk\Model\PurgeReasonModel|null $purge_reason purge_reason
+     * @param string|null $purge_reason user_deleted | retention_expired | admin_action
      *
      * @return self
      */
@@ -777,62 +588,89 @@ class ExtractionMetaOutDTO implements ModelInterface, ArrayAccess, \JsonSerializ
     }
 
     /**
-     * Gets thinking
+     * Gets resumable
      *
-     * @return bool
+     * @return bool|null
      */
-    public function getThinking()
+    public function getResumable()
     {
-        return $this->container['thinking'];
+        return $this->container['resumable'];
     }
 
     /**
-     * Sets thinking
+     * Sets resumable
      *
-     * @param bool $thinking thinking
+     * @param bool|null $resumable False: the transcript is read-only; a new turn on it would 404
      *
      * @return self
      */
-    public function setThinking($thinking)
+    public function setResumable($resumable)
     {
-        if (is_null($thinking)) {
-            throw new \InvalidArgumentException('non-nullable thinking cannot be null');
+        if (is_null($resumable)) {
+            throw new \InvalidArgumentException('non-nullable resumable cannot be null');
         }
-        $this->container['thinking'] = $thinking;
+        $this->container['resumable'] = $resumable;
 
         return $this;
     }
 
     /**
-     * Gets validation_feedback
+     * Gets title
      *
-     * @return \Gemina\Sdk\Model\ValidationSchemaModel|null
+     * @return string|null
      */
-    public function getValidationFeedback()
+    public function getTitle()
     {
-        return $this->container['validation_feedback'];
+        return $this->container['title'];
     }
 
     /**
-     * Sets validation_feedback
+     * Sets title
      *
-     * @param \Gemina\Sdk\Model\ValidationSchemaModel|null $validation_feedback validation_feedback
+     * @param string|null $title LLM-generated label; null for pre-history or purged sessions
      *
      * @return self
      */
-    public function setValidationFeedback($validation_feedback)
+    public function setTitle($title)
     {
-        if (is_null($validation_feedback)) {
-            array_push($this->openAPINullablesSetToNull, 'validation_feedback');
+        if (is_null($title)) {
+            array_push($this->openAPINullablesSetToNull, 'title');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('validation_feedback', $nullablesSetToNull);
+            $index = array_search('title', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['validation_feedback'] = $validation_feedback;
+        $this->container['title'] = $title;
+
+        return $this;
+    }
+
+    /**
+     * Gets turn_count
+     *
+     * @return int|null
+     */
+    public function getTurnCount()
+    {
+        return $this->container['turn_count'];
+    }
+
+    /**
+     * Sets turn_count
+     *
+     * @param int|null $turn_count turn_count
+     *
+     * @return self
+     */
+    public function setTurnCount($turn_count)
+    {
+        if (is_null($turn_count)) {
+            throw new \InvalidArgumentException('non-nullable turn_count cannot be null');
+        }
+        $this->container['turn_count'] = $turn_count;
 
         return $this;
     }

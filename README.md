@@ -211,7 +211,28 @@ printf("%s · session: %s\n", $follow->getAnswer(), $chat->getSessionId());
 $chat->delete(); // end it server-side (or $chat->reset() to just forget it locally)
 ```
 
-A conversation expires after 24h of inactivity; the next `send()` then throws the API's `404 CHAT_SESSION_NOT_FOUND` (an `ApiException`) — call `$chat->reset()` and resend to continue in a fresh one. One-shot `chatQuery()` with a `session_id` is still available if you'd rather hold the id yourself; every response returns `getSessionId()`.
+A conversation's live context expires after roughly 24h of inactivity; the next `send()` then throws the API's `404 CHAT_SESSION_NOT_FOUND` (an `ApiException`) — call `$chat->reset()` and resend to continue in a fresh one. The transcript itself is not lost: it stays available in chat history (below) until your data-retention window — or an explicit purge — removes it. One-shot `chatQuery()` with a `session_id` is still available if you'd rather hold the id yourself; every response returns `getSessionId()`.
+
+## Chat history
+
+Past conversations are kept as sessions you can list, reread, and purge:
+
+```php
+$listing = $client->chat()->listChatSessions(0, 20);
+foreach ($listing->getSessions() as $session) {
+    printf("%s · %d turns\n", $session->getTitle(), $session->getTurnCount());
+}
+
+$sessionId = $listing->getSessions()[0]->getId();
+$transcript = $client->chat()->getChatSession($sessionId);
+foreach ($transcript->getMessages() as $msg) {
+    printf("[%s] %s\n", $msg->getRole(), $msg->getContent());
+}
+
+$client->chat()->purgeChatSession($sessionId);
+```
+
+`purgeChatSession()` permanently deletes the transcript and the server-side copy of its content — it cannot be undone. Purged sessions vanish from the list; pass `$with_purged = true` to see their content-free stubs — title cleared, `getPurgedAt()`/`getPurgeReason()` set; timestamps and `getTurnCount()` survive. Transcripts also age out automatically under your account's data-retention setting (each session's `getPurgeAt()` tells you when). Purging requires an API key or a console sign-in — browser session tokens can list and read history, but never purge.
 
 ## Session tokens (browser embedding)
 

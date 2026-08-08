@@ -1,6 +1,6 @@
 <?php
 /**
- * ExtractionValidationResultOutDTO
+ * SpendLimitOutDTO
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Gemina\Sdk\ObjectSerializer;
 
 /**
- * ExtractionValidationResultOutDTO Class Doc Comment
+ * SpendLimitOutDTO Class Doc Comment
  *
  * @category Class
  * @package  Gemina\Sdk
@@ -40,7 +40,7 @@ use \Gemina\Sdk\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ExtractionValidationResultOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
+class SpendLimitOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class ExtractionValidationResultOutDTO implements ModelInterface, ArrayAccess, \
      *
      * @var string
      */
-    protected static $openAPIModelName = 'ExtractionValidationResultOutDTO';
+    protected static $openAPIModelName = 'SpendLimitOutDTO';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,14 +57,15 @@ class ExtractionValidationResultOutDTO implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $openAPITypes = [
+        'blocked' => 'bool',
         'created_at' => '\DateTime',
         'created_at_timestamp' => 'float',
-        'data' => '\Gemina\Sdk\Model\ComparisonSummaryModel',
-        'errors' => 'array<string,mixed>[]',
-        'meta' => '\Gemina\Sdk\Model\ExtractionValidationMetaOutDTO',
-        'served_at' => '\DateTime',
-        'served_at_timestamp' => 'float',
-        'status' => '\Gemina\Sdk\Model\ResponseStatus'
+        'cycle_end' => '\DateTime',
+        'cycle_start' => '\DateTime',
+        'limit_cents' => 'int',
+        'mtd_spend_cents' => 'int',
+        'percent_used' => 'float',
+        'warning' => 'string'
     ];
 
     /**
@@ -75,14 +76,15 @@ class ExtractionValidationResultOutDTO implements ModelInterface, ArrayAccess, \
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
+        'blocked' => null,
         'created_at' => 'date-time',
         'created_at_timestamp' => null,
-        'data' => null,
-        'errors' => null,
-        'meta' => null,
-        'served_at' => 'date-time',
-        'served_at_timestamp' => null,
-        'status' => null
+        'cycle_end' => 'date-time',
+        'cycle_start' => 'date-time',
+        'limit_cents' => null,
+        'mtd_spend_cents' => null,
+        'percent_used' => null,
+        'warning' => null
     ];
 
     /**
@@ -91,14 +93,15 @@ class ExtractionValidationResultOutDTO implements ModelInterface, ArrayAccess, \
      * @var boolean[]
      */
     protected static array $openAPINullables = [
+        'blocked' => false,
         'created_at' => true,
         'created_at_timestamp' => true,
-        'data' => false,
-        'errors' => false,
-        'meta' => false,
-        'served_at' => false,
-        'served_at_timestamp' => false,
-        'status' => false
+        'cycle_end' => false,
+        'cycle_start' => false,
+        'limit_cents' => true,
+        'mtd_spend_cents' => false,
+        'percent_used' => true,
+        'warning' => true
     ];
 
     /**
@@ -187,14 +190,15 @@ class ExtractionValidationResultOutDTO implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $attributeMap = [
+        'blocked' => 'blocked',
         'created_at' => 'createdAt',
         'created_at_timestamp' => 'createdAtTimestamp',
-        'data' => 'data',
-        'errors' => 'errors',
-        'meta' => 'meta',
-        'served_at' => 'servedAt',
-        'served_at_timestamp' => 'servedAtTimestamp',
-        'status' => 'status'
+        'cycle_end' => 'cycleEnd',
+        'cycle_start' => 'cycleStart',
+        'limit_cents' => 'limitCents',
+        'mtd_spend_cents' => 'mtdSpendCents',
+        'percent_used' => 'percentUsed',
+        'warning' => 'warning'
     ];
 
     /**
@@ -203,14 +207,15 @@ class ExtractionValidationResultOutDTO implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $setters = [
+        'blocked' => 'setBlocked',
         'created_at' => 'setCreatedAt',
         'created_at_timestamp' => 'setCreatedAtTimestamp',
-        'data' => 'setData',
-        'errors' => 'setErrors',
-        'meta' => 'setMeta',
-        'served_at' => 'setServedAt',
-        'served_at_timestamp' => 'setServedAtTimestamp',
-        'status' => 'setStatus'
+        'cycle_end' => 'setCycleEnd',
+        'cycle_start' => 'setCycleStart',
+        'limit_cents' => 'setLimitCents',
+        'mtd_spend_cents' => 'setMtdSpendCents',
+        'percent_used' => 'setPercentUsed',
+        'warning' => 'setWarning'
     ];
 
     /**
@@ -219,14 +224,15 @@ class ExtractionValidationResultOutDTO implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $getters = [
+        'blocked' => 'getBlocked',
         'created_at' => 'getCreatedAt',
         'created_at_timestamp' => 'getCreatedAtTimestamp',
-        'data' => 'getData',
-        'errors' => 'getErrors',
-        'meta' => 'getMeta',
-        'served_at' => 'getServedAt',
-        'served_at_timestamp' => 'getServedAtTimestamp',
-        'status' => 'getStatus'
+        'cycle_end' => 'getCycleEnd',
+        'cycle_start' => 'getCycleStart',
+        'limit_cents' => 'getLimitCents',
+        'mtd_spend_cents' => 'getMtdSpendCents',
+        'percent_used' => 'getPercentUsed',
+        'warning' => 'getWarning'
     ];
 
     /**
@@ -286,14 +292,15 @@ class ExtractionValidationResultOutDTO implements ModelInterface, ArrayAccess, \
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('blocked', $data ?? [], false);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('created_at_timestamp', $data ?? [], null);
-        $this->setIfExists('data', $data ?? [], null);
-        $this->setIfExists('errors', $data ?? [], null);
-        $this->setIfExists('meta', $data ?? [], null);
-        $this->setIfExists('served_at', $data ?? [], null);
-        $this->setIfExists('served_at_timestamp', $data ?? [], null);
-        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('cycle_end', $data ?? [], null);
+        $this->setIfExists('cycle_start', $data ?? [], null);
+        $this->setIfExists('limit_cents', $data ?? [], null);
+        $this->setIfExists('mtd_spend_cents', $data ?? [], 0);
+        $this->setIfExists('percent_used', $data ?? [], null);
+        $this->setIfExists('warning', $data ?? [], null);
     }
 
     /**
@@ -323,14 +330,11 @@ class ExtractionValidationResultOutDTO implements ModelInterface, ArrayAccess, \
     {
         $invalidProperties = [];
 
-        if ($this->container['data'] === null) {
-            $invalidProperties[] = "'data' can't be null";
+        if ($this->container['cycle_end'] === null) {
+            $invalidProperties[] = "'cycle_end' can't be null";
         }
-        if ($this->container['meta'] === null) {
-            $invalidProperties[] = "'meta' can't be null";
-        }
-        if ($this->container['status'] === null) {
-            $invalidProperties[] = "'status' can't be null";
+        if ($this->container['cycle_start'] === null) {
+            $invalidProperties[] = "'cycle_start' can't be null";
         }
         return $invalidProperties;
     }
@@ -346,6 +350,33 @@ class ExtractionValidationResultOutDTO implements ModelInterface, ArrayAccess, \
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets blocked
+     *
+     * @return bool|null
+     */
+    public function getBlocked()
+    {
+        return $this->container['blocked'];
+    }
+
+    /**
+     * Sets blocked
+     *
+     * @param bool|null $blocked blocked
+     *
+     * @return self
+     */
+    public function setBlocked($blocked)
+    {
+        if (is_null($blocked)) {
+            throw new \InvalidArgumentException('non-nullable blocked cannot be null');
+        }
+        $this->container['blocked'] = $blocked;
+
+        return $this;
+    }
 
     /**
      * Gets created_at
@@ -416,163 +447,184 @@ class ExtractionValidationResultOutDTO implements ModelInterface, ArrayAccess, \
     }
 
     /**
-     * Gets data
+     * Gets cycle_end
      *
-     * @return \Gemina\Sdk\Model\ComparisonSummaryModel
+     * @return \DateTime
      */
-    public function getData()
+    public function getCycleEnd()
     {
-        return $this->container['data'];
+        return $this->container['cycle_end'];
     }
 
     /**
-     * Sets data
+     * Sets cycle_end
      *
-     * @param \Gemina\Sdk\Model\ComparisonSummaryModel $data data
+     * @param \DateTime $cycle_end cycle_end
      *
      * @return self
      */
-    public function setData($data)
+    public function setCycleEnd($cycle_end)
     {
-        if (is_null($data)) {
-            throw new \InvalidArgumentException('non-nullable data cannot be null');
+        if (is_null($cycle_end)) {
+            throw new \InvalidArgumentException('non-nullable cycle_end cannot be null');
         }
-        $this->container['data'] = $data;
+        $this->container['cycle_end'] = $cycle_end;
 
         return $this;
     }
 
     /**
-     * Gets errors
+     * Gets cycle_start
      *
-     * @return array<string,mixed>[]|null
+     * @return \DateTime
      */
-    public function getErrors()
+    public function getCycleStart()
     {
-        return $this->container['errors'];
+        return $this->container['cycle_start'];
     }
 
     /**
-     * Sets errors
+     * Sets cycle_start
      *
-     * @param array<string,mixed>[]|null $errors errors
+     * @param \DateTime $cycle_start cycle_start
      *
      * @return self
      */
-    public function setErrors($errors)
+    public function setCycleStart($cycle_start)
     {
-        if (is_null($errors)) {
-            throw new \InvalidArgumentException('non-nullable errors cannot be null');
+        if (is_null($cycle_start)) {
+            throw new \InvalidArgumentException('non-nullable cycle_start cannot be null');
         }
-        $this->container['errors'] = $errors;
+        $this->container['cycle_start'] = $cycle_start;
 
         return $this;
     }
 
     /**
-     * Gets meta
+     * Gets limit_cents
      *
-     * @return \Gemina\Sdk\Model\ExtractionValidationMetaOutDTO
+     * @return int|null
      */
-    public function getMeta()
+    public function getLimitCents()
     {
-        return $this->container['meta'];
+        return $this->container['limit_cents'];
     }
 
     /**
-     * Sets meta
+     * Sets limit_cents
      *
-     * @param \Gemina\Sdk\Model\ExtractionValidationMetaOutDTO $meta meta
+     * @param int|null $limit_cents limit_cents
      *
      * @return self
      */
-    public function setMeta($meta)
+    public function setLimitCents($limit_cents)
     {
-        if (is_null($meta)) {
-            throw new \InvalidArgumentException('non-nullable meta cannot be null');
+        if (is_null($limit_cents)) {
+            array_push($this->openAPINullablesSetToNull, 'limit_cents');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('limit_cents', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['meta'] = $meta;
+        $this->container['limit_cents'] = $limit_cents;
 
         return $this;
     }
 
     /**
-     * Gets served_at
+     * Gets mtd_spend_cents
      *
-     * @return \DateTime|null
+     * @return int|null
      */
-    public function getServedAt()
+    public function getMtdSpendCents()
     {
-        return $this->container['served_at'];
+        return $this->container['mtd_spend_cents'];
     }
 
     /**
-     * Sets served_at
+     * Sets mtd_spend_cents
      *
-     * @param \DateTime|null $served_at served_at
+     * @param int|null $mtd_spend_cents mtd_spend_cents
      *
      * @return self
      */
-    public function setServedAt($served_at)
+    public function setMtdSpendCents($mtd_spend_cents)
     {
-        if (is_null($served_at)) {
-            throw new \InvalidArgumentException('non-nullable served_at cannot be null');
+        if (is_null($mtd_spend_cents)) {
+            throw new \InvalidArgumentException('non-nullable mtd_spend_cents cannot be null');
         }
-        $this->container['served_at'] = $served_at;
+        $this->container['mtd_spend_cents'] = $mtd_spend_cents;
 
         return $this;
     }
 
     /**
-     * Gets served_at_timestamp
+     * Gets percent_used
      *
      * @return float|null
      */
-    public function getServedAtTimestamp()
+    public function getPercentUsed()
     {
-        return $this->container['served_at_timestamp'];
+        return $this->container['percent_used'];
     }
 
     /**
-     * Sets served_at_timestamp
+     * Sets percent_used
      *
-     * @param float|null $served_at_timestamp served_at_timestamp
+     * @param float|null $percent_used percent_used
      *
      * @return self
      */
-    public function setServedAtTimestamp($served_at_timestamp)
+    public function setPercentUsed($percent_used)
     {
-        if (is_null($served_at_timestamp)) {
-            throw new \InvalidArgumentException('non-nullable served_at_timestamp cannot be null');
+        if (is_null($percent_used)) {
+            array_push($this->openAPINullablesSetToNull, 'percent_used');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('percent_used', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['served_at_timestamp'] = $served_at_timestamp;
+        $this->container['percent_used'] = $percent_used;
 
         return $this;
     }
 
     /**
-     * Gets status
+     * Gets warning
      *
-     * @return \Gemina\Sdk\Model\ResponseStatus
+     * @return string|null
      */
-    public function getStatus()
+    public function getWarning()
     {
-        return $this->container['status'];
+        return $this->container['warning'];
     }
 
     /**
-     * Sets status
+     * Sets warning
      *
-     * @param \Gemina\Sdk\Model\ResponseStatus $status status
+     * @param string|null $warning warning
      *
      * @return self
      */
-    public function setStatus($status)
+    public function setWarning($warning)
     {
-        if (is_null($status)) {
-            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        if (is_null($warning)) {
+            array_push($this->openAPINullablesSetToNull, 'warning');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('warning', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['status'] = $status;
+        $this->container['warning'] = $warning;
 
         return $this;
     }

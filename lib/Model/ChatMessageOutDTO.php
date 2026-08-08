@@ -1,6 +1,6 @@
 <?php
 /**
- * ValidationError
+ * ChatMessageOutDTO
  *
  * PHP version 8.1
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Gemina\Sdk\ObjectSerializer;
 
 /**
- * ValidationError Class Doc Comment
+ * ChatMessageOutDTO Class Doc Comment
  *
  * @category Class
+ * @description One transcript message. &#x60;&#x60;citations&#x60;&#x60;/&#x60;&#x60;intent&#x60;&#x60;/&#x60;&#x60;confident&#x60;&#x60; are assistant-side only and stay null on user rows.
  * @package  Gemina\Sdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
+class ChatMessageOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'ValidationError';
+    protected static $openAPIModelName = 'ChatMessageOutDTO';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +58,14 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'loc' => '\Gemina\Sdk\Model\LocationInner[]',
-        'msg' => 'string',
-        'type' => 'string'
+        'citations' => 'string[]',
+        'confident' => 'bool',
+        'content' => 'string',
+        'created_at' => '\DateTime',
+        'created_at_timestamp' => 'float',
+        'intent' => 'string',
+        'role' => 'string',
+        'turn_index' => 'int'
     ];
 
     /**
@@ -70,9 +76,14 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'loc' => null,
-        'msg' => null,
-        'type' => null
+        'citations' => null,
+        'confident' => null,
+        'content' => null,
+        'created_at' => 'date-time',
+        'created_at_timestamp' => null,
+        'intent' => null,
+        'role' => null,
+        'turn_index' => null
     ];
 
     /**
@@ -81,9 +92,14 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'loc' => false,
-        'msg' => false,
-        'type' => false
+        'citations' => true,
+        'confident' => true,
+        'content' => false,
+        'created_at' => true,
+        'created_at_timestamp' => true,
+        'intent' => true,
+        'role' => false,
+        'turn_index' => false
     ];
 
     /**
@@ -172,9 +188,14 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'loc' => 'loc',
-        'msg' => 'msg',
-        'type' => 'type'
+        'citations' => 'citations',
+        'confident' => 'confident',
+        'content' => 'content',
+        'created_at' => 'createdAt',
+        'created_at_timestamp' => 'createdAtTimestamp',
+        'intent' => 'intent',
+        'role' => 'role',
+        'turn_index' => 'turnIndex'
     ];
 
     /**
@@ -183,9 +204,14 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'loc' => 'setLoc',
-        'msg' => 'setMsg',
-        'type' => 'setType'
+        'citations' => 'setCitations',
+        'confident' => 'setConfident',
+        'content' => 'setContent',
+        'created_at' => 'setCreatedAt',
+        'created_at_timestamp' => 'setCreatedAtTimestamp',
+        'intent' => 'setIntent',
+        'role' => 'setRole',
+        'turn_index' => 'setTurnIndex'
     ];
 
     /**
@@ -194,9 +220,14 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'loc' => 'getLoc',
-        'msg' => 'getMsg',
-        'type' => 'getType'
+        'citations' => 'getCitations',
+        'confident' => 'getConfident',
+        'content' => 'getContent',
+        'created_at' => 'getCreatedAt',
+        'created_at_timestamp' => 'getCreatedAtTimestamp',
+        'intent' => 'getIntent',
+        'role' => 'getRole',
+        'turn_index' => 'getTurnIndex'
     ];
 
     /**
@@ -256,9 +287,14 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('loc', $data ?? [], null);
-        $this->setIfExists('msg', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('citations', $data ?? [], null);
+        $this->setIfExists('confident', $data ?? [], null);
+        $this->setIfExists('content', $data ?? [], null);
+        $this->setIfExists('created_at', $data ?? [], null);
+        $this->setIfExists('created_at_timestamp', $data ?? [], null);
+        $this->setIfExists('intent', $data ?? [], null);
+        $this->setIfExists('role', $data ?? [], null);
+        $this->setIfExists('turn_index', $data ?? [], null);
     }
 
     /**
@@ -288,14 +324,14 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['loc'] === null) {
-            $invalidProperties[] = "'loc' can't be null";
+        if ($this->container['content'] === null) {
+            $invalidProperties[] = "'content' can't be null";
         }
-        if ($this->container['msg'] === null) {
-            $invalidProperties[] = "'msg' can't be null";
+        if ($this->container['role'] === null) {
+            $invalidProperties[] = "'role' can't be null";
         }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
+        if ($this->container['turn_index'] === null) {
+            $invalidProperties[] = "'turn_index' can't be null";
         }
         return $invalidProperties;
     }
@@ -313,82 +349,252 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets loc
+     * Gets citations
      *
-     * @return \Gemina\Sdk\Model\LocationInner[]
+     * @return string[]|null
      */
-    public function getLoc()
+    public function getCitations()
     {
-        return $this->container['loc'];
+        return $this->container['citations'];
     }
 
     /**
-     * Sets loc
+     * Sets citations
      *
-     * @param \Gemina\Sdk\Model\LocationInner[] $loc loc
+     * @param string[]|null $citations citations
      *
      * @return self
      */
-    public function setLoc($loc)
+    public function setCitations($citations)
     {
-        if (is_null($loc)) {
-            throw new \InvalidArgumentException('non-nullable loc cannot be null');
+        if (is_null($citations)) {
+            array_push($this->openAPINullablesSetToNull, 'citations');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('citations', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['loc'] = $loc;
+        $this->container['citations'] = $citations;
 
         return $this;
     }
 
     /**
-     * Gets msg
+     * Gets confident
      *
-     * @return string
+     * @return bool|null
      */
-    public function getMsg()
+    public function getConfident()
     {
-        return $this->container['msg'];
+        return $this->container['confident'];
     }
 
     /**
-     * Sets msg
+     * Sets confident
      *
-     * @param string $msg msg
+     * @param bool|null $confident confident
      *
      * @return self
      */
-    public function setMsg($msg)
+    public function setConfident($confident)
     {
-        if (is_null($msg)) {
-            throw new \InvalidArgumentException('non-nullable msg cannot be null');
+        if (is_null($confident)) {
+            array_push($this->openAPINullablesSetToNull, 'confident');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('confident', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['msg'] = $msg;
+        $this->container['confident'] = $confident;
 
         return $this;
     }
 
     /**
-     * Gets type
+     * Gets content
      *
      * @return string
      */
-    public function getType()
+    public function getContent()
     {
-        return $this->container['type'];
+        return $this->container['content'];
     }
 
     /**
-     * Sets type
+     * Sets content
      *
-     * @param string $type type
+     * @param string $content content
      *
      * @return self
      */
-    public function setType($type)
+    public function setContent($content)
     {
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        if (is_null($content)) {
+            throw new \InvalidArgumentException('non-nullable content cannot be null');
         }
-        $this->container['type'] = $type;
+        $this->container['content'] = $content;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_at
+     *
+     * @return \DateTime|null
+     */
+    public function getCreatedAt()
+    {
+        return $this->container['created_at'];
+    }
+
+    /**
+     * Sets created_at
+     *
+     * @param \DateTime|null $created_at created_at
+     *
+     * @return self
+     */
+    public function setCreatedAt($created_at)
+    {
+        if (is_null($created_at)) {
+            array_push($this->openAPINullablesSetToNull, 'created_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('created_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['created_at'] = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_at_timestamp
+     *
+     * @return float|null
+     */
+    public function getCreatedAtTimestamp()
+    {
+        return $this->container['created_at_timestamp'];
+    }
+
+    /**
+     * Sets created_at_timestamp
+     *
+     * @param float|null $created_at_timestamp created_at_timestamp
+     *
+     * @return self
+     */
+    public function setCreatedAtTimestamp($created_at_timestamp)
+    {
+        if (is_null($created_at_timestamp)) {
+            array_push($this->openAPINullablesSetToNull, 'created_at_timestamp');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('created_at_timestamp', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['created_at_timestamp'] = $created_at_timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Gets intent
+     *
+     * @return string|null
+     */
+    public function getIntent()
+    {
+        return $this->container['intent'];
+    }
+
+    /**
+     * Sets intent
+     *
+     * @param string|null $intent intent
+     *
+     * @return self
+     */
+    public function setIntent($intent)
+    {
+        if (is_null($intent)) {
+            array_push($this->openAPINullablesSetToNull, 'intent');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('intent', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['intent'] = $intent;
+
+        return $this;
+    }
+
+    /**
+     * Gets role
+     *
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->container['role'];
+    }
+
+    /**
+     * Sets role
+     *
+     * @param string $role user | assistant
+     *
+     * @return self
+     */
+    public function setRole($role)
+    {
+        if (is_null($role)) {
+            throw new \InvalidArgumentException('non-nullable role cannot be null');
+        }
+        $this->container['role'] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Gets turn_index
+     *
+     * @return int
+     */
+    public function getTurnIndex()
+    {
+        return $this->container['turn_index'];
+    }
+
+    /**
+     * Sets turn_index
+     *
+     * @param int $turn_index turn_index
+     *
+     * @return self
+     */
+    public function setTurnIndex($turn_index)
+    {
+        if (is_null($turn_index)) {
+            throw new \InvalidArgumentException('non-nullable turn_index cannot be null');
+        }
+        $this->container['turn_index'] = $turn_index;
 
         return $this;
     }

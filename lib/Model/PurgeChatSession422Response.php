@@ -1,6 +1,6 @@
 <?php
 /**
- * ValidationError
+ * PurgeChatSession422Response
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Gemina\Sdk\ObjectSerializer;
 
 /**
- * ValidationError Class Doc Comment
+ * PurgeChatSession422Response Class Doc Comment
  *
  * @category Class
  * @package  Gemina\Sdk
@@ -40,7 +40,7 @@ use \Gemina\Sdk\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
+class PurgeChatSession422Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'ValidationError';
+    protected static $openAPIModelName = 'purge_chat_session_422_response';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,15 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'loc' => '\Gemina\Sdk\Model\LocationInner[]',
-        'msg' => 'string',
-        'type' => 'string'
+        'detail' => '\Gemina\Sdk\Model\ValidationError[]',
+        'created_at' => '\DateTime',
+        'created_at_timestamp' => 'float',
+        'data' => 'array<string,mixed>',
+        'errors' => 'array<string,mixed>[]',
+        'meta' => '\Gemina\Sdk\Model\FoundationMetaDTO',
+        'served_at' => '\DateTime',
+        'served_at_timestamp' => 'float',
+        'status' => '\Gemina\Sdk\Model\ResponseStatus'
     ];
 
     /**
@@ -70,9 +76,15 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'loc' => null,
-        'msg' => null,
-        'type' => null
+        'detail' => null,
+        'created_at' => 'date-time',
+        'created_at_timestamp' => null,
+        'data' => null,
+        'errors' => null,
+        'meta' => null,
+        'served_at' => 'date-time',
+        'served_at_timestamp' => null,
+        'status' => null
     ];
 
     /**
@@ -81,9 +93,15 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'loc' => false,
-        'msg' => false,
-        'type' => false
+        'detail' => false,
+        'created_at' => false,
+        'created_at_timestamp' => false,
+        'data' => false,
+        'errors' => false,
+        'meta' => false,
+        'served_at' => false,
+        'served_at_timestamp' => false,
+        'status' => false
     ];
 
     /**
@@ -172,9 +190,15 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'loc' => 'loc',
-        'msg' => 'msg',
-        'type' => 'type'
+        'detail' => 'detail',
+        'created_at' => 'createdAt',
+        'created_at_timestamp' => 'createdAtTimestamp',
+        'data' => 'data',
+        'errors' => 'errors',
+        'meta' => 'meta',
+        'served_at' => 'servedAt',
+        'served_at_timestamp' => 'servedAtTimestamp',
+        'status' => 'status'
     ];
 
     /**
@@ -183,9 +207,15 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'loc' => 'setLoc',
-        'msg' => 'setMsg',
-        'type' => 'setType'
+        'detail' => 'setDetail',
+        'created_at' => 'setCreatedAt',
+        'created_at_timestamp' => 'setCreatedAtTimestamp',
+        'data' => 'setData',
+        'errors' => 'setErrors',
+        'meta' => 'setMeta',
+        'served_at' => 'setServedAt',
+        'served_at_timestamp' => 'setServedAtTimestamp',
+        'status' => 'setStatus'
     ];
 
     /**
@@ -194,9 +224,15 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'loc' => 'getLoc',
-        'msg' => 'getMsg',
-        'type' => 'getType'
+        'detail' => 'getDetail',
+        'created_at' => 'getCreatedAt',
+        'created_at_timestamp' => 'getCreatedAtTimestamp',
+        'data' => 'getData',
+        'errors' => 'getErrors',
+        'meta' => 'getMeta',
+        'served_at' => 'getServedAt',
+        'served_at_timestamp' => 'getServedAtTimestamp',
+        'status' => 'getStatus'
     ];
 
     /**
@@ -256,9 +292,15 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('loc', $data ?? [], null);
-        $this->setIfExists('msg', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('detail', $data ?? [], null);
+        $this->setIfExists('created_at', $data ?? [], null);
+        $this->setIfExists('created_at_timestamp', $data ?? [], null);
+        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('errors', $data ?? [], null);
+        $this->setIfExists('meta', $data ?? [], null);
+        $this->setIfExists('served_at', $data ?? [], null);
+        $this->setIfExists('served_at_timestamp', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
     }
 
     /**
@@ -288,14 +330,8 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['loc'] === null) {
-            $invalidProperties[] = "'loc' can't be null";
-        }
-        if ($this->container['msg'] === null) {
-            $invalidProperties[] = "'msg' can't be null";
-        }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
+        if ($this->container['status'] === null) {
+            $invalidProperties[] = "'status' can't be null";
         }
         return $invalidProperties;
     }
@@ -313,82 +349,244 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets loc
+     * Gets detail
      *
-     * @return \Gemina\Sdk\Model\LocationInner[]
+     * @return \Gemina\Sdk\Model\ValidationError[]|null
      */
-    public function getLoc()
+    public function getDetail()
     {
-        return $this->container['loc'];
+        return $this->container['detail'];
     }
 
     /**
-     * Sets loc
+     * Sets detail
      *
-     * @param \Gemina\Sdk\Model\LocationInner[] $loc loc
+     * @param \Gemina\Sdk\Model\ValidationError[]|null $detail detail
      *
      * @return self
      */
-    public function setLoc($loc)
+    public function setDetail($detail)
     {
-        if (is_null($loc)) {
-            throw new \InvalidArgumentException('non-nullable loc cannot be null');
+        if (is_null($detail)) {
+            throw new \InvalidArgumentException('non-nullable detail cannot be null');
         }
-        $this->container['loc'] = $loc;
+        $this->container['detail'] = $detail;
 
         return $this;
     }
 
     /**
-     * Gets msg
+     * Gets created_at
      *
-     * @return string
+     * @return \DateTime|null
      */
-    public function getMsg()
+    public function getCreatedAt()
     {
-        return $this->container['msg'];
+        return $this->container['created_at'];
     }
 
     /**
-     * Sets msg
+     * Sets created_at
      *
-     * @param string $msg msg
+     * @param \DateTime|null $created_at created_at
      *
      * @return self
      */
-    public function setMsg($msg)
+    public function setCreatedAt($created_at)
     {
-        if (is_null($msg)) {
-            throw new \InvalidArgumentException('non-nullable msg cannot be null');
+        if (is_null($created_at)) {
+            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
         }
-        $this->container['msg'] = $msg;
+        $this->container['created_at'] = $created_at;
 
         return $this;
     }
 
     /**
-     * Gets type
+     * Gets created_at_timestamp
      *
-     * @return string
+     * @return float|null
      */
-    public function getType()
+    public function getCreatedAtTimestamp()
     {
-        return $this->container['type'];
+        return $this->container['created_at_timestamp'];
     }
 
     /**
-     * Sets type
+     * Sets created_at_timestamp
      *
-     * @param string $type type
+     * @param float|null $created_at_timestamp created_at_timestamp
      *
      * @return self
      */
-    public function setType($type)
+    public function setCreatedAtTimestamp($created_at_timestamp)
     {
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        if (is_null($created_at_timestamp)) {
+            throw new \InvalidArgumentException('non-nullable created_at_timestamp cannot be null');
         }
-        $this->container['type'] = $type;
+        $this->container['created_at_timestamp'] = $created_at_timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Gets data
+     *
+     * @return array<string,mixed>|null
+     */
+    public function getData()
+    {
+        return $this->container['data'];
+    }
+
+    /**
+     * Sets data
+     *
+     * @param array<string,mixed>|null $data data
+     *
+     * @return self
+     */
+    public function setData($data)
+    {
+        if (is_null($data)) {
+            throw new \InvalidArgumentException('non-nullable data cannot be null');
+        }
+        $this->container['data'] = $data;
+
+        return $this;
+    }
+
+    /**
+     * Gets errors
+     *
+     * @return array<string,mixed>[]|null
+     */
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+
+    /**
+     * Sets errors
+     *
+     * @param array<string,mixed>[]|null $errors errors
+     *
+     * @return self
+     */
+    public function setErrors($errors)
+    {
+        if (is_null($errors)) {
+            throw new \InvalidArgumentException('non-nullable errors cannot be null');
+        }
+        $this->container['errors'] = $errors;
+
+        return $this;
+    }
+
+    /**
+     * Gets meta
+     *
+     * @return \Gemina\Sdk\Model\FoundationMetaDTO|null
+     */
+    public function getMeta()
+    {
+        return $this->container['meta'];
+    }
+
+    /**
+     * Sets meta
+     *
+     * @param \Gemina\Sdk\Model\FoundationMetaDTO|null $meta meta
+     *
+     * @return self
+     */
+    public function setMeta($meta)
+    {
+        if (is_null($meta)) {
+            throw new \InvalidArgumentException('non-nullable meta cannot be null');
+        }
+        $this->container['meta'] = $meta;
+
+        return $this;
+    }
+
+    /**
+     * Gets served_at
+     *
+     * @return \DateTime|null
+     */
+    public function getServedAt()
+    {
+        return $this->container['served_at'];
+    }
+
+    /**
+     * Sets served_at
+     *
+     * @param \DateTime|null $served_at served_at
+     *
+     * @return self
+     */
+    public function setServedAt($served_at)
+    {
+        if (is_null($served_at)) {
+            throw new \InvalidArgumentException('non-nullable served_at cannot be null');
+        }
+        $this->container['served_at'] = $served_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets served_at_timestamp
+     *
+     * @return float|null
+     */
+    public function getServedAtTimestamp()
+    {
+        return $this->container['served_at_timestamp'];
+    }
+
+    /**
+     * Sets served_at_timestamp
+     *
+     * @param float|null $served_at_timestamp served_at_timestamp
+     *
+     * @return self
+     */
+    public function setServedAtTimestamp($served_at_timestamp)
+    {
+        if (is_null($served_at_timestamp)) {
+            throw new \InvalidArgumentException('non-nullable served_at_timestamp cannot be null');
+        }
+        $this->container['served_at_timestamp'] = $served_at_timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Gets status
+     *
+     * @return \Gemina\Sdk\Model\ResponseStatus
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param \Gemina\Sdk\Model\ResponseStatus $status status
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        }
+        $this->container['status'] = $status;
 
         return $this;
     }

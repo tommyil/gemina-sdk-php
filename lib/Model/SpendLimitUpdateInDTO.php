@@ -1,6 +1,6 @@
 <?php
 /**
- * ValidationError
+ * SpendLimitUpdateInDTO
  *
  * PHP version 8.1
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Gemina\Sdk\ObjectSerializer;
 
 /**
- * ValidationError Class Doc Comment
+ * SpendLimitUpdateInDTO Class Doc Comment
  *
  * @category Class
+ * @description Self-service monthly spend limit. &#x60;&#x60;null&#x60;&#x60; (or omitted) REMOVES the limit — 0 is deliberately invalid so \&quot;remove\&quot; has exactly one spelling.
  * @package  Gemina\Sdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
+class SpendLimitUpdateInDTO implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'ValidationError';
+    protected static $openAPIModelName = 'SpendLimitUpdateInDTO';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +58,9 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'loc' => '\Gemina\Sdk\Model\LocationInner[]',
-        'msg' => 'string',
-        'type' => 'string'
+        'created_at' => '\DateTime',
+        'created_at_timestamp' => 'float',
+        'limit_cents' => 'int'
     ];
 
     /**
@@ -70,9 +71,9 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'loc' => null,
-        'msg' => null,
-        'type' => null
+        'created_at' => 'date-time',
+        'created_at_timestamp' => null,
+        'limit_cents' => null
     ];
 
     /**
@@ -81,9 +82,9 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'loc' => false,
-        'msg' => false,
-        'type' => false
+        'created_at' => true,
+        'created_at_timestamp' => true,
+        'limit_cents' => true
     ];
 
     /**
@@ -172,9 +173,9 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'loc' => 'loc',
-        'msg' => 'msg',
-        'type' => 'type'
+        'created_at' => 'createdAt',
+        'created_at_timestamp' => 'createdAtTimestamp',
+        'limit_cents' => 'limitCents'
     ];
 
     /**
@@ -183,9 +184,9 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'loc' => 'setLoc',
-        'msg' => 'setMsg',
-        'type' => 'setType'
+        'created_at' => 'setCreatedAt',
+        'created_at_timestamp' => 'setCreatedAtTimestamp',
+        'limit_cents' => 'setLimitCents'
     ];
 
     /**
@@ -194,9 +195,9 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'loc' => 'getLoc',
-        'msg' => 'getMsg',
-        'type' => 'getType'
+        'created_at' => 'getCreatedAt',
+        'created_at_timestamp' => 'getCreatedAtTimestamp',
+        'limit_cents' => 'getLimitCents'
     ];
 
     /**
@@ -256,9 +257,9 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('loc', $data ?? [], null);
-        $this->setIfExists('msg', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('created_at', $data ?? [], null);
+        $this->setIfExists('created_at_timestamp', $data ?? [], null);
+        $this->setIfExists('limit_cents', $data ?? [], null);
     }
 
     /**
@@ -288,15 +289,10 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['loc'] === null) {
-            $invalidProperties[] = "'loc' can't be null";
+        if (!is_null($this->container['limit_cents']) && ($this->container['limit_cents'] < 1)) {
+            $invalidProperties[] = "invalid value for 'limit_cents', must be bigger than or equal to 1.";
         }
-        if ($this->container['msg'] === null) {
-            $invalidProperties[] = "'msg' can't be null";
-        }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
+
         return $invalidProperties;
     }
 
@@ -313,82 +309,108 @@ class ValidationError implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets loc
+     * Gets created_at
      *
-     * @return \Gemina\Sdk\Model\LocationInner[]
+     * @return \DateTime|null
      */
-    public function getLoc()
+    public function getCreatedAt()
     {
-        return $this->container['loc'];
+        return $this->container['created_at'];
     }
 
     /**
-     * Sets loc
+     * Sets created_at
      *
-     * @param \Gemina\Sdk\Model\LocationInner[] $loc loc
+     * @param \DateTime|null $created_at created_at
      *
      * @return self
      */
-    public function setLoc($loc)
+    public function setCreatedAt($created_at)
     {
-        if (is_null($loc)) {
-            throw new \InvalidArgumentException('non-nullable loc cannot be null');
+        if (is_null($created_at)) {
+            array_push($this->openAPINullablesSetToNull, 'created_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('created_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['loc'] = $loc;
+        $this->container['created_at'] = $created_at;
 
         return $this;
     }
 
     /**
-     * Gets msg
+     * Gets created_at_timestamp
      *
-     * @return string
+     * @return float|null
      */
-    public function getMsg()
+    public function getCreatedAtTimestamp()
     {
-        return $this->container['msg'];
+        return $this->container['created_at_timestamp'];
     }
 
     /**
-     * Sets msg
+     * Sets created_at_timestamp
      *
-     * @param string $msg msg
+     * @param float|null $created_at_timestamp created_at_timestamp
      *
      * @return self
      */
-    public function setMsg($msg)
+    public function setCreatedAtTimestamp($created_at_timestamp)
     {
-        if (is_null($msg)) {
-            throw new \InvalidArgumentException('non-nullable msg cannot be null');
+        if (is_null($created_at_timestamp)) {
+            array_push($this->openAPINullablesSetToNull, 'created_at_timestamp');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('created_at_timestamp', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['msg'] = $msg;
+        $this->container['created_at_timestamp'] = $created_at_timestamp;
 
         return $this;
     }
 
     /**
-     * Gets type
+     * Gets limit_cents
      *
-     * @return string
+     * @return int|null
      */
-    public function getType()
+    public function getLimitCents()
     {
-        return $this->container['type'];
+        return $this->container['limit_cents'];
     }
 
     /**
-     * Sets type
+     * Sets limit_cents
      *
-     * @param string $type type
+     * @param int|null $limit_cents limit_cents
      *
      * @return self
      */
-    public function setType($type)
+    public function setLimitCents($limit_cents)
     {
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        if (is_null($limit_cents)) {
+            array_push($this->openAPINullablesSetToNull, 'limit_cents');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('limit_cents', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['type'] = $type;
+
+        if (!is_null($limit_cents) && ($limit_cents < 1)) {
+            throw new \InvalidArgumentException('invalid value for $limit_cents when calling SpendLimitUpdateInDTO., must be bigger than or equal to 1.');
+        }
+
+        $this->container['limit_cents'] = $limit_cents;
 
         return $this;
     }
