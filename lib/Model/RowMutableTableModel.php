@@ -1,6 +1,6 @@
 <?php
 /**
- * CountBreakdownModel
+ * RowMutableTableModel
  *
  * PHP version 8.1
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Gemina\Sdk\ObjectSerializer;
 
 /**
- * CountBreakdownModel Class Doc Comment
+ * RowMutableTableModel Class Doc Comment
  *
  * @category Class
+ * @description A table whose rows a reviewer may add to and remove from.  Declared by the processor, never inferred by the client: any wide object array looks like a table to a shape classifier (custom_template&#39;s do), and row controls on the wrong one would produce an alignment the scorer must reject.
  * @package  Gemina\Sdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializable
+class RowMutableTableModel implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
      *
      * @var string
      */
-    protected static $openAPIModelName = 'CountBreakdownModel';
+    protected static $openAPIModelName = 'RowMutableTableModel';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,16 +58,9 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $openAPITypes = [
-        'correct' => 'int',
-        'extra' => 'int',
-        'fn' => 'int',
-        'fp' => 'int',
-        'incorrect' => 'int',
-        'missing' => 'int',
-        'present' => 'int',
-        'total_expected' => 'int',
-        'total_extracted' => 'int',
-        'tp' => 'int'
+        'columns' => '\Gemina\Sdk\Model\ValidationColumnModel[]',
+        'key_template' => 'string',
+        'pointer' => 'string'
     ];
 
     /**
@@ -77,16 +71,9 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'correct' => null,
-        'extra' => null,
-        'fn' => null,
-        'fp' => null,
-        'incorrect' => null,
-        'missing' => null,
-        'present' => null,
-        'total_expected' => null,
-        'total_extracted' => null,
-        'tp' => null
+        'columns' => null,
+        'key_template' => null,
+        'pointer' => null
     ];
 
     /**
@@ -95,16 +82,9 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'correct' => false,
-        'extra' => false,
-        'fn' => false,
-        'fp' => false,
-        'incorrect' => false,
-        'missing' => false,
-        'present' => false,
-        'total_expected' => false,
-        'total_extracted' => false,
-        'tp' => false
+        'columns' => false,
+        'key_template' => false,
+        'pointer' => false
     ];
 
     /**
@@ -193,16 +173,9 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'correct' => 'correct',
-        'extra' => 'extra',
-        'fn' => 'fn',
-        'fp' => 'fp',
-        'incorrect' => 'incorrect',
-        'missing' => 'missing',
-        'present' => 'present',
-        'total_expected' => 'total_expected',
-        'total_extracted' => 'total_extracted',
-        'tp' => 'tp'
+        'columns' => 'columns',
+        'key_template' => 'keyTemplate',
+        'pointer' => 'pointer'
     ];
 
     /**
@@ -211,16 +184,9 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'correct' => 'setCorrect',
-        'extra' => 'setExtra',
-        'fn' => 'setFn',
-        'fp' => 'setFp',
-        'incorrect' => 'setIncorrect',
-        'missing' => 'setMissing',
-        'present' => 'setPresent',
-        'total_expected' => 'setTotalExpected',
-        'total_extracted' => 'setTotalExtracted',
-        'tp' => 'setTp'
+        'columns' => 'setColumns',
+        'key_template' => 'setKeyTemplate',
+        'pointer' => 'setPointer'
     ];
 
     /**
@@ -229,16 +195,9 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'correct' => 'getCorrect',
-        'extra' => 'getExtra',
-        'fn' => 'getFn',
-        'fp' => 'getFp',
-        'incorrect' => 'getIncorrect',
-        'missing' => 'getMissing',
-        'present' => 'getPresent',
-        'total_expected' => 'getTotalExpected',
-        'total_extracted' => 'getTotalExtracted',
-        'tp' => 'getTp'
+        'columns' => 'getColumns',
+        'key_template' => 'getKeyTemplate',
+        'pointer' => 'getPointer'
     ];
 
     /**
@@ -298,16 +257,9 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('correct', $data ?? [], null);
-        $this->setIfExists('extra', $data ?? [], null);
-        $this->setIfExists('fn', $data ?? [], null);
-        $this->setIfExists('fp', $data ?? [], null);
-        $this->setIfExists('incorrect', $data ?? [], null);
-        $this->setIfExists('missing', $data ?? [], null);
-        $this->setIfExists('present', $data ?? [], null);
-        $this->setIfExists('total_expected', $data ?? [], null);
-        $this->setIfExists('total_extracted', $data ?? [], null);
-        $this->setIfExists('tp', $data ?? [], null);
+        $this->setIfExists('columns', $data ?? [], null);
+        $this->setIfExists('key_template', $data ?? [], null);
+        $this->setIfExists('pointer', $data ?? [], null);
     }
 
     /**
@@ -337,35 +289,11 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $invalidProperties = [];
 
-        if ($this->container['correct'] === null) {
-            $invalidProperties[] = "'correct' can't be null";
+        if ($this->container['key_template'] === null) {
+            $invalidProperties[] = "'key_template' can't be null";
         }
-        if ($this->container['extra'] === null) {
-            $invalidProperties[] = "'extra' can't be null";
-        }
-        if ($this->container['fn'] === null) {
-            $invalidProperties[] = "'fn' can't be null";
-        }
-        if ($this->container['fp'] === null) {
-            $invalidProperties[] = "'fp' can't be null";
-        }
-        if ($this->container['incorrect'] === null) {
-            $invalidProperties[] = "'incorrect' can't be null";
-        }
-        if ($this->container['missing'] === null) {
-            $invalidProperties[] = "'missing' can't be null";
-        }
-        if ($this->container['present'] === null) {
-            $invalidProperties[] = "'present' can't be null";
-        }
-        if ($this->container['total_expected'] === null) {
-            $invalidProperties[] = "'total_expected' can't be null";
-        }
-        if ($this->container['total_extracted'] === null) {
-            $invalidProperties[] = "'total_extracted' can't be null";
-        }
-        if ($this->container['tp'] === null) {
-            $invalidProperties[] = "'tp' can't be null";
+        if ($this->container['pointer'] === null) {
+            $invalidProperties[] = "'pointer' can't be null";
         }
         return $invalidProperties;
     }
@@ -383,271 +311,82 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets correct
+     * Gets columns
      *
-     * @return int
+     * @return \Gemina\Sdk\Model\ValidationColumnModel[]|null
      */
-    public function getCorrect()
+    public function getColumns()
     {
-        return $this->container['correct'];
+        return $this->container['columns'];
     }
 
     /**
-     * Sets correct
+     * Sets columns
      *
-     * @param int $correct correct
+     * @param \Gemina\Sdk\Model\ValidationColumnModel[]|null $columns columns
      *
      * @return self
      */
-    public function setCorrect($correct)
+    public function setColumns($columns)
     {
-        if (is_null($correct)) {
-            throw new \InvalidArgumentException('non-nullable correct cannot be null');
+        if (is_null($columns)) {
+            throw new \InvalidArgumentException('non-nullable columns cannot be null');
         }
-        $this->container['correct'] = $correct;
+        $this->container['columns'] = $columns;
 
         return $this;
     }
 
     /**
-     * Gets extra
+     * Gets key_template
      *
-     * @return int
+     * @return string
      */
-    public function getExtra()
+    public function getKeyTemplate()
     {
-        return $this->container['extra'];
+        return $this->container['key_template'];
     }
 
     /**
-     * Sets extra
+     * Sets key_template
      *
-     * @param int $extra extra
+     * @param string $key_template key_template
      *
      * @return self
      */
-    public function setExtra($extra)
+    public function setKeyTemplate($key_template)
     {
-        if (is_null($extra)) {
-            throw new \InvalidArgumentException('non-nullable extra cannot be null');
+        if (is_null($key_template)) {
+            throw new \InvalidArgumentException('non-nullable key_template cannot be null');
         }
-        $this->container['extra'] = $extra;
+        $this->container['key_template'] = $key_template;
 
         return $this;
     }
 
     /**
-     * Gets fn
+     * Gets pointer
      *
-     * @return int
+     * @return string
      */
-    public function getFn()
+    public function getPointer()
     {
-        return $this->container['fn'];
+        return $this->container['pointer'];
     }
 
     /**
-     * Sets fn
+     * Sets pointer
      *
-     * @param int $fn False Negatives (missing)
+     * @param string $pointer pointer
      *
      * @return self
      */
-    public function setFn($fn)
+    public function setPointer($pointer)
     {
-        if (is_null($fn)) {
-            throw new \InvalidArgumentException('non-nullable fn cannot be null');
+        if (is_null($pointer)) {
+            throw new \InvalidArgumentException('non-nullable pointer cannot be null');
         }
-        $this->container['fn'] = $fn;
-
-        return $this;
-    }
-
-    /**
-     * Gets fp
-     *
-     * @return int
-     */
-    public function getFp()
-    {
-        return $this->container['fp'];
-    }
-
-    /**
-     * Sets fp
-     *
-     * @param int $fp False Positives (incorrect on expected)
-     *
-     * @return self
-     */
-    public function setFp($fp)
-    {
-        if (is_null($fp)) {
-            throw new \InvalidArgumentException('non-nullable fp cannot be null');
-        }
-        $this->container['fp'] = $fp;
-
-        return $this;
-    }
-
-    /**
-     * Gets incorrect
-     *
-     * @return int
-     */
-    public function getIncorrect()
-    {
-        return $this->container['incorrect'];
-    }
-
-    /**
-     * Sets incorrect
-     *
-     * @param int $incorrect incorrect
-     *
-     * @return self
-     */
-    public function setIncorrect($incorrect)
-    {
-        if (is_null($incorrect)) {
-            throw new \InvalidArgumentException('non-nullable incorrect cannot be null');
-        }
-        $this->container['incorrect'] = $incorrect;
-
-        return $this;
-    }
-
-    /**
-     * Gets missing
-     *
-     * @return int
-     */
-    public function getMissing()
-    {
-        return $this->container['missing'];
-    }
-
-    /**
-     * Sets missing
-     *
-     * @param int $missing missing
-     *
-     * @return self
-     */
-    public function setMissing($missing)
-    {
-        if (is_null($missing)) {
-            throw new \InvalidArgumentException('non-nullable missing cannot be null');
-        }
-        $this->container['missing'] = $missing;
-
-        return $this;
-    }
-
-    /**
-     * Gets present
-     *
-     * @return int
-     */
-    public function getPresent()
-    {
-        return $this->container['present'];
-    }
-
-    /**
-     * Sets present
-     *
-     * @param int $present present
-     *
-     * @return self
-     */
-    public function setPresent($present)
-    {
-        if (is_null($present)) {
-            throw new \InvalidArgumentException('non-nullable present cannot be null');
-        }
-        $this->container['present'] = $present;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_expected
-     *
-     * @return int
-     */
-    public function getTotalExpected()
-    {
-        return $this->container['total_expected'];
-    }
-
-    /**
-     * Sets total_expected
-     *
-     * @param int $total_expected total_expected
-     *
-     * @return self
-     */
-    public function setTotalExpected($total_expected)
-    {
-        if (is_null($total_expected)) {
-            throw new \InvalidArgumentException('non-nullable total_expected cannot be null');
-        }
-        $this->container['total_expected'] = $total_expected;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_extracted
-     *
-     * @return int
-     */
-    public function getTotalExtracted()
-    {
-        return $this->container['total_extracted'];
-    }
-
-    /**
-     * Sets total_extracted
-     *
-     * @param int $total_extracted total_extracted
-     *
-     * @return self
-     */
-    public function setTotalExtracted($total_extracted)
-    {
-        if (is_null($total_extracted)) {
-            throw new \InvalidArgumentException('non-nullable total_extracted cannot be null');
-        }
-        $this->container['total_extracted'] = $total_extracted;
-
-        return $this;
-    }
-
-    /**
-     * Gets tp
-     *
-     * @return int
-     */
-    public function getTp()
-    {
-        return $this->container['tp'];
-    }
-
-    /**
-     * Sets tp
-     *
-     * @param int $tp True Positives (correct)
-     *
-     * @return self
-     */
-    public function setTp($tp)
-    {
-        if (is_null($tp)) {
-            throw new \InvalidArgumentException('non-nullable tp cannot be null');
-        }
-        $this->container['tp'] = $tp;
+        $this->container['pointer'] = $pointer;
 
         return $this;
     }

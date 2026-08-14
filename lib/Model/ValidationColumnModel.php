@@ -1,6 +1,6 @@
 <?php
 /**
- * CountBreakdownModel
+ * ValidationColumnModel
  *
  * PHP version 8.1
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Gemina\Sdk\ObjectSerializer;
 
 /**
- * CountBreakdownModel Class Doc Comment
+ * ValidationColumnModel Class Doc Comment
  *
  * @category Class
+ * @description One column of a row-mutable table — the shape of ANY row.  Same metadata as &#x60;&#x60;ValidationFieldModel&#x60;&#x60; minus the row index, so a client can render a user-added row&#39;s cells with the same typed inputs as an extracted row&#39;s.
  * @package  Gemina\Sdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializable
+class ValidationColumnModel implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
      *
      * @var string
      */
-    protected static $openAPIModelName = 'CountBreakdownModel';
+    protected static $openAPIModelName = 'ValidationColumnModel';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,16 +58,11 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $openAPITypes = [
-        'correct' => 'int',
-        'extra' => 'int',
-        'fn' => 'int',
-        'fp' => 'int',
-        'incorrect' => 'int',
-        'missing' => 'int',
-        'present' => 'int',
-        'total_expected' => 'int',
-        'total_extracted' => 'int',
-        'tp' => 'int'
+        'description' => 'string',
+        'enum' => 'string[]',
+        'format' => 'string',
+        'name' => 'string',
+        'type' => 'string'
     ];
 
     /**
@@ -77,16 +73,11 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'correct' => null,
-        'extra' => null,
-        'fn' => null,
-        'fp' => null,
-        'incorrect' => null,
-        'missing' => null,
-        'present' => null,
-        'total_expected' => null,
-        'total_extracted' => null,
-        'tp' => null
+        'description' => null,
+        'enum' => null,
+        'format' => null,
+        'name' => null,
+        'type' => null
     ];
 
     /**
@@ -95,16 +86,11 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'correct' => false,
-        'extra' => false,
-        'fn' => false,
-        'fp' => false,
-        'incorrect' => false,
-        'missing' => false,
-        'present' => false,
-        'total_expected' => false,
-        'total_extracted' => false,
-        'tp' => false
+        'description' => true,
+        'enum' => true,
+        'format' => true,
+        'name' => false,
+        'type' => false
     ];
 
     /**
@@ -193,16 +179,11 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'correct' => 'correct',
-        'extra' => 'extra',
-        'fn' => 'fn',
-        'fp' => 'fp',
-        'incorrect' => 'incorrect',
-        'missing' => 'missing',
-        'present' => 'present',
-        'total_expected' => 'total_expected',
-        'total_extracted' => 'total_extracted',
-        'tp' => 'tp'
+        'description' => 'description',
+        'enum' => 'enum',
+        'format' => 'format',
+        'name' => 'name',
+        'type' => 'type'
     ];
 
     /**
@@ -211,16 +192,11 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'correct' => 'setCorrect',
-        'extra' => 'setExtra',
-        'fn' => 'setFn',
-        'fp' => 'setFp',
-        'incorrect' => 'setIncorrect',
-        'missing' => 'setMissing',
-        'present' => 'setPresent',
-        'total_expected' => 'setTotalExpected',
-        'total_extracted' => 'setTotalExtracted',
-        'tp' => 'setTp'
+        'description' => 'setDescription',
+        'enum' => 'setEnum',
+        'format' => 'setFormat',
+        'name' => 'setName',
+        'type' => 'setType'
     ];
 
     /**
@@ -229,16 +205,11 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'correct' => 'getCorrect',
-        'extra' => 'getExtra',
-        'fn' => 'getFn',
-        'fp' => 'getFp',
-        'incorrect' => 'getIncorrect',
-        'missing' => 'getMissing',
-        'present' => 'getPresent',
-        'total_expected' => 'getTotalExpected',
-        'total_extracted' => 'getTotalExtracted',
-        'tp' => 'getTp'
+        'description' => 'getDescription',
+        'enum' => 'getEnum',
+        'format' => 'getFormat',
+        'name' => 'getName',
+        'type' => 'getType'
     ];
 
     /**
@@ -282,6 +253,27 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
         return self::$openAPIModelName;
     }
 
+    public const TYPE_STRING = 'string';
+    public const TYPE_NUMBER = 'number';
+    public const TYPE_INTEGER = 'integer';
+    public const TYPE_BOOLEAN = 'boolean';
+    public const TYPE_DATE = 'date';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getTypeAllowableValues()
+    {
+        return [
+            self::TYPE_STRING,
+            self::TYPE_NUMBER,
+            self::TYPE_INTEGER,
+            self::TYPE_BOOLEAN,
+            self::TYPE_DATE,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -298,16 +290,11 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('correct', $data ?? [], null);
-        $this->setIfExists('extra', $data ?? [], null);
-        $this->setIfExists('fn', $data ?? [], null);
-        $this->setIfExists('fp', $data ?? [], null);
-        $this->setIfExists('incorrect', $data ?? [], null);
-        $this->setIfExists('missing', $data ?? [], null);
-        $this->setIfExists('present', $data ?? [], null);
-        $this->setIfExists('total_expected', $data ?? [], null);
-        $this->setIfExists('total_extracted', $data ?? [], null);
-        $this->setIfExists('tp', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('enum', $data ?? [], null);
+        $this->setIfExists('format', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
     }
 
     /**
@@ -337,36 +324,21 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $invalidProperties = [];
 
-        if ($this->container['correct'] === null) {
-            $invalidProperties[] = "'correct' can't be null";
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
         }
-        if ($this->container['extra'] === null) {
-            $invalidProperties[] = "'extra' can't be null";
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
         }
-        if ($this->container['fn'] === null) {
-            $invalidProperties[] = "'fn' can't be null";
+        $allowedValues = $this->getTypeAllowableValues();
+        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'type', must be one of '%s'",
+                $this->container['type'],
+                implode("', '", $allowedValues)
+            );
         }
-        if ($this->container['fp'] === null) {
-            $invalidProperties[] = "'fp' can't be null";
-        }
-        if ($this->container['incorrect'] === null) {
-            $invalidProperties[] = "'incorrect' can't be null";
-        }
-        if ($this->container['missing'] === null) {
-            $invalidProperties[] = "'missing' can't be null";
-        }
-        if ($this->container['present'] === null) {
-            $invalidProperties[] = "'present' can't be null";
-        }
-        if ($this->container['total_expected'] === null) {
-            $invalidProperties[] = "'total_expected' can't be null";
-        }
-        if ($this->container['total_extracted'] === null) {
-            $invalidProperties[] = "'total_extracted' can't be null";
-        }
-        if ($this->container['tp'] === null) {
-            $invalidProperties[] = "'tp' can't be null";
-        }
+
         return $invalidProperties;
     }
 
@@ -383,271 +355,167 @@ class CountBreakdownModel implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets correct
+     * Gets description
      *
-     * @return int
+     * @return string|null
      */
-    public function getCorrect()
+    public function getDescription()
     {
-        return $this->container['correct'];
+        return $this->container['description'];
     }
 
     /**
-     * Sets correct
+     * Sets description
      *
-     * @param int $correct correct
+     * @param string|null $description description
      *
      * @return self
      */
-    public function setCorrect($correct)
+    public function setDescription($description)
     {
-        if (is_null($correct)) {
-            throw new \InvalidArgumentException('non-nullable correct cannot be null');
+        if (is_null($description)) {
+            array_push($this->openAPINullablesSetToNull, 'description');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('description', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['correct'] = $correct;
+        $this->container['description'] = $description;
 
         return $this;
     }
 
     /**
-     * Gets extra
+     * Gets enum
      *
-     * @return int
+     * @return string[]|null
      */
-    public function getExtra()
+    public function getEnum()
     {
-        return $this->container['extra'];
+        return $this->container['enum'];
     }
 
     /**
-     * Sets extra
+     * Sets enum
      *
-     * @param int $extra extra
+     * @param string[]|null $enum enum
      *
      * @return self
      */
-    public function setExtra($extra)
+    public function setEnum($enum)
     {
-        if (is_null($extra)) {
-            throw new \InvalidArgumentException('non-nullable extra cannot be null');
+        if (is_null($enum)) {
+            array_push($this->openAPINullablesSetToNull, 'enum');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('enum', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['extra'] = $extra;
+        $this->container['enum'] = $enum;
 
         return $this;
     }
 
     /**
-     * Gets fn
+     * Gets format
      *
-     * @return int
+     * @return string|null
      */
-    public function getFn()
+    public function getFormat()
     {
-        return $this->container['fn'];
+        return $this->container['format'];
     }
 
     /**
-     * Sets fn
+     * Sets format
      *
-     * @param int $fn False Negatives (missing)
+     * @param string|null $format format
      *
      * @return self
      */
-    public function setFn($fn)
+    public function setFormat($format)
     {
-        if (is_null($fn)) {
-            throw new \InvalidArgumentException('non-nullable fn cannot be null');
+        if (is_null($format)) {
+            array_push($this->openAPINullablesSetToNull, 'format');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('format', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['fn'] = $fn;
+        $this->container['format'] = $format;
 
         return $this;
     }
 
     /**
-     * Gets fp
+     * Gets name
      *
-     * @return int
+     * @return string
      */
-    public function getFp()
+    public function getName()
     {
-        return $this->container['fp'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets fp
+     * Sets name
      *
-     * @param int $fp False Positives (incorrect on expected)
+     * @param string $name name
      *
      * @return self
      */
-    public function setFp($fp)
+    public function setName($name)
     {
-        if (is_null($fp)) {
-            throw new \InvalidArgumentException('non-nullable fp cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['fp'] = $fp;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets incorrect
+     * Gets type
      *
-     * @return int
+     * @return string
      */
-    public function getIncorrect()
+    public function getType()
     {
-        return $this->container['incorrect'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets incorrect
+     * Sets type
      *
-     * @param int $incorrect incorrect
+     * @param string $type type
      *
      * @return self
      */
-    public function setIncorrect($incorrect)
+    public function setType($type)
     {
-        if (is_null($incorrect)) {
-            throw new \InvalidArgumentException('non-nullable incorrect cannot be null');
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
         }
-        $this->container['incorrect'] = $incorrect;
-
-        return $this;
-    }
-
-    /**
-     * Gets missing
-     *
-     * @return int
-     */
-    public function getMissing()
-    {
-        return $this->container['missing'];
-    }
-
-    /**
-     * Sets missing
-     *
-     * @param int $missing missing
-     *
-     * @return self
-     */
-    public function setMissing($missing)
-    {
-        if (is_null($missing)) {
-            throw new \InvalidArgumentException('non-nullable missing cannot be null');
+        $allowedValues = $this->getTypeAllowableValues();
+        if (!in_array($type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'type', must be one of '%s'",
+                    $type,
+                    implode("', '", $allowedValues)
+                )
+            );
         }
-        $this->container['missing'] = $missing;
-
-        return $this;
-    }
-
-    /**
-     * Gets present
-     *
-     * @return int
-     */
-    public function getPresent()
-    {
-        return $this->container['present'];
-    }
-
-    /**
-     * Sets present
-     *
-     * @param int $present present
-     *
-     * @return self
-     */
-    public function setPresent($present)
-    {
-        if (is_null($present)) {
-            throw new \InvalidArgumentException('non-nullable present cannot be null');
-        }
-        $this->container['present'] = $present;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_expected
-     *
-     * @return int
-     */
-    public function getTotalExpected()
-    {
-        return $this->container['total_expected'];
-    }
-
-    /**
-     * Sets total_expected
-     *
-     * @param int $total_expected total_expected
-     *
-     * @return self
-     */
-    public function setTotalExpected($total_expected)
-    {
-        if (is_null($total_expected)) {
-            throw new \InvalidArgumentException('non-nullable total_expected cannot be null');
-        }
-        $this->container['total_expected'] = $total_expected;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_extracted
-     *
-     * @return int
-     */
-    public function getTotalExtracted()
-    {
-        return $this->container['total_extracted'];
-    }
-
-    /**
-     * Sets total_extracted
-     *
-     * @param int $total_extracted total_extracted
-     *
-     * @return self
-     */
-    public function setTotalExtracted($total_extracted)
-    {
-        if (is_null($total_extracted)) {
-            throw new \InvalidArgumentException('non-nullable total_extracted cannot be null');
-        }
-        $this->container['total_extracted'] = $total_extracted;
-
-        return $this;
-    }
-
-    /**
-     * Gets tp
-     *
-     * @return int
-     */
-    public function getTp()
-    {
-        return $this->container['tp'];
-    }
-
-    /**
-     * Sets tp
-     *
-     * @param int $tp True Positives (correct)
-     *
-     * @return self
-     */
-    public function setTp($tp)
-    {
-        if (is_null($tp)) {
-            throw new \InvalidArgumentException('non-nullable tp cannot be null');
-        }
-        $this->container['tp'] = $tp;
+        $this->container['type'] = $type;
 
         return $this;
     }
