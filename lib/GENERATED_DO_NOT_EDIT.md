@@ -9,4 +9,4 @@ Fixes belong in:
 - the upstream API spec (gemina-api-v2), or
 - the hand-written helper layer outside this directory.
 
-Spec snapshot: gemina-1.5.0.json
+Spec snapshot: gemina-1.6.0.json
