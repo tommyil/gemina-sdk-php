@@ -12,7 +12,7 @@ namespace Gemina\Sdk;
  */
 final class SdkVersion
 {
-    public const VERSION = '0.13.1';
+    public const VERSION = '0.13.2';
 
     private function __construct()
     {
