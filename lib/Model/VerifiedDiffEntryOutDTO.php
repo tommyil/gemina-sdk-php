@@ -1,6 +1,6 @@
 <?php
 /**
- * TOSOutDTO
+ * VerifiedDiffEntryOutDTO
  *
  * PHP version 8.1
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Gemina\Sdk\ObjectSerializer;
 
 /**
- * TOSOutDTO Class Doc Comment
+ * VerifiedDiffEntryOutDTO Class Doc Comment
  *
  * @category Class
+ * @description One thing the reviewer changed, display-faithful.  Built from the stored validation&#39;s per-label statuses and its RAW submitted/original value maps — never from the &#x60;differences&#x60; column, which is normalized for scoring (lowercased strings) and would lie to a display.
  * @package  Gemina\Sdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class TOSOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
+class VerifiedDiffEntryOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class TOSOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'TOSOutDTO';
+    protected static $openAPIModelName = 'VerifiedDiffEntryOutDTO';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +58,11 @@ class TOSOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $openAPITypes = [
-        'content' => 'string',
-        'content_url' => 'string',
-        'effective_date' => '\DateTime',
-        'version' => 'string'
+        'field' => 'string',
+        'original' => 'mixed',
+        'pointer' => 'string',
+        'status' => 'string',
+        'verified' => 'mixed'
     ];
 
     /**
@@ -71,10 +73,11 @@ class TOSOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'content' => null,
-        'content_url' => null,
-        'effective_date' => 'date',
-        'version' => null
+        'field' => null,
+        'original' => null,
+        'pointer' => null,
+        'status' => null,
+        'verified' => null
     ];
 
     /**
@@ -83,10 +86,11 @@ class TOSOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'content' => false,
-        'content_url' => false,
-        'effective_date' => false,
-        'version' => false
+        'field' => false,
+        'original' => true,
+        'pointer' => true,
+        'status' => false,
+        'verified' => true
     ];
 
     /**
@@ -175,10 +179,11 @@ class TOSOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'content' => 'content',
-        'content_url' => 'contentUrl',
-        'effective_date' => 'effectiveDate',
-        'version' => 'version'
+        'field' => 'field',
+        'original' => 'original',
+        'pointer' => 'pointer',
+        'status' => 'status',
+        'verified' => 'verified'
     ];
 
     /**
@@ -187,10 +192,11 @@ class TOSOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'content' => 'setContent',
-        'content_url' => 'setContentUrl',
-        'effective_date' => 'setEffectiveDate',
-        'version' => 'setVersion'
+        'field' => 'setField',
+        'original' => 'setOriginal',
+        'pointer' => 'setPointer',
+        'status' => 'setStatus',
+        'verified' => 'setVerified'
     ];
 
     /**
@@ -199,10 +205,11 @@ class TOSOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'content' => 'getContent',
-        'content_url' => 'getContentUrl',
-        'effective_date' => 'getEffectiveDate',
-        'version' => 'getVersion'
+        'field' => 'getField',
+        'original' => 'getOriginal',
+        'pointer' => 'getPointer',
+        'status' => 'getStatus',
+        'verified' => 'getVerified'
     ];
 
     /**
@@ -246,6 +253,23 @@ class TOSOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const STATUS_CORRECTED = 'corrected';
+    public const STATUS_ADDED = 'added';
+    public const STATUS_REMOVED = 'removed';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStatusAllowableValues()
+    {
+        return [
+            self::STATUS_CORRECTED,
+            self::STATUS_ADDED,
+            self::STATUS_REMOVED,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -262,10 +286,11 @@ class TOSOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('content', $data ?? [], null);
-        $this->setIfExists('content_url', $data ?? [], null);
-        $this->setIfExists('effective_date', $data ?? [], null);
-        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('field', $data ?? [], null);
+        $this->setIfExists('original', $data ?? [], null);
+        $this->setIfExists('pointer', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('verified', $data ?? [], null);
     }
 
     /**
@@ -295,18 +320,21 @@ class TOSOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['content'] === null) {
-            $invalidProperties[] = "'content' can't be null";
+        if ($this->container['field'] === null) {
+            $invalidProperties[] = "'field' can't be null";
         }
-        if ($this->container['content_url'] === null) {
-            $invalidProperties[] = "'content_url' can't be null";
+        if ($this->container['status'] === null) {
+            $invalidProperties[] = "'status' can't be null";
         }
-        if ($this->container['effective_date'] === null) {
-            $invalidProperties[] = "'effective_date' can't be null";
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'status', must be one of '%s'",
+                $this->container['status'],
+                implode("', '", $allowedValues)
+            );
         }
-        if ($this->container['version'] === null) {
-            $invalidProperties[] = "'version' can't be null";
-        }
+
         return $invalidProperties;
     }
 
@@ -323,109 +351,167 @@ class TOSOutDTO implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets content
+     * Gets field
      *
      * @return string
      */
-    public function getContent()
+    public function getField()
     {
-        return $this->container['content'];
+        return $this->container['field'];
     }
 
     /**
-     * Sets content
+     * Sets field
      *
-     * @param string $content TOS content in markdown format
+     * @param string $field field
      *
      * @return self
      */
-    public function setContent($content)
+    public function setField($field)
     {
-        if (is_null($content)) {
-            throw new \InvalidArgumentException('non-nullable content cannot be null');
+        if (is_null($field)) {
+            throw new \InvalidArgumentException('non-nullable field cannot be null');
         }
-        $this->container['content'] = $content;
+        $this->container['field'] = $field;
 
         return $this;
     }
 
     /**
-     * Gets content_url
+     * Gets original
      *
-     * @return string
+     * @return mixed|null
      */
-    public function getContentUrl()
+    public function getOriginal()
     {
-        return $this->container['content_url'];
+        return $this->container['original'];
     }
 
     /**
-     * Sets content_url
+     * Sets original
      *
-     * @param string $content_url URL to the TOS page on the website
+     * @param mixed|null $original original
      *
      * @return self
      */
-    public function setContentUrl($content_url)
+    public function setOriginal($original)
     {
-        if (is_null($content_url)) {
-            throw new \InvalidArgumentException('non-nullable content_url cannot be null');
+        if (is_null($original)) {
+            array_push($this->openAPINullablesSetToNull, 'original');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('original', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['content_url'] = $content_url;
+        $this->container['original'] = $original;
 
         return $this;
     }
 
     /**
-     * Gets effective_date
+     * Gets pointer
      *
-     * @return \DateTime
+     * @return string|null
      */
-    public function getEffectiveDate()
+    public function getPointer()
     {
-        return $this->container['effective_date'];
+        return $this->container['pointer'];
     }
 
     /**
-     * Sets effective_date
+     * Sets pointer
      *
-     * @param \DateTime $effective_date Date the TOS became effective
+     * @param string|null $pointer pointer
      *
      * @return self
      */
-    public function setEffectiveDate($effective_date)
+    public function setPointer($pointer)
     {
-        if (is_null($effective_date)) {
-            throw new \InvalidArgumentException('non-nullable effective_date cannot be null');
+        if (is_null($pointer)) {
+            array_push($this->openAPINullablesSetToNull, 'pointer');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('pointer', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['effective_date'] = $effective_date;
+        $this->container['pointer'] = $pointer;
 
         return $this;
     }
 
     /**
-     * Gets version
+     * Gets status
      *
      * @return string
      */
-    public function getVersion()
+    public function getStatus()
     {
-        return $this->container['version'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets version
+     * Sets status
      *
-     * @param string $version Current TOS version (semver)
+     * @param string $status status
      *
      * @return self
      */
-    public function setVersion($version)
+    public function setStatus($status)
     {
-        if (is_null($version)) {
-            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
-        $this->container['version'] = $version;
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!in_array($status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'status', must be one of '%s'",
+                    $status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets verified
+     *
+     * @return mixed|null
+     */
+    public function getVerified()
+    {
+        return $this->container['verified'];
+    }
+
+    /**
+     * Sets verified
+     *
+     * @param mixed|null $verified verified
+     *
+     * @return self
+     */
+    public function setVerified($verified)
+    {
+        if (is_null($verified)) {
+            array_push($this->openAPINullablesSetToNull, 'verified');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('verified', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['verified'] = $verified;
 
         return $this;
     }
