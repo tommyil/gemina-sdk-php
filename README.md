@@ -257,6 +257,35 @@ $sessionClient = GeminaClient::withSessionToken($sessionToken);
 
 For a drop-in chat UI, see the `@gemina/elements` package on npm.
 
+## Human verification in the browser
+
+`@gemina/elements` also ships `<GeminaVerification>`: a drop-in review step that puts the document next to every extracted field, lets a person correct what's wrong, and sends the corrections back to Gemina for accuracy scoring.
+
+Mint the token **scoped to the extraction being reviewed** — an unscoped token that reaches a browser can read every extraction in your account:
+
+```php
+$token = $client->sessions()->mintRetrievalToken(new SessionTokenInDTO([
+    'extraction_ids' => [$extractionId],  // up to 10; pins the token to these
+    'ttl_seconds' => 900,
+]));
+```
+
+An empty list is rejected rather than quietly minting a tenant-wide token. Your endpoint must check that the requesting end-user is allowed to see those extractions: Gemina enforces the claim, you decide who gets it.
+
+Upload with `evaluation` enabled to give the reviewer per-field confidence scores and the "hide everything already scored high" filter.
+
+Verification is **one-shot** per extraction — a second submission is rejected with 409. Afterwards the extraction carries two new fields, both null until someone verifies it: `verifiedValues` — the same shape as `values`, with the reviewer's corrections merged in, so switching payloads is a one-name change — and `verifiedDiff`, the typed list of what they changed. To submit a review from your own UI instead of the widget:
+
+```php
+use Gemina\Sdk\Model\ExtractionValidationInDTO;
+
+$summary = $client->documents()->validateDocumentExtraction($extractionId, new ExtractionValidationInDTO([
+    'data' => $correctedValues,
+]));
+
+$summary->getData(); // per-field comparison against what was extracted
+```
+
 ## Going deeper
 
 ### Full API surface
