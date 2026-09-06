@@ -13,6 +13,7 @@ use Gemina\Sdk\Api\RetrievalApi;
 use Gemina\Sdk\Api\SessionsApi;
 use Gemina\Sdk\Api\SubscriptionsApi;
 use Gemina\Sdk\Api\TemplatesApi;
+use Gemina\Sdk\Model\AddExtractionsInDTO;
 use Gemina\Sdk\Model\DocumentProcessingResultOutDTO;
 use Gemina\Sdk\Model\ResponseStatus;
 use Gemina\Sdk\Model\WebDocumentUploadInDTO;
@@ -239,12 +240,6 @@ class GeminaClient
             throw new GeminaException('extractionTypes must be a non-empty list.');
         }
 
-        $timeoutSeconds = (float) ($options['timeoutSeconds'] ?? self::DEFAULT_TIMEOUT_SECONDS);
-        $initialIntervalSeconds = (float) ($options['initialIntervalSeconds'] ?? self::DEFAULT_INITIAL_INTERVAL_SECONDS);
-        $maxIntervalSeconds = (float) ($options['maxIntervalSeconds'] ?? self::DEFAULT_MAX_INTERVAL_SECONDS);
-        $sleeper = $options['sleeper'] ?? $this->sleeper;
-        $random = $options['random'] ?? $this->random;
-
         try {
             $result = $this->submit($source, $extractionTypes, $options);
         } catch (ApiException $e) {
@@ -263,9 +258,84 @@ class GeminaClient
             );
         }
 
+        return $this->pollUntilTerminal($correlationId, $result, $options);
+    }
+
+    /**
+     * Add extraction types to a document Gemina already stores, then poll until
+     * terminal and return the typed result — the add-on twin of
+     * {@see processDocument} for a document you uploaded earlier (via
+     * processDocument, FileTag or an MCP tool), addressed by its id. No file is
+     * re-uploaded: the stored document is re-extracted with the new
+     * $extractionTypes. Billing and page limits apply per added type exactly as
+     * on an upload.
+     *
+     * Reuses the $options bag; the upload-only externalId/endUserId keys do not
+     * apply and are ignored. Terminal semantics match processDocument: failed
+     * throws {@see GeminaProcessingException} and the deadline throws
+     * {@see GeminaTimeoutException}. The add-on request itself is never retried —
+     * a rejected request (404 unknown document, 409 type already present, 410
+     * content purged, 422 custom_template without a template, 429 out of
+     * credits / over quota) surfaces as {@see ApiException}.
+     *
+     * @param string[] $extractionTypes
+     * @param array<string, mixed> $options
+     */
+    public function addExtractionsAndWait(
+        string $documentId,
+        array $extractionTypes,
+        array $options = [],
+    ): DocumentProcessingResultOutDTO {
+        if ($extractionTypes === []) {
+            throw new GeminaException('extractionTypes must be a non-empty list.');
+        }
+
+        $dto = new AddExtractionsInDTO([
+            'extraction_types' => $extractionTypes,
+            'template_id' => $options['templateId'] ?? null,
+            'model_type' => $options['modelType'] ?? null,
+            'thinking' => $options['thinking'] ?? null,
+            'evaluation' => $options['evaluation'] ?? null,
+            'correction' => $options['correction'] ?? null,
+            'include_coordinates' => $options['includeCoordinates'] ?? null,
+        ]);
+
+        // The add-on POST dispatches async work; it never returns a terminal
+        // failed processing result inline. Every ApiException here is an
+        // endpoint rejection (404/409/410/422/429) — propagate it unchanged
+        // rather than misreading a generic error envelope (which also carries
+        // status=failed) as a processing failure.
+        $submitted = $this->documents()->addDocumentExtractions($documentId, $dto);
+
+        // The add-on's pollCorrelationId is the document's owning correlation,
+        // so the existing results endpoint and poll loop apply unchanged.
+        return $this->pollUntilTerminal($submitted->getPollCorrelationId(), null, $options);
+    }
+
+    /**
+     * Poll GET /v1/documents/results/{correlationId} with jittered exponential
+     * backoff until a terminal status. Shared by {@see processDocument} and
+     * {@see addExtractionsAndWait}. $initialResult seeds the value carried by
+     * {@see GeminaTimeoutException} if the deadline passes before the first
+     * successful poll (the submit result for uploads; null for the add-on path,
+     * whose submit response is a document view, not a processing result).
+     *
+     * @param array<string, mixed> $options
+     */
+    private function pollUntilTerminal(
+        string $correlationId,
+        ?DocumentProcessingResultOutDTO $initialResult,
+        array $options,
+    ): DocumentProcessingResultOutDTO {
+        $timeoutSeconds = (float) ($options['timeoutSeconds'] ?? self::DEFAULT_TIMEOUT_SECONDS);
+        $initialIntervalSeconds = (float) ($options['initialIntervalSeconds'] ?? self::DEFAULT_INITIAL_INTERVAL_SECONDS);
+        $maxIntervalSeconds = (float) ($options['maxIntervalSeconds'] ?? self::DEFAULT_MAX_INTERVAL_SECONDS);
+        $sleeper = $options['sleeper'] ?? $this->sleeper;
+        $random = $options['random'] ?? $this->random;
+
         $nominalInterval = $initialIntervalSeconds;
         $elapsedSeconds = 0.0;
-        $lastResult = $result;
+        $lastResult = $initialResult;
         $consecutivePollFailures = 0;
 
         while (true) {
